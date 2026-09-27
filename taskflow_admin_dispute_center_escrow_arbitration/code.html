@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary-fixed-variant":"#005236","on-primary-fixed":"#00174b","secondary-fixed":"#6ffbbe","surface-dim":"#d2d9f4","primary-fixed":"#dbe1ff","on-secondary":"#ffffff","on-tertiary-container":"#ffeedd","on-background":"#131b2e","on-error-container":"#93000a","outline":"#737686","on-primary-fixed-variant":"#003ea8","tertiary-container":"#996100","error":"#ba1a1a","secondary-container":"#6cf8bb","primary-container":"#2563eb","tertiary":"#784b00","surface-container-low":"#f2f3ff","surface":"#faf8ff","surface-tint":"#0053db","tertiary-fixed":"#ffddb8","secondary":"#006c49","on-tertiary":"#ffffff","on-error":"#ffffff","inverse-on-surface":"#eef0ff","surface-variant":"#dae2fd","surface-container-high":"#e2e7ff","secondary-fixed-dim":"#4edea3","on-secondary-container":"#00714d","on-tertiary-fixed":"#2a1700","on-primary-container":"#eeefff","surface-container":"#eaedff","error-container":"#ffdad6","surface-container-highest":"#dae2fd","on-secondary-fixed":"#002113","primary":"#004ac6","outline-variant":"#c3c6d7","on-surface-variant":"#434655","surface-bright":"#faf8ff","on-primary":"#ffffff","primary-fixed-dim":"#b4c5ff","surface-container-lowest":"#ffffff","inverse-primary":"#b4c5ff","on-surface":"#131b2e","inverse-surface":"#283044","tertiary-fixed-dim":"#ffb95f","background":"#faf8ff","on-tertiary-fixed-variant":"#653e00"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-xl":"2rem","space-xs":"0.25rem","margin-desktop":"2.5rem","space-lg":"1.5rem","gutter-lg":"2rem","space-2xl":"3rem","margin":"1.5rem","space-sm":"0.5rem","space-md":"1rem","gutter-sm":"1rem","gutter":"1.5rem","margin-mobile":"1rem"},"fontFamily":{"headline-xl-mobile":["Inter"],"display":["Inter"],"label-sm":["Inter"],"body-md":["Inter"],"label-md":["Inter"],"headline-lg-mobile":["Inter"],"headline-md":["Inter"],"currency-stat":["Inter"],"body-sm":["Inter"],"headline-xl":["Inter"],"headline-sm":["Inter"],"body-xs":["Inter"],"label-lg":["Inter"],"headline-lg":["Inter"],"body-lg":["Inter"]},"fontSize":{"headline-xl-mobile":["1.75rem",{"lineHeight":"2.25rem","letterSpacing":"-0.02em","fontWeight":"700"}],"display":["3rem",{"lineHeight":"3.5rem","letterSpacing":"-0.03em","fontWeight":"700"}],"label-sm":["0.6875rem",{"lineHeight":"0.875rem","letterSpacing":"0.03em","fontWeight":"600"}],"body-md":["1rem",{"lineHeight":"1.5rem","fontWeight":"400"}],"label-md":["0.75rem",{"lineHeight":"1rem","letterSpacing":"0.02em","fontWeight":"600"}],"headline-lg-mobile":["1.375rem",{"lineHeight":"1.875rem","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-md":["1.25rem",{"lineHeight":"1.75rem","letterSpacing":"-0.01em","fontWeight":"600"}],"currency-stat":["1.875rem",{"lineHeight":"2.25rem","letterSpacing":"-0.02em","fontWeight":"700"}],"body-sm":["0.875rem",{"lineHeight":"1.25rem","fontWeight":"400"}],"headline-xl":["2.25rem",{"lineHeight":"2.75rem","letterSpacing":"-0.025em","fontWeight":"700"}],"headline-sm":["1.125rem",{"lineHeight":"1.5rem","letterSpacing":"-0.005em","fontWeight":"600"}],"body-xs":["0.75rem",{"lineHeight":"1rem","fontWeight":"400"}],"label-lg":["0.875rem",{"lineHeight":"1.25rem","letterSpacing":"0.01em","fontWeight":"600"}],"headline-lg":["1.75rem",{"lineHeight":"2.25rem","letterSpacing":"-0.02em","fontWeight":"600"}],"body-lg":["1.125rem",{"lineHeight":"1.75rem","fontWeight":"400"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-screen w-72 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between overflow-y-auto"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Brand logo. - Primary color: #2563eb
+- Font: inter
+- Mode: light
+- Roundness: rounded-md
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WgVZRs9TOla130AAPBAag0AUa8auUk-f0NLS0A5b7cgfjHIOsGbpXt-0zcvA3tKq49987Ff5kzudg3ncgR388LChDZFz0F1MGt_kEIAUZjcToD_jxaRFTiX8xeLxuTHkAlMgI1MhKIlXj0AL7sJCtv5nCe6cAY2lwpKMDATmbFlLU2VL3XrJoXi-WQpNH5EPHq8f2ElKH7ZT3Z3ALb-hIlMmSdhPnDOwfBUdjyAsCsocOT8Dhu6hxQ2q46"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight">TaskFlow</span><span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">Admin Console</span></div></div></div><nav class="flex flex-col px-space-md py-space-sm gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-sm"><div class="px-space-sm pt-space-sm pb-space-xs"><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Overview</span></div><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-label-lg text-label-lg">Dashboard</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="live-metrics" href="#"><span class="material-symbols-outlined text-[20px]">monitoring</span><span class="font-label-lg text-label-lg">Live Metrics</span></a><div class="px-space-sm pt-space-md pb-space-xs"><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Task Management</span></div><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="task-approval-center" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">verified</span><span class="font-label-lg text-label-lg">Task Approval Center</span></div><span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-secondary text-on-secondary font-bold">14</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="all-tasks" href="#"><span class="material-symbols-outlined text-[20px]">format_list_bulleted</span><span class="font-label-lg text-label-lg">All Tasks</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="category-config" href="#"><span class="material-symbols-outlined text-[20px]">category</span><span class="font-label-lg text-label-lg">Category Config</span></a><div class="px-space-sm pt-space-md pb-space-xs"><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Financials &amp; Commerce</span></div><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="unlock-analytics" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">lock_open</span><span class="font-label-lg text-label-lg">$0.80 Unlock Analytics</span></div><span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-semibold">Hot</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="escrow-and-payouts" href="#"><span class="material-symbols-outlined text-[20px]">account_balance</span><span class="font-label-lg text-label-lg">Escrow &amp; Payouts</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="withdrawals" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span class="font-label-lg text-label-lg">Withdrawals</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="transactions" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-label-lg text-label-lg">Transactions</span></a><div class="px-space-sm pt-space-md pb-space-xs"><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Users &amp; Verification</span></div><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="workers" href="#"><span class="material-symbols-outlined text-[20px]">engineering</span><span class="font-label-lg text-label-lg">Workers</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="clients" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span class="font-label-lg text-label-lg">Clients</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="verification-queue" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">badge</span><span class="font-label-lg text-label-lg">Verification Queue</span></div><span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-bold">5</span></a><div class="px-space-sm pt-space-md pb-space-xs"><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Governance</span></div><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="dispute-center" href="#"><span class="material-symbols-outlined text-[20px]">gavel</span><span class="font-label-lg text-label-lg">Dispute Center</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="audit-logs" href="#"><span class="material-symbols-outlined text-[20px]">history_edu</span><span class="font-label-lg text-label-lg">Audit Logs</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-label-lg text-label-lg">Settings</span></a></nav></div><div class="p-space-md"><div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm font-semibold text-on-surface-variant">Smart Escrow Rate</span><span class="font-label-sm text-label-sm font-bold text-secondary">99.8%</span></div><div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden"><div class="bg-secondary h-full rounded-full" style="width: 99.8%"></div></div><span class="font-body-xs text-body-xs text-outline">Operational sync: Nominal</span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-md flex-1 max-w-xl"><div class="relative w-full"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span><input class="w-full pl-10 pr-4 py-2 bg-surface-container-low rounded-lg text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest transition-colors" placeholder="Search tasks, transaction hashes, users..." type="text"/></div><div class="flex items-center gap-space-xs px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant whitespace-nowrap"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-sm text-label-sm font-bold tracking-wide uppercase">Live Production</span></div></div><div class="flex items-center gap-space-lg"><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-low"><span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span><span class="font-label-sm text-label-sm font-semibold text-on-surface-variant">Escrow &amp; Webhooks Operational</span></div><button aria-label="Notifications" class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error"></span></button><div class="h-8 w-px bg-surface-container-high"></div><div class="flex items-center gap-space-sm pl-space-xs"><div class="flex flex-col text-right"><span class="font-label-md text-label-md font-bold text-on-surface leading-tight">Sarah Jenkins</span><span class="font-label-sm text-label-sm text-primary font-semibold leading-tight">Super Admin</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Sub-header / Breadcrumbs & Live Arbitration Status -->
+<div class="px-margin-desktop py-space-md flex flex-col md:flex-row md:items-center justify-between gap-space-md bg-surface-container-low">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Admin</span>
+<span class="material-symbols-outlined text-[14px] text-outline">chevron_right</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Governance</span>
+<span class="material-symbols-outlined text-[14px] text-outline">chevron_right</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">Dispute Center &amp; Escrow Arbitration</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-md mt-1">
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">Dispute Center &amp; Escrow Arbitration</h1>
+<div class="flex items-center gap-space-xs px-2.5 py-1 rounded-full bg-error-container text-on-error-container">
+<span class="w-2 h-2 rounded-full bg-error animate-ping"></span>
+<span class="font-label-sm text-label-sm font-bold tracking-wide uppercase">3 Active Arbitrations</span>
+</div>
+<div class="flex items-center gap-space-xs px-2.5 py-1 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[16px] text-primary">timer</span>
+<span>SLA Target: &lt; 4.0 hrs</span>
+</div>
+<div class="flex items-center gap-space-xs px-2.5 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[16px] text-tertiary">shield_locked</span>
+<span>Escrow at Risk: $3,420.00</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<button class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-lowest text-on-surface shadow-sm hover:bg-surface-container transition-all" type="button">
+<span class="material-symbols-outlined text-[18px] text-outline">download</span>
+<span class="font-label-md text-label-md">Export Dispute Logs (CSV/JSON)</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">policy</span>
+<span class="font-label-md text-label-md">Dispute Policy Rules</span>
+</button>
+</div>
+</div>
+<div class="px-margin-desktop py-space-lg flex flex-col gap-space-lg">
+<!-- Top KPI Cards Row -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-space-md">
+<!-- KPI 1 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Active Disputes</span>
+<span class="material-symbols-outlined text-error text-[22px]">gavel</span>
+</div>
+<div class="my-space-xs">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display text-display text-on-surface">18</span>
+<span class="font-label-sm text-label-sm text-error font-bold">+2 today</span>
+</div>
+<p class="font-body-xs text-body-xs text-on-surface-variant mt-0.5">4 High Urgency / Escrow Hold</p>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full overflow-hidden mt-1">
+<div class="bg-error h-full rounded-full" style="width: 28%"></div>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Avg Arbitration SLA</span>
+<span class="material-symbols-outlined text-secondary text-[22px]">speed</span>
+</div>
+<div class="my-space-xs">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display text-display text-on-surface">2.8</span>
+<span class="font-headline-sm text-headline-sm text-on-surface-variant">hrs</span>
+</div>
+<p class="font-body-xs text-body-xs text-secondary font-medium mt-0.5">Benchmark target: &lt; 4.0h</p>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full overflow-hidden mt-1">
+<div class="bg-secondary h-full rounded-full" style="width: 70%"></div>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Escrow in Dispute</span>
+<span class="material-symbols-outlined text-primary text-[22px]">lock_clock</span>
+</div>
+<div class="my-space-xs">
+<div class="font-currency-stat text-currency-stat text-on-surface">$3,840.50</div>
+<p class="font-body-xs text-body-xs text-on-surface-variant mt-0.5">100% held in Multi-Sig isolation</p>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full overflow-hidden mt-1">
+<div class="bg-primary h-full rounded-full" style="width: 85%"></div>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">$0.80 Unlock Claims</span>
+<span class="material-symbols-outlined text-tertiary text-[22px]">toll</span>
+</div>
+<div class="my-space-xs">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display text-display text-on-surface">24</span>
+<span class="font-label-sm text-label-sm text-tertiary font-bold">Claims</span>
+</div>
+<p class="font-body-xs text-body-xs text-on-surface-variant mt-0.5">Auto-refund on client bad faith</p>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full overflow-hidden mt-1">
+<div class="bg-tertiary-fixed-dim h-full rounded-full" style="width: 48%"></div>
+</div>
+</div>
+<!-- KPI 5 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Resolution Ratio</span>
+<span class="material-symbols-outlined text-primary text-[22px]">balance</span>
+</div>
+<div class="my-space-xs">
+<div class="font-currency-stat text-currency-stat text-on-surface">94.2%</div>
+<div class="flex items-center gap-space-xs font-body-xs text-body-xs text-on-surface-variant mt-0.5">
+<span class="text-secondary font-semibold">62% W</span> • <span class="text-primary font-semibold">32% C</span> • <span class="text-outline font-semibold">6% S</span>
+</div>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full overflow-hidden mt-1 flex">
+<div class="bg-secondary h-full" style="width: 62%"></div>
+<div class="bg-primary h-full" style="width: 32%"></div>
+<div class="bg-tertiary h-full" style="width: 6%"></div>
+</div>
+</div>
+</div>
+<!-- Main Two-Column Arbitration Workbench -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT QUEUE PANEL (35% approx = 4 cols on lg, 5 on xl) -->
+<div class="lg:col-span-5 xl:col-span-4 flex flex-col gap-space-md">
+<!-- Filter Tabs -->
+<div class="p-space-xs bg-surface-container rounded-xl flex items-center justify-between text-center overflow-x-auto">
+<button class="flex-1 py-1.5 px-space-sm rounded-lg bg-surface-container-lowest text-on-surface shadow-sm font-label-md text-label-md font-bold whitespace-nowrap" type="button">
+            All (18)
+          </button>
+<button class="flex-1 py-1.5 px-space-sm rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap" type="button">
+            Active (6)
+          </button>
+<button class="flex-1 py-1.5 px-space-sm rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap" type="button">
+            Pending (5)
+          </button>
+<button class="flex-1 py-1.5 px-space-sm rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap" type="button">
+            Holds (4)
+          </button>
+</div>
+<!-- Search & Filter Controls -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-sm">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="w-full pl-9 pr-3 py-1.5 bg-surface-container-low rounded-lg text-on-surface text-body-sm font-body-sm focus:outline-none focus:bg-surface-container-lowest" placeholder="Filter DSP-ID, Worker, Client..." type="text"/>
+</div>
+<div class="flex items-center justify-between text-body-xs font-body-xs text-on-surface-variant">
+<span>Sorting: <strong class="text-on-surface">Urgency / SLA Remaining</strong></span>
+<button class="text-primary hover:underline flex items-center gap-0.5 font-label-sm text-label-sm" type="button">
+<span class="material-symbols-outlined text-[14px]">tune</span> Filter
+            </button>
+</div>
+</div>
+<!-- Dispute List Cards Stack -->
+<div class="flex flex-col gap-space-sm">
+<!-- Card 1: ACTIVE / SELECTED -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-md flex flex-col gap-space-xs cursor-pointer relative overflow-hidden transition-all bg-gradient-to-r from-primary/5 via-transparent to-transparent">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-lg text-label-lg text-primary font-bold">DSP-8492</span>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-bold">High Urgency</span>
+</div>
+<div class="flex items-center gap-1 text-error font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[15px]">timer</span>
+<span>1h 14m left</span>
+</div>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-semibold line-clamp-1 mt-0.5">
+              AI Data Bounding Box Misclassification vs Rejection
+            </div>
+<div class="flex items-center justify-between text-body-xs font-body-xs text-on-surface-variant mt-1">
+<span>TechSolutions Global <span class="text-outline">vs</span> Elena Rostova</span>
+</div>
+<div class="mt-2 pt-2 flex items-center justify-between bg-surface-container-low p-2 rounded-lg">
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-secondary">paid</span>
+<span class="font-bold">$50.00 Escrow</span>
+</div>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-tertiary">
+<span class="material-symbols-outlined text-[15px]">toll</span>
+<span>+$0.80 Fee Claim</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md flex flex-col gap-space-xs cursor-pointer transition-all">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">DSP-8488</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-semibold">Pending Client</span>
+</div>
+<div class="flex items-center gap-1 text-outline font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px]">schedule</span>
+<span>3h 40m left</span>
+</div>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-semibold line-clamp-1 mt-0.5">
+              Unfair Rejection: Translation Accuracy &amp; Tone
+            </div>
+<div class="flex items-center justify-between text-body-xs font-body-xs text-on-surface-variant mt-1">
+<span>NexaMobile Ltd <span class="text-outline">vs</span> Juan Perez</span>
+</div>
+<div class="mt-2 pt-2 flex items-center justify-between bg-surface-container-low p-2 rounded-lg">
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-secondary">paid</span>
+<span class="font-bold">$35.00 Escrow</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Awaiting Evidence</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md flex flex-col gap-space-xs cursor-pointer transition-all">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">DSP-8481</span>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold">Escrow Hold</span>
+</div>
+<div class="flex items-center gap-1 text-outline font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px]">schedule</span>
+<span>8h 12m left</span>
+</div>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-semibold line-clamp-1 mt-0.5">
+              Incomplete Data Scraping Spec Change Mid-Stream
+            </div>
+<div class="flex items-center justify-between text-body-xs font-body-xs text-on-surface-variant mt-1">
+<span>Omnimart Retail <span class="text-outline">vs</span> David Kim</span>
+</div>
+<div class="mt-2 pt-2 flex items-center justify-between bg-surface-container-low p-2 rounded-lg">
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-secondary">paid</span>
+<span class="font-bold">$80.00 Escrow</span>
+</div>
+<span class="font-label-sm text-label-sm text-error">Counter-Claim Filed</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md flex flex-col gap-space-xs cursor-pointer transition-all">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">DSP-8475</span>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">Security Flagged</span>
+</div>
+<div class="flex items-center gap-1 text-error font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[15px]">security</span>
+<span>Vault Frozen</span>
+</div>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-semibold line-clamp-1 mt-0.5">
+              Suspicious Malicious Archive Upload on Deliverable
+            </div>
+<div class="flex items-center justify-between text-body-xs font-body-xs text-on-surface-variant mt-1">
+<span>NexusPay Inc <span class="text-outline">vs</span> Worker #4819</span>
+</div>
+<div class="mt-2 pt-2 flex items-center justify-between bg-surface-container-low p-2 rounded-lg">
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-secondary">paid</span>
+<span class="font-bold">$15.00 Escrow</span>
+</div>
+<span class="font-label-sm text-label-sm text-error">VirusTotal Alert</span>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT ARBITRATION BENCH / DOSSIER PANEL (65% approx = 7 cols on lg, 8 on xl) -->
+<div class="lg:col-span-7 xl:col-span-8 flex flex-col gap-space-lg">
+<!-- Case Overview Header Card -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-md flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pb-space-sm bg-surface-container-low p-space-md rounded-xl">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-label-sm text-label-sm px-2.5 py-0.5 rounded-full bg-primary-container text-on-primary-container font-bold">CASE: DSP-8492</span>
+<span class="font-label-sm text-label-sm px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-semibold">LINKED TASK: TASK-10482</span>
+<span class="font-label-sm text-label-sm px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container font-bold">SLA: 01:14:28 REMAINING</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight mt-1">
+                Claim of Unfair Deliverable Rejection &amp; Escrow Retention
+              </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Task: AI Data Annotation &amp; Bounding Box Labeling (15 Urban Dashcam Frames)</p>
+</div>
+<div class="flex flex-col sm:items-end justify-center bg-surface-container-lowest p-space-sm rounded-lg shadow-sm">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Isolated Escrow</span>
+<span class="font-currency-stat text-currency-stat text-secondary font-bold leading-tight">$50.00</span>
+<span class="font-body-xs text-body-xs text-tertiary font-semibold">+$0.80 Micro-Unlock Claim</span>
+</div>
+</div>
+<!-- Parties Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Worker Dossier -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between">
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center relative overflow-hidden flex-shrink-0">
+<span class="material-symbols-outlined text-primary text-[28px]">account_circle</span>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-secondary"></div>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-md text-label-md uppercase tracking-wider text-outline font-bold">Complainant / Worker</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.2 rounded bg-secondary-fixed text-on-secondary-fixed-variant font-bold">Tier 3</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Elena Rostova</h3>
+<span class="font-body-xs text-body-xs text-on-surface-variant">elena.rostova@devnet.io • ID: USR-4910</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs grid grid-cols-3 gap-2 text-center bg-surface-container-lowest p-2 rounded-lg">
+<div>
+<div class="font-label-sm text-label-sm text-outline">Success</div>
+<div class="font-label-lg text-label-lg text-secondary font-bold">98.4%</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-outline">Tasks Done</div>
+<div class="font-label-lg text-label-lg text-on-surface font-bold">142</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-outline">Disputes</div>
+<div class="font-label-lg text-label-lg text-on-surface font-bold">1 (0.7%)</div>
+</div>
+</div>
+</div>
+<!-- Client Dossier -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between">
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center relative overflow-hidden flex-shrink-0">
+<span class="material-symbols-outlined text-outline text-[28px]">domain</span>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-primary"></div>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-md text-label-md uppercase tracking-wider text-outline font-bold">Respondent / Client</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.2 rounded bg-primary-fixed text-on-primary-fixed-variant font-bold">Enterprise</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">TechSolutions Global, Inc.</h3>
+<span class="font-body-xs text-body-xs text-on-surface-variant">billing@techsolutions.com • ACC: CLI-9201</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs grid grid-cols-3 gap-2 text-center bg-surface-container-lowest p-2 rounded-lg">
+<div>
+<div class="font-label-sm text-label-sm text-outline">Escrow Paid</div>
+<div class="font-label-lg text-label-lg text-primary font-bold">$18.4k</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-outline">Client Rating</div>
+<div class="font-label-lg text-label-lg text-on-surface font-bold">4.9 ★</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-outline">Rejection %</div>
+<div class="font-label-lg text-label-lg text-error font-bold">14.2%</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Lifecycle Stepper / Milestone Flow -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Escrow Lifecycle &amp; Task Timeline</span>
+<div class="w-full bg-surface-container-low p-space-md rounded-xl overflow-x-auto">
+<div class="flex items-center min-w-[620px] justify-between relative">
+<!-- Line background -->
+<div class="absolute left-6 right-6 top-1/2 -translate-y-1/2 h-1 bg-surface-container-highest z-0"></div>
+<div class="absolute left-6 top-1/2 -translate-y-1/2 h-1 bg-secondary z-0" style="width: 78%"></div>
+<!-- Step 1 -->
+<div class="flex flex-col items-center gap-1 z-10">
+<div class="w-7 h-7 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-label-sm text-label-sm font-bold shadow-sm">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Fund Escrow</span>
+<span class="font-body-xs text-body-xs text-outline">$50.00 Pre-fund</span>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center gap-1 z-10">
+<div class="w-7 h-7 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-label-sm text-label-sm font-bold shadow-sm">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Worker Unlock</span>
+<span class="font-body-xs text-body-xs text-outline">$0.80 Debited</span>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center gap-1 z-10">
+<div class="w-7 h-7 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-label-sm text-label-sm font-bold shadow-sm">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Delivered</span>
+<span class="font-body-xs text-body-xs text-outline">15/15 frames</span>
+</div>
+<!-- Step 4 -->
+<div class="flex flex-col items-center gap-1 z-10">
+<div class="w-7 h-7 rounded-full bg-error text-on-error flex items-center justify-center font-label-sm text-label-sm font-bold shadow-sm">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</div>
+<span class="font-label-sm text-label-sm text-error font-semibold">Rejected</span>
+<span class="font-body-xs text-body-xs text-outline">Zero Revision</span>
+</div>
+<!-- Step 5 (Current) -->
+<div class="flex flex-col items-center gap-1 z-10">
+<div class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-sm text-label-sm font-bold shadow-md animate-pulse">
+<span class="material-symbols-outlined text-[16px]">gavel</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-bold">Arbitration</span>
+<span class="font-body-xs text-body-xs text-primary font-semibold">Under Review</span>
+</div>
+<!-- Step 6 -->
+<div class="flex flex-col items-center gap-1 z-10 opacity-50">
+<div class="w-7 h-7 rounded-full bg-surface-container-highest text-outline flex items-center justify-center font-label-sm text-label-sm font-bold">
+                    6
+                  </div>
+<span class="font-label-sm text-label-sm text-outline font-semibold">Settlement</span>
+<span class="font-body-xs text-body-xs text-outline">Escrow Disbursed</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Evidence Review Workspace & Inspection Tabs -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between border-b pb-space-sm bg-surface-container-low p-space-sm rounded-xl">
+<div class="flex items-center gap-space-sm">
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-lowest text-primary font-label-md text-label-md font-bold shadow-sm flex items-center gap-space-xs" type="button">
+<span class="material-symbols-outlined text-[18px]">folder_open</span>
+<span>Deliverables &amp; AI Analysis</span>
+</button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-space-xs" type="button">
+<span class="material-symbols-outlined text-[18px]">forum</span>
+<span>Audit Chat Logs (11)</span>
+</button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-space-xs" type="button">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+<span>Financial &amp; System Telemetry</span>
+</button>
+</div>
+<div class="hidden sm:flex items-center gap-space-xs text-body-xs font-body-xs text-secondary font-semibold">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+              Automated IoU Pass (91.4%)
+            </div>
+</div>
+<!-- Evidence Tab Content: Deliverables & Discrepancy Compare -->
+<div class="flex flex-col gap-space-md">
+<!-- Deliverable file banner -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">data_object</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-bold">annotations_batch_4b_final.json (15 Frames)</span>
+<span class="font-body-xs text-body-xs text-on-surface-variant">SHA-256: 8fbc102...94a3 | 340 KB | Submitted Jan 24, 14:12 UTC</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container-lowest text-on-surface font-label-sm text-label-sm font-semibold shadow-sm hover:bg-surface-container flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span> Quick Inspect
+                </button>
+<button class="px-space-sm py-1.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm hover:opacity-90 flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">download</span> Download Payload
+                </button>
+</div>
+</div>
+<!-- Visual Inspection Comparator (Visual Frame & Overlays) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Frame Sample 1: Worker's Bounding Submission -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+                    Worker Delivery: Frame 014 Annotation
+                  </span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">IoU 0.91 vs Ground Truth</span>
+</div>
+<div class="relative rounded-xl overflow-hidden shadow-sm bg-surface-container aspect-video">
+<img class="w-full h-full object-cover" data-alt="High-resolution dashcam view of a busy rainy city street intersection at dusk with glowing neon lights, cars in crosswalk, and bounding boxes rendered in clean technical green outlines around roadway vehicles, micro-details in high fintech clarity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZkPfO9zFv_3SsMYI8sn2FDCv_HcJJRSNJadp7XyMBJJsHNb20l2vGkiHG01kIxNUS3GlIcqEWd5gRfa0hMzf9GVCk9hyF5suwV7iFXRuvgxMF_NTQQBgkMvo5kPdizPAlaW6TeFumLkpn9WczAvqVZr83J14XILgnMzn4-EEGSUQr_rV-s23rS_uR9VEymeXJn1N49el3FavPhdyoHpUSEqhV-XSV7_73pu66Nu10UXkeXB9Hdza-AA"/>
+<div class="absolute top-2 left-2 px-2 py-1 rounded bg-inverse-surface/90 text-inverse-on-surface font-label-sm text-label-sm backdrop-blur-sm">
+                    Elena Rostova (Bounding Set)
+                  </div>
+<!-- Automated verification overlay badge -->
+<div class="absolute bottom-2 right-2 px-2.5 py-1 rounded-md bg-secondary text-on-secondary font-label-sm text-label-sm font-bold flex items-center gap-1 shadow-md">
+<span class="material-symbols-outlined text-[15px]">auto_awesome</span>
+                    IoU 91.4% (Threshold: 85%)
+                  </div>
+</div>
+<p class="font-body-xs text-body-xs text-on-surface-variant">Labeled 14 active roadway entities according to Taxonomy Spec v2.3.</p>
+</div>
+<!-- Frame Sample 2: Client's Flagged Defect Frame -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-error font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">report_problem</span>
+                    Client's Stated Rejection Defect
+                  </span>
+<span class="font-label-sm text-label-sm text-error font-semibold">Flagged: Unlabeled Cyclists</span>
+</div>
+<div class="relative rounded-xl overflow-hidden shadow-sm bg-surface-container aspect-video">
+<img class="w-full h-full object-cover" data-alt="Urban street scene at dusk under streetlamps with zoomed-in red targeting reticles highlighting distant shadowy sidewalk figures, with a technical radar grid overlay and diagnostic inspection markings" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxPk6LYk1b9rqd0vlCX0Uf2Ct5K_9J3u4qMva7xECfawQs-FX_zgbRpjnbu6OvJcSlgzpbqS9IhsiX9f6d0-4MXNNVuUxuSYvMqlND9_jdRiJIA3gI-f_vEN-wz1xmIDED9zOq1Uf-uFyhw0pwxJHdfWcVocMbMpnBmPvT7118kcVVDSwa5Az00HPfhHYyS4Lf18w5ZTHpwUHFIodgHprAJ21ghrsU8cAMrjwtHpmY7PyGs54ZRPWpBA"/>
+<div class="absolute top-2 left-2 px-2 py-1 rounded bg-error/90 text-on-error font-label-sm text-label-sm backdrop-blur-sm">
+                    Client Rejection Annotation
+                  </div>
+<div class="absolute bottom-2 left-2 right-2 p-2 rounded-md bg-inverse-surface/85 text-inverse-on-surface font-body-xs text-body-xs backdrop-blur-sm">
+                    Client claim: "Missed 2 cyclists in far sidewalk shadow."
+                  </div>
+</div>
+<p class="font-body-xs text-body-xs text-on-surface-variant">Arbitrator Notice: Taxonomy sheet Section 4b states sidewalk bystanders excluded.</p>
+</div>
+</div>
+<!-- Counter Arguments Accordion / Side-by-Side Comparison -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="p-space-md rounded-xl bg-error-container/20 flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-error font-label-md text-label-md font-bold">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+                  Client Stated Reason for Escrow Rejection
+                </div>
+<p class="font-body-sm text-body-sm text-on-surface italic">
+                  "The worker failed precision requirements on Frame 014 and 015. Missed 2 active cyclists on sidewalk perimeter. Furthermore edge tolerances on truck cab exceeded 3px margin. We require immediate 100% escrow cancellation."
+                </p>
+<div class="mt-1 flex items-center justify-between text-body-xs font-body-xs text-on-surface-variant">
+<span>Rejection timestamp: Jan 24, 15:40 UTC</span>
+<span class="text-error font-bold">Zero revisions requested</span>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-secondary-container/20 flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-secondary font-label-md text-label-md font-bold">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+                  Worker Rebuttal &amp; Evidence Basis
+                </div>
+<p class="font-body-sm text-body-sm text-on-surface italic">
+                  "Client project guide section 4b clearly states: 'Exclude non-motorized pedestrians on pedestrian walk zones and sidewalks unless entering active asphalt.' The cyclists were stationary on a cafe terrace. Truck IoU is 0.91, well above the 0.85 pass grade."
+                </p>
+<div class="mt-1 flex items-center justify-between text-body-xs font-body-xs text-on-surface-variant">
+<span>Dispute opened: Jan 24, 16:05 UTC</span>
+<span class="text-secondary font-bold">Unlock Fee Refund Claimed</span>
+</div>
+</div>
+</div>
+<!-- Party Communications Snippet -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Chat Log Snapshot (Prior to Dispute Escalation)</span>
+<span class="font-body-xs text-body-xs text-primary font-semibold cursor-pointer hover:underline">View all 11 messages</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-start gap-space-sm p-space-xs rounded bg-surface-container-lowest text-body-sm font-body-sm">
+<span class="font-label-sm text-label-sm text-secondary font-bold whitespace-nowrap">Elena (Worker):</span>
+<span class="text-on-surface">"Deliverable uploaded with full telemetry. Please let me know if you need any slight margin readjustment!"</span>
+<span class="ml-auto text-outline font-body-xs text-body-xs whitespace-nowrap">14:15 UTC</span>
+</div>
+<div class="flex items-start gap-space-sm p-space-xs rounded bg-surface-container-lowest text-body-sm font-body-sm">
+<span class="font-label-sm text-label-sm text-primary font-bold whitespace-nowrap">TechSolutions:</span>
+<span class="text-on-surface">"Rejected. We ran internal script and found non-labeled objects. Cannot accept."</span>
+<span class="ml-auto text-outline font-body-xs text-body-xs whitespace-nowrap">15:40 UTC</span>
+</div>
+<div class="flex items-start gap-space-sm p-space-xs rounded bg-surface-container-lowest text-body-sm font-body-sm">
+<span class="font-label-sm text-label-sm text-secondary font-bold whitespace-nowrap">Elena (Worker):</span>
+<span class="text-on-surface">"Those objects were outside of active lane per spec §4b. Can we do a quick revision before rejection?"</span>
+<span class="ml-auto text-outline font-body-xs text-body-xs whitespace-nowrap">15:48 UTC</span>
+</div>
+</div>
+</div>
+<!-- Financial Telemetry verification -->
+<div class="p-space-sm rounded-lg bg-surface-container flex items-center justify-between text-body-xs font-body-xs text-on-surface-variant">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[18px]">verified</span>
+<span>$0.80 Task Unlock TXN-8092470 verified on internal ledger</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span>Time spent on task: <strong>3h 12m</strong></span>
+<span>•</span>
+<span>SHA-256 match validated</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ESCROW ADJUDICATION & RESOLUTION CONTROLS (PROMINENT ACTION BOX) -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-xl flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs border-b">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[24px]">gavel</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold">Escrow Adjudication &amp; Arbitrator Ruling</h3>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-bold">
+              Multi-Sig Ready
+            </span>
+</div>
+<!-- Adjudication Option Radios -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Option A (Recommended) -->
+<label class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all cursor-pointer flex items-start gap-space-md">
+<input checked="" class="mt-1 text-primary focus:ring-0 w-4 h-4" name="adjudication_choice" type="radio"/>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-md text-label-md text-on-surface font-bold">Rule in Worker's Favor (Recommended)</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-secondary text-on-secondary font-bold">AI Matched</span>
+</div>
+<p class="font-body-xs text-body-xs text-on-surface-variant">
+                  Disburse 100% Escrow ($50.00) to Elena Rostova. Retain $0.80 unlock fee as earned service charge. Clears worker dispute record.
+                </p>
+<div class="mt-1 font-label-sm text-label-sm text-secondary font-bold">
+                  Worker Receives: +$50.00 • Client Refund: $0.00
+                </div>
+</div>
+</label>
+<!-- Option B -->
+<label class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all cursor-pointer flex items-start gap-space-md">
+<input class="mt-1 text-primary focus:ring-0 w-4 h-4" name="adjudication_choice" type="radio"/>
+<div class="flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface font-bold">Rule in Client's Favor</span>
+<p class="font-body-xs text-body-xs text-on-surface-variant">
+                  Return 100% Escrow ($50.00) to TechSolutions Vault. Assess if $0.80 unlock fee should be reimbursed to worker due to spec ambiguity.
+                </p>
+<div class="mt-1 font-label-sm text-label-sm text-error font-bold">
+                  Worker Receives: $0.00 • Client Refund: +$50.00
+                </div>
+</div>
+</label>
+<!-- Option C -->
+<label class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all cursor-pointer flex items-start gap-space-md">
+<input class="mt-1 text-primary focus:ring-0 w-4 h-4" name="adjudication_choice" type="radio"/>
+<div class="flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface font-bold">Partial / Split Escrow Settlement</span>
+<p class="font-body-xs text-body-xs text-on-surface-variant">
+                  Equitable partition: Default 50/50 ($25.00 each) or custom allocation. Automatically reverse $0.80 unlock fee back to Worker wallet.
+                </p>
+<div class="mt-1 font-label-sm text-label-sm text-tertiary font-bold">
+                  Split: Worker $25.00 / Client $25.00
+                </div>
+</div>
+</label>
+<!-- Option D -->
+<label class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all cursor-pointer flex items-start gap-space-md">
+<input class="mt-1 text-primary focus:ring-0 w-4 h-4" name="adjudication_choice" type="radio"/>
+<div class="flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface font-bold">Mandatory Revision Order</span>
+<p class="font-body-xs text-body-xs text-on-surface-variant">
+                  Reset deliverable to In-Progress state. Grants Elena 24 hours to annotate sidewalk objects. Freezes dispute SLA without financial transfer.
+                </p>
+<div class="mt-1 font-label-sm text-label-sm text-primary font-bold">
+                  Escrow Retained in Vault (24h timer)
+                </div>
+</div>
+</label>
+</div>
+<!-- Administrative Findings / Auditor Notes Textarea -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">
+                Official Administrative Findings &amp; Ledger Notes (Visible in Audit Trail)
+              </label>
+<span class="font-body-xs text-body-xs text-outline">Markdown supported</span>
+</div>
+<textarea class="w-full p-space-md bg-surface-container-low rounded-lg text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest" rows="3">Evidence reviewed demonstrates worker strictly adhered to Project Taxonomy Specification v2.3 (§4b). The automated computer vision audit recorded 91.4% IoU, comfortably clearing the 85.0% contractual quality threshold. Client's blanket rejection without granting standard revision grace constitutes bad-faith escrow clawback. Escrow released in full to worker.</textarea>
+</div>
+<!-- Action Confirmation Button Row -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-xs border-t">
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-2 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[18px]">pause</span> Request Additional Proof (Pause SLA)
+              </button>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap justify-end">
+<button class="px-space-md py-2 rounded-lg bg-error-container text-on-error-container hover:opacity-90 font-label-md text-label-md flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[18px]">undo</span> Refund Escrow to Client ($50)
+              </button>
+<button class="px-space-md py-2 rounded-lg bg-surface-container-high text-on-surface hover:bg-surface-container-highest font-label-md text-label-md flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[18px]">call_split</span> Split Escrow (50/50)
+              </button>
+<button class="px-space-lg py-2.5 rounded-lg bg-secondary text-on-secondary hover:opacity-90 font-label-md text-label-md font-bold shadow-md flex items-center gap-space-xs transition-transform active:scale-95" type="button">
+<span class="material-symbols-outlined text-[20px]">check_circle</span> Release Full Escrow to Worker ($50.00)
+              </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Simple micro-interaction for tab toggling or alert feedback
+  document.querySelectorAll('input[name="adjudication_choice"]').forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      // Provide subtle visual cues when arbitrator changes recommendation
+    });
+  });
+</script></main></div></body></html>

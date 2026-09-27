@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "secondary-fixed": "#6ffbbe", "primary": "#004ac6", "on-secondary": "#ffffff", "on-secondary-fixed": "#002113", "surface-container-highest": "#dae2fd", "tertiary": "#784b00", "surface-container-lowest": "#ffffff", "on-error": "#ffffff", "on-tertiary-fixed": "#2a1700", "secondary": "#006c49", "surface-container": "#eaedff", "on-tertiary-container": "#ffeedd", "on-tertiary": "#ffffff", "tertiary-fixed-dim": "#ffb95f", "surface-dim": "#d2d9f4", "surface-tint": "#0053db", "error": "#ba1a1a", "secondary-container": "#6cf8bb", "on-secondary-fixed-variant": "#005236", "primary-fixed-dim": "#b4c5ff", "tertiary-fixed": "#ffddb8", "on-tertiary-fixed-variant": "#653e00", "surface-container-low": "#f2f3ff", "on-surface-variant": "#434655", "on-error-container": "#93000a", "surface-variant": "#dae2fd", "outline": "#737686", "surface-container-high": "#e2e7ff", "on-primary-container": "#eeefff", "tertiary-container": "#996100", "error-container": "#ffdad6", "outline-variant": "#c3c6d7", "on-secondary-container": "#00714d", "surface-bright": "#faf8ff", "on-background": "#131b2e", "on-primary": "#ffffff", "primary-fixed": "#dbe1ff", "primary-container": "#2563eb", "secondary-fixed-dim": "#4edea3", "on-primary-fixed-variant": "#003ea8", "inverse-primary": "#b4c5ff", "on-primary-fixed": "#00174b", "inverse-on-surface": "#eef0ff", "inverse-surface": "#283044", "surface": "#faf8ff", "on-surface": "#131b2e", "background": "#faf8ff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter-sm": "1rem", "margin": "1.5rem", "space-xs": "0.25rem", "space-xl": "2rem", "space-2xl": "3rem", "space-lg": "1.5rem", "gutter": "1.5rem", "gutter-lg": "2rem", "space-sm": "0.5rem", "margin-mobile": "1rem", "margin-desktop": "2.5rem", "space-md": "1rem" }, "fontFamily": { "display": ["Inter"], "headline-lg-mobile": ["Inter"], "label-sm": ["Inter"], "headline-xl-mobile": ["Inter"], "label-md": ["Inter"], "body-md": ["Inter"], "body-xs": ["Inter"], "body-sm": ["Inter"], "headline-md": ["Inter"], "currency-stat": ["Inter"], "headline-sm": ["Inter"], "headline-xl": ["Inter"], "label-lg": ["Inter"], "headline-lg": ["Inter"], "body-lg": ["Inter"] }, "fontSize": { "display": ["3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.03em", "fontWeight": "700" }], "headline-lg-mobile": ["1.375rem", { "lineHeight": "1.875rem", "letterSpacing": "-0.015em", "fontWeight": "600" }], "label-sm": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.03em", "fontWeight": "600" }], "headline-xl-mobile": ["1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-md": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600" }], "body-md": ["1rem", { "lineHeight": "1.5rem", "fontWeight": "400" }], "body-xs": ["0.75rem", { "lineHeight": "1rem", "fontWeight": "400" }], "body-sm": ["0.875rem", { "lineHeight": "1.25rem", "fontWeight": "400" }], "headline-md": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "600" }], "currency-stat": ["1.875rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-sm": ["1.125rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.005em", "fontWeight": "600" }], "headline-xl": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.025em", "fontWeight": "700" }], "label-lg": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "600" }], "headline-lg": ["1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "fontWeight": "400" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-[1280px] mx-auto px-margin-mobile md:px-margin lg:px-margin-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-xl"><a class="flex items-center gap-space-sm" data-path="find-tasks" href="#"><img alt="TaskFlow Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XuWoqTzpHs-R1YNAc9X6ClYDrK78AssXzAQQSyu4X5W0AZ1rbXHWJF2UKEaknnYXs7mREisKoRVBShT-hVTshN6EPrGGOYD59soA2G0aw__c1Z91vUBon4HcdZa-7NS7gBaQ4Hst-EXBf0jebnMbW2k-SqSZYiKgxrXOjrCw8oDYUIvjV43XpRnmp4xrZXLtAHKi664S9rxoWiTV97dwxXgY4Fdr3c_dHiiRcBz0Y2XBb_4DuWr5GCjBx8"/><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">TaskFlow</span></a><nav class="hidden lg:flex items-center gap-space-lg" data-active-classes="text-primary font-label-lg text-label-lg font-bold"><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="find-tasks" href="#">Find Tasks</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="how-it-works" href="#">How It Works</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="for-clients" href="#">For Clients</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="for-workers" href="#">For Workers</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="pricing" href="#">Pricing</a></nav></div><div class="flex items-center gap-space-md"><div class="hidden sm:flex items-center gap-space-xs bg-surface-container-high px-space-md py-space-xs rounded-full"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Wallet</span><span class="font-label-lg text-label-lg text-secondary font-bold">$245.50</span></div><button aria-label="Notifications" class="p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors relative flex items-center justify-center" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-error"></span></button><div class="flex items-center gap-space-sm pl-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><main class="w-full pt-16 bg-surface"><div class="flex flex-col w-full">
+<!-- Dynamic Shell Sync Script (Updates App Shell Wallet Pill to debited $145.50 balance) -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Find wallet pill in the global header and update its value to Elena's new debited amount
+      const walletPills = document.querySelectorAll('header span, header div');
+      walletPills.forEach(el => {
+        if (el.textContent.trim() === '$245.50') {
+          el.textContent = '$145.50';
+          el.classList.add('transition-colors', 'duration-500', 'text-primary');
+        }
+      });
+    });
+  </script>
+<!-- Content Container -->
+<div class="max-w-[1280px] w-full mx-auto px-margin-mobile md:px-margin lg:px-margin-desktop py-space-md space-y-space-lg">
+<!-- Top Sub-Bar & Breadcrumbs -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pb-space-xs">
+<nav aria-label="Breadcrumb" class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm">
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[16px]">domain</span>
+<span>Worker Portal</span>
+</a>
+<span class="text-outline-variant font-bold">/</span>
+<span class="text-on-surface font-semibold">Earnings &amp; Wallet</span>
+<span class="text-outline-variant font-bold">/</span>
+<div class="flex items-center gap-1.5 bg-surface-container px-2 py-0.5 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="text-on-surface font-label-sm text-label-sm font-semibold">Elena Rostova (ID: W-8821)</span>
+</div>
+</nav>
+<!-- Sync Status & Debited Wallet Indicator -->
+<div class="flex items-center gap-space-sm self-start sm:self-auto">
+<div class="flex items-center gap-space-xs bg-surface-container-high px-space-md py-1.5 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[16px]">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Synced Wallet:</span>
+<span class="font-label-lg text-label-lg text-on-surface font-bold">$145.50</span>
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-container/40 px-1.5 py-0.2 rounded font-semibold">-100.00 M-Pesa</span>
+</div>
+<div class="hidden md:flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">wifi_tethering</span>
+<span>Ledger Live</span>
+</div>
+</div>
+</div>
+<!-- Payout Settled Banner / Dismissible Toast Alert -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-lowest shadow-md p-space-md flex flex-col md:flex-row md:items-center justify-between gap-space-md transition-all duration-300" id="payoutToast">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-secondary"></div>
+<div class="flex items-start md:items-center gap-space-md pl-space-xs">
+<div class="w-10 h-10 rounded-full bg-secondary-container/50 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary text-[22px]">check_circle</span>
+</div>
+<div>
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">Payout Settled</span>
+<span class="font-label-sm text-label-sm bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-full font-semibold">Instant Rail Success</span>
+<span class="font-body-xs text-body-xs text-on-surface-variant font-mono">Ref: QJH4928XLP</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+<strong class="text-on-surface font-semibold">$100.00 USD (13,150.00 KES)</strong> was successfully disbursed to Safaricom M-Pesa <span class="font-mono text-on-surface font-semibold">(+254 712 345 678)</span>. Transaction ID broadcast to telecom aggregator.
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm pl-space-xl md:pl-0 shrink-0">
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-high text-on-surface hover:bg-surface-variant transition-colors font-label-lg text-label-lg flex items-center gap-1 shadow-sm" onclick="document.getElementById('receiptModal').classList.remove('hidden')">
+<span class="material-symbols-outlined text-[16px]">receipt_long</span>
+<span>View Receipt</span>
+</button>
+<button aria-label="Dismiss banner" class="w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors" onclick="document.getElementById('payoutToast').style.display='none'">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+<!-- Header & Action Row -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md pt-space-xs">
+<div class="space-y-space-xs max-w-2xl">
+<h1 class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">Earnings &amp; Worker Wallet</h1>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          Manage your verified micro-task payouts, withdraw liquidity instantly via M-Pesa or Global Wire, and monitor real-time escrow isolation states.
+        </p>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="px-space-md py-2.5 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container-low transition-colors shadow-sm font-label-lg text-label-lg font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">download</span>
+<span>Statement (CSV/PDF)</span>
+</button>
+<button class="px-space-lg py-2.5 rounded-lg bg-primary-container text-on-primary hover:bg-primary transition-all shadow-md font-label-lg text-label-lg font-bold flex items-center gap-2" onclick="document.getElementById('withdrawModal').classList.remove('hidden')">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+<span>Withdraw Funds INSTANT</span>
+</button>
+</div>
+</div>
+<!-- 4 Column Metric Cards Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Card 1: Available Balance -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between">
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant">Available Balance</span>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm bg-secondary-container/60 text-on-secondary-container px-2 py-0.5 rounded-full font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Instant
+            </span>
+</div>
+<div class="flex items-baseline gap-2 pt-1">
+<span class="font-display text-display text-on-surface font-extrabold tracking-tight">$145.50</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-semibold">USD</span>
+</div>
+</div>
+<div class="pt-space-md mt-space-sm space-y-1">
+<div class="flex items-center justify-between text-body-xs font-body-xs">
+<span class="text-error font-medium flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[13px]">arrow_outward</span> -$100.00 today via M-Pesa
+            </span>
+<span class="text-on-surface-variant font-mono">13,150 KES</span>
+</div>
+<div class="flex items-center justify-between text-body-xs font-body-xs text-on-surface-variant pt-1">
+<span>Settled to Wallet</span>
+<span class="text-secondary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">autorenew</span> Auto-Transfer On
+            </span>
+</div>
+</div>
+</div>
+<!-- Card 2: Pending Escrow & Review -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between">
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant">Pending Escrow</span>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm bg-surface-container text-on-surface-variant px-2 py-0.5 rounded-full font-semibold">
+<span class="material-symbols-outlined text-[13px]">lock</span> 4 Tasks
+            </span>
+</div>
+<div class="flex items-baseline gap-2 pt-1">
+<span class="font-currency-stat text-currency-stat text-tertiary-container font-extrabold">$88.80</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-medium">escrow locked</span>
+</div>
+</div>
+<div class="pt-space-md mt-space-sm space-y-1">
+<div class="flex items-center justify-between text-body-xs font-body-xs">
+<span class="text-tertiary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">gavel</span> $50.80 Dispute isolated
+            </span>
+<span class="text-on-surface-variant">DSP-8492</span>
+</div>
+<div class="flex items-center justify-between text-body-xs font-body-xs text-on-surface-variant pt-1">
+<span>$38.00 in 24h review</span>
+<span class="font-medium text-primary">3 Submissions</span>
+</div>
+</div>
+</div>
+<!-- Card 3: Lifetime Earned -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between">
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant">Lifetime Earned</span>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm bg-primary-fixed text-on-primary-fixed-variant px-2 py-0.5 rounded-full font-bold">
+<span class="material-symbols-outlined text-[13px]">verified</span> Tier 1 Pro
+            </span>
+</div>
+<div class="flex items-baseline gap-2 pt-1">
+<span class="font-currency-stat text-currency-stat text-on-surface font-extrabold">$670.80</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-medium">gross</span>
+</div>
+</div>
+<div class="pt-space-md mt-space-sm space-y-1">
+<div class="flex items-center justify-between text-body-xs font-body-xs text-on-surface-variant">
+<span>42 completed bounties</span>
+<span class="text-secondary font-semibold">99.4% approval</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden mt-1.5">
+<div class="bg-primary h-full rounded-full" style="width: 94%;"></div>
+</div>
+</div>
+</div>
+<!-- Card 4: Total Disbursed -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between">
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant">Total Disbursed</span>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm bg-secondary-container/50 text-secondary px-2 py-0.5 rounded-full font-semibold">
+<span class="material-symbols-outlined text-[13px]">done_all</span> Settled
+            </span>
+</div>
+<div class="flex items-baseline gap-2 pt-1">
+<span class="font-currency-stat text-currency-stat text-on-surface font-extrabold">$474.50</span>
+<span class="font-label-md text-label-md text-secondary font-semibold">+$100 today</span>
+</div>
+</div>
+<div class="pt-space-md mt-space-sm space-y-1">
+<div class="flex items-center justify-between text-body-xs font-body-xs text-on-surface-variant">
+<span>4 payouts to M-Pesa</span>
+<span class="font-mono text-on-surface font-medium">62,450 KES</span>
+</div>
+<div class="flex items-center justify-between text-body-xs font-body-xs text-on-surface-variant pt-1">
+<span class="text-secondary font-medium">0% fee tier applied</span>
+<span class="text-on-surface-variant">Instant Rails</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Pending Dispute Credit Spotlight (DSP-8492) -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-lg relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-tertiary-fixed/30 pointer-events-none blur-3xl"></div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg relative z-10">
+<div class="space-y-space-sm max-w-3xl">
+<div class="flex flex-wrap items-center gap-space-sm">
+<span class="inline-flex items-center gap-1.5 font-label-sm text-label-sm bg-tertiary-fixed text-on-tertiary-fixed font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+<span class="material-symbols-outlined text-[14px]">shield_locked</span>
+              MULTI-SIG ESCROW ISOLATED
+            </span>
+<span class="font-label-md text-label-md text-on-surface font-bold bg-surface-container px-2 py-0.5 rounded">Case Ref: DSP-8492</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Task: TASK-10482 (AI Data Annotation)</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold flex items-center gap-2">
+<span>Arbitration Escrow Protection:</span>
+<span class="text-tertiary font-extrabold">$50.80 Pending Settlement</span>
+</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-relaxed">
+              Upon arbitrator release, <strong class="text-on-surface font-semibold">$50.80</strong> will be instantly credited to your wallet balance ($50.00 bounty + $0.80 unlock refund protection) with zero platform deduction.
+            </p>
+</div>
+<!-- Arb Metric Pill Badges -->
+<div class="flex flex-wrap items-center gap-space-md pt-space-xs text-body-xs font-body-xs text-on-surface-variant">
+<div class="flex items-center gap-1.5 bg-surface-container-high px-2.5 py-1 rounded-lg">
+<span class="material-symbols-outlined text-primary text-[15px]">person</span>
+<span>Arbitrator: <strong class="text-on-surface font-semibold">Sarah Jenkins (Sr. AI Lead)</strong></span>
+</div>
+<div class="flex items-center gap-1.5 bg-surface-container-high px-2.5 py-1 rounded-lg">
+<span class="material-symbols-outlined text-secondary text-[15px]">fact_check</span>
+<span>IoU Benchmark: <strong class="text-secondary font-bold">91.4%</strong> (Pass &gt;85%)</span>
+</div>
+<div class="flex items-center gap-1.5 bg-surface-container-high px-2.5 py-1 rounded-lg">
+<span class="material-symbols-outlined text-tertiary text-[15px]">timer</span>
+<span>Est. Ruling: <strong class="text-on-surface font-semibold">&lt; 1.5h</strong> (Target 4h SLA)</span>
+</div>
+</div>
+</div>
+<!-- Action CTAs -->
+<div class="flex sm:flex-row lg:flex-col gap-space-sm shrink-0 justify-start">
+<button class="px-space-md py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-variant text-on-surface transition-colors font-label-lg text-label-lg font-semibold flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">folder_open</span>
+<span>Evidence Dossier</span>
+</button>
+<button class="px-space-md py-2.5 rounded-lg bg-tertiary-container hover:bg-tertiary text-on-primary transition-colors font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">gavel</span>
+<span>Arbitration Desk</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Velocity Chart & Fast Cashout Rails -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- 30D Velocity Chart (7 cols) -->
+<div class="lg:col-span-7 bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-space-sm">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-bold">Earnings Velocity &amp; Balance Trajectory</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">30-Day Liquidity Curve</h2>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container px-2 py-1 rounded-lg text-body-xs font-body-xs">
+<span class="inline-block w-2.5 h-0.5 bg-primary"></span>
+<span class="text-on-surface-variant">Realized</span>
+<span class="inline-block w-2.5 h-0.5 border-t border-dashed border-tertiary ml-2"></span>
+<span class="text-on-surface-variant">DSP-8492 Forecast</span>
+</div>
+</div>
+<p class="font-body-xs text-body-xs text-on-surface-variant mb-space-md">
+            Reflects immediate -$100.00 M-Pesa withdrawal step down to $145.50, and dotted projection to <span class="font-semibold text-tertiary">$196.30</span> upon case resolution.
+          </p>
+<!-- Inline Vector Graph Visualization -->
+<div class="w-full h-56 pt-2">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 540 180">
+<defs>
+<lineargradient id="velocityFill" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#004ac6" stop-opacity="0.18"></stop>
+<stop offset="100%" stop-color="#004ac6" stop-opacity="0.0"></stop>
+</lineargradient>
+<lineargradient id="forecastFill" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#ffb95f" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#ffb95f" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<!-- Subtle Grid Horizontal Lines -->
+<line stroke="#eaedff" stroke-dasharray="4,4" stroke-width="1" x1="0" x2="540" y1="30" y2="30"></line>
+<line stroke="#eaedff" stroke-dasharray="4,4" stroke-width="1" x1="0" x2="540" y1="75" y2="75"></line>
+<line stroke="#eaedff" stroke-dasharray="4,4" stroke-width="1" x1="0" x2="540" y1="120" y2="120"></line>
+<line stroke="#eaedff" stroke-width="1" x1="0" x2="540" y1="165" y2="165"></line>
+<!-- Price Indicators on Left -->
+<text class="text-[10px] font-mono" fill="#737686" x="5" y="34">$250</text>
+<text class="text-[10px] font-mono" fill="#737686" x="5" y="79">$200</text>
+<text class="text-[10px] font-mono" fill="#737686" x="5" y="124">$150</text>
+<text class="text-[10px] font-mono" fill="#737686" x="5" y="162">$100</text>
+<!-- Realized Historical Area -->
+<path d="M 40 140 
+                       Q 90 130, 140 115 
+                       T 240 85 
+                       T 340 50 
+                       L 380 40 
+                       L 380 125 
+                       L 40 125 Z" fill="url(#velocityFill)"></path>
+<!-- Realized Historical Stroke (up to $245.50 and instant drop to $145.50) -->
+<path d="M 40 140 
+                       Q 90 130, 140 115 
+                       T 240 85 
+                       T 340 50 
+                       L 380 40 
+                       L 380 125" fill="none" stroke="#004ac6" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+<!-- Drop down indicator line & point for $100 withdrawal -->
+<circle cx="380" cy="40" fill="#ffffff" r="4.5" stroke="#ba1a1a" stroke-width="2"></circle>
+<text class="text-[10px] font-bold font-mono" fill="#ba1a1a" x="360" y="28">-$100 M-Pesa</text>
+<!-- Current Settled Point ($145.50) -->
+<circle cx="380" cy="125" fill="#004ac6" r="5" stroke="#ffffff" stroke-width="2"></circle>
+<text class="text-[11px] font-bold font-mono" fill="#004ac6" x="330" y="142">Now: $145.50</text>
+<!-- Forecast Projected Dotted Curve (Adding DSP-8492 $50.80 -> $196.30) -->
+<path d="M 380 125 
+                       Q 440 115, 490 85 
+                       L 525 80" fill="none" stroke="#784b00" stroke-dasharray="5,4" stroke-width="2.5"></path>
+<!-- Projected Point -->
+<circle cx="525" cy="80" fill="#ffb95f" r="4.5" stroke="#784b00" stroke-width="2"></circle>
+<text class="text-[11px] font-bold font-mono" fill="#784b00" x="445" y="72">Est: $196.30</text>
+</svg>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-sm text-body-xs font-body-xs text-on-surface-variant">
+<span>May 01 (Cycle Open)</span>
+<span>May 15</span>
+<span class="text-primary font-bold">May 22 (Withdrawal Executed)</span>
+<span class="text-tertiary font-bold">Arbitration Target (+1.5h)</span>
+</div>
+</div>
+<!-- Fast Cashout Rails Card (5 cols) -->
+<div class="lg:col-span-5 bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-space-xs">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[22px]">flash_on</span>
+<span>Fast Cashout Rails</span>
+</h2>
+<span class="font-label-sm text-label-sm bg-secondary-container/50 text-secondary px-2 py-0.5 rounded-full font-bold">0% Fees Tier</span>
+</div>
+<p class="font-body-xs text-body-xs text-on-surface-variant mb-space-md">
+            Direct gateway to Kenyan mobile banking &amp; international clearance.
+          </p>
+<!-- Destination Options -->
+<div class="space-y-space-xs">
+<!-- Active Option: M-Pesa -->
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface-container cursor-pointer transition-colors">
+<div class="flex items-center gap-3">
+<input checked="" class="w-4 h-4 text-primary focus:ring-primary accent-primary" name="rail" type="radio"/>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface font-bold">Safaricom M-Pesa Express</span>
+<span class="material-symbols-outlined text-secondary text-[16px]">verified</span>
+</div>
+<span class="font-body-xs text-body-xs text-on-surface-variant font-mono">+254 712 345 678</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-secondary font-bold">&lt; 30s Instant</span>
+<span class="block font-body-xs text-body-xs text-on-surface-variant">Fee: $0.00</span>
+</div>
+</label>
+<!-- Option 2: Bank Wire -->
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low hover:bg-surface-container cursor-pointer transition-colors">
+<div class="flex items-center gap-3">
+<input class="w-4 h-4 text-primary focus:ring-primary accent-primary" name="rail" type="radio"/>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface font-bold">Global Bank Wire (SWIFT)</span>
+</div>
+<span class="font-body-xs text-body-xs text-on-surface-variant font-mono">IBAN ending •••• 4091</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-on-surface-variant">1-2 Business Days</span>
+<span class="block font-body-xs text-body-xs text-on-surface-variant">Fee: $1.50</span>
+</div>
+</label>
+</div>
+<!-- Amount to withdraw input -->
+<div class="mt-space-md space-y-1.5">
+<div class="flex items-center justify-between text-label-sm font-label-sm">
+<span class="text-on-surface-variant font-medium">Amount to Disburse:</span>
+<span class="text-on-surface font-bold">Max Available: $145.50</span>
+</div>
+<div class="relative flex items-center">
+<span class="absolute left-3 text-on-surface font-bold text-headline-sm">$</span>
+<input class="w-full bg-surface-container-lowest rounded-lg py-2.5 pl-8 pr-20 text-on-surface font-headline-sm text-headline-sm font-bold shadow-inner focus:outline-none focus:bg-surface-container-high transition-colors" id="cashoutAmountInput" max="145.50" min="5" step="0.5" type="number" value="100.00"/>
+<button class="absolute right-2 px-2.5 py-1 rounded bg-surface-container text-primary font-label-sm text-label-sm font-bold hover:bg-surface-variant transition-colors" onclick="document.getElementById('cashoutAmountInput').value = '145.50'">
+                MAX
+              </button>
+</div>
+<div class="flex items-center justify-between text-body-xs font-body-xs text-on-surface-variant px-1">
+<span>Min withdrawal: $5.00</span>
+<span class="font-mono">Est: 13,150 KES</span>
+</div>
+</div>
+</div>
+<div class="pt-space-md">
+<button class="w-full py-3 rounded-lg bg-primary-container text-on-primary hover:bg-primary transition-colors shadow-md font-label-lg text-label-lg font-bold flex items-center justify-center gap-2" onclick="document.getElementById('withdrawModal').classList.remove('hidden')">
+<span class="material-symbols-outlined text-[20px]">send_money</span>
+<span>Execute Instant Payout</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Granular Financial Ledger (Core Component) -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden space-y-space-md p-space-md md:p-space-lg">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">Granular Financial Ledger</h2>
+<p class="font-body-xs text-body-xs text-on-surface-variant">Immutable record of unlock micro-deposits, bounty escrows, dispute isolations, and telco payouts.</p>
+</div>
+<!-- Search Bar -->
+<div class="relative w-full md:w-80">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full bg-surface-container-low rounded-lg py-2 pl-10 pr-4 text-on-surface text-body-sm font-body-sm focus:outline-none focus:bg-surface-container transition-colors" placeholder="Search Task ID, Case, Ref..." type="text"/>
+</div>
+</div>
+<!-- Ledger Filter Tabs -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1 text-label-md font-label-md no-scrollbar">
+<button class="px-space-md py-1.5 rounded-full bg-on-surface text-surface font-bold shrink-0">
+          All Records (49)
+        </button>
+<button class="px-space-md py-1.5 rounded-full bg-surface-container-high hover:bg-surface-variant text-on-surface shrink-0 transition-colors">
+          Task Earnings
+        </button>
+<button class="px-space-md py-1.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-bold flex items-center gap-1 shrink-0">
+<span>Disputes &amp; Holds</span>
+<span class="w-4 h-4 rounded-full bg-tertiary-container text-on-primary flex items-center justify-center text-[10px]">1</span>
+</button>
+<button class="px-space-md py-1.5 rounded-full bg-surface-container-high hover:bg-surface-variant text-on-surface shrink-0 transition-colors">
+          Unlock Fees (-$0.80)
+        </button>
+<button class="px-space-md py-1.5 rounded-full bg-secondary-container text-on-secondary-container font-bold flex items-center gap-1 shrink-0">
+<span>Disbursements</span>
+<span class="w-4 h-4 rounded-full bg-secondary text-on-secondary flex items-center justify-center text-[10px]">4</span>
+</button>
+</div>
+<!-- Responsive Table Container -->
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
+<th class="py-3 px-4 rounded-l-lg">Date &amp; Time</th>
+<th class="py-3 px-4">Transaction / Scope</th>
+<th class="py-3 px-3">Type</th>
+<th class="py-3 px-3">Channel / Rail</th>
+<th class="py-3 px-4 text-right">Amount</th>
+<th class="py-3 px-3 text-center">Status</th>
+<th class="py-3 px-4 text-right rounded-r-lg">Audit</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm text-on-surface divide-y-0">
+<!-- ROW 1: NEW DISBURSEMENT RECORD (JUST NOW) -->
+<tr class="bg-secondary-container/15 hover:bg-secondary-container/25 transition-colors">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-semibold text-on-surface">Just now, 16:22</span>
+</div>
+<span class="font-body-xs text-body-xs text-on-surface-variant block font-mono">Today</span>
+</td>
+<td class="py-3.5 px-4 min-w-[280px]">
+<div class="font-semibold text-on-surface flex items-center gap-1.5">
+<span>Disbursement to Mobile Wallet</span>
+<span class="font-mono text-body-xs text-secondary font-bold">13,150.00 KES Net</span>
+</div>
+<div class="text-body-xs text-on-surface-variant font-mono">
+                  Ref: QJH4928XLP · Safaricom M-Pesa (+254 712 345 678)
+                </div>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap">
+<span class="inline-flex items-center font-label-sm text-label-sm bg-primary-fixed text-on-primary-fixed-variant px-2.5 py-0.5 rounded-full font-bold">
+                  Payout Rail
+                </span>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap text-on-surface-variant font-medium">
+                M-Pesa Express
+              </td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<span class="font-bold text-headline-sm text-error font-mono">-$100.00</span>
+<span class="block text-body-xs text-on-surface-variant font-mono">0.00 fee</span>
+</td>
+<td class="py-3.5 px-3 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm bg-secondary-container text-on-secondary-container px-2.5 py-0.5 rounded-full font-bold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Disbursed
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-variant text-on-surface font-label-sm text-label-sm font-semibold transition-colors inline-flex items-center gap-1 shadow-sm" onclick="document.getElementById('receiptModal').classList.remove('hidden')">
+<span class="material-symbols-outlined text-[14px] text-primary">receipt</span>
+<span>Receipt (QJH...)</span>
+</button>
+</td>
+</tr>
+<!-- ROW 2: DISPUTE ISOLATED CLAIM (DSP-8492) -->
+<tr class="bg-tertiary-fixed/15 hover:bg-tertiary-fixed/25 transition-colors">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="font-medium text-on-surface">Today, 14:22</span>
+<span class="font-body-xs text-body-xs text-on-surface-variant block font-mono">May 22</span>
+</td>
+<td class="py-3.5 px-4 min-w-[280px]">
+<div class="font-semibold text-tertiary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">gavel</span>
+<span>Case DSP-8492: Escrow Claim Hold</span>
+</div>
+<div class="text-body-xs text-on-surface-variant">
+                  Task TASK-10482: AI Bounding Box Labeling (Sarah Jenkins arbitration)
+                </div>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap">
+<span class="inline-flex items-center font-label-sm text-label-sm bg-tertiary-fixed text-on-tertiary-fixed px-2.5 py-0.5 rounded-full font-bold">
+                  Dispute Escrow
+                </span>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap text-on-surface-variant font-medium">
+                Multi-Sig Safe Hold
+              </td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<span class="font-bold text-headline-sm text-tertiary font-mono">$50.80</span>
+<span class="block text-body-xs text-tertiary-container font-mono">Isolated</span>
+</td>
+<td class="py-3.5 px-3 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm bg-tertiary-fixed text-on-tertiary-fixed px-2.5 py-0.5 rounded-full font-bold">
+<span class="material-symbols-outlined text-[14px]">hourglass_top</span> Arbitrating
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-variant text-on-surface font-label-sm text-label-sm font-semibold transition-colors inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">folder</span>
+<span>Dossier</span>
+</button>
+</td>
+</tr>
+<!-- ROW 3: TASK BOUNTY -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="font-medium text-on-surface">Yesterday, 19:40</span>
+<span class="font-body-xs text-body-xs text-on-surface-variant block font-mono">May 21</span>
+</td>
+<td class="py-3.5 px-4 min-w-[280px]">
+<div class="font-semibold text-on-surface">
+                  TASK-10488: Fintech App UI Usability Feedback
+                </div>
+<div class="text-body-xs text-on-surface-variant">
+                  Client: Apex Labs · Client 5-Star Approval
+                </div>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap">
+<span class="inline-flex items-center font-label-sm text-label-sm bg-primary-fixed text-primary px-2.5 py-0.5 rounded-full font-semibold">
+                  Task Bounty
+                </span>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap text-on-surface-variant font-medium">
+                TaskFlow Wallet
+              </td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<span class="font-bold text-headline-sm text-secondary font-mono">+$8.50</span>
+</td>
+<td class="py-3.5 px-3 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm bg-secondary-container/50 text-secondary px-2.5 py-0.5 rounded-full font-semibold">
+<span class="material-symbols-outlined text-[14px]">check</span> Settled
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface transition-colors" title="View details">
+<span class="material-symbols-outlined text-[18px]">description</span>
+</button>
+</td>
+</tr>
+<!-- ROW 4: MICRO-UNLOCK -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="font-medium text-on-surface">Yesterday, 18:12</span>
+<span class="font-body-xs text-body-xs text-on-surface-variant block font-mono">May 21</span>
+</td>
+<td class="py-3.5 px-4 min-w-[280px]">
+<div class="font-semibold text-on-surface">
+                  TASK-10488: Task Access Unlock Fee
+                </div>
+<div class="text-body-xs text-on-surface-variant">
+                  Standard $0.80 Escrow Protocol
+                </div>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap">
+<span class="inline-flex items-center font-label-sm text-label-sm bg-surface-container text-on-surface-variant px-2.5 py-0.5 rounded-full font-medium">
+                  Micro-Unlock
+                </span>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap text-on-surface-variant font-medium">
+                M-Pesa Express
+              </td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<span class="font-bold font-mono text-on-surface-variant">-$0.80</span>
+</td>
+<td class="py-3.5 px-3 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm bg-surface-container text-on-surface-variant px-2.5 py-0.5 rounded-full">
+                  Processed
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface transition-colors" title="Audit Log">
+<span class="material-symbols-outlined text-[18px]">receipt</span>
+</button>
+</td>
+</tr>
+<!-- ROW 5: TASK BOUNTY -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="font-medium text-on-surface">May 21, 11:15</span>
+<span class="font-body-xs text-body-xs text-on-surface-variant block font-mono">Batch 44</span>
+</td>
+<td class="py-3.5 px-4 min-w-[280px]">
+<div class="font-semibold text-on-surface">
+                  TASK-10485: Medical Spanish Audio Transcription
+                </div>
+<div class="text-body-xs text-on-surface-variant">
+                  Client: MediHealth Global · Fast Review Payout
+                </div>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap">
+<span class="inline-flex items-center font-label-sm text-label-sm bg-primary-fixed text-primary px-2.5 py-0.5 rounded-full font-semibold">
+                  Task Bounty
+                </span>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap text-on-surface-variant font-medium">
+                TaskFlow Wallet
+              </td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<span class="font-bold text-headline-sm text-secondary font-mono">+$7.50</span>
+</td>
+<td class="py-3.5 px-3 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm bg-secondary-container/50 text-secondary px-2.5 py-0.5 rounded-full font-semibold">
+<span class="material-symbols-outlined text-[14px]">check</span> Settled
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">description</span>
+</button>
+</td>
+</tr>
+<!-- ROW 6: PREVIOUS DISBURSEMENT -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="font-medium text-on-surface">May 19, 09:05</span>
+<span class="font-body-xs text-body-xs text-on-surface-variant block font-mono">Cycle 12</span>
+</td>
+<td class="py-3.5 px-4 min-w-[280px]">
+<div class="font-semibold text-on-surface">
+                  Disbursement to Mobile Wallet
+                </div>
+<div class="text-body-xs text-on-surface-variant font-mono">
+                  Ref: MP-98214 · Recipient: Elena Rostova (+254 712 345 678)
+                </div>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap">
+<span class="inline-flex items-center font-label-sm text-label-sm bg-primary-fixed text-on-primary-fixed-variant px-2.5 py-0.5 rounded-full font-bold">
+                  Payout Rail
+                </span>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap text-on-surface-variant font-medium">
+                M-Pesa Express
+              </td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<span class="font-bold text-headline-sm text-on-surface font-mono">-$50.00</span>
+</td>
+<td class="py-3.5 px-3 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm bg-secondary-container text-on-secondary-container px-2.5 py-0.5 rounded-full font-bold">
+<span class="material-symbols-outlined text-[14px]">done_all</span> Disbursed
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</button>
+</td>
+</tr>
+<!-- ROW 7: UNLOCK UNDER DISPUTE -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="font-medium text-on-surface">May 18, 14:02</span>
+<span class="font-body-xs text-body-xs text-on-surface-variant block font-mono">Case Linked</span>
+</td>
+<td class="py-3.5 px-4 min-w-[280px]">
+<div class="font-semibold text-on-surface">
+                  TASK-10482: Unlock Access Fee (Under DSP-8492 Protection)
+                </div>
+<div class="text-body-xs text-on-surface-variant">
+                  Guaranteed $0.80 reimbursement if arbitrator awards bounty
+                </div>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap">
+<span class="inline-flex items-center font-label-sm text-label-sm bg-surface-container text-on-surface-variant px-2.5 py-0.5 rounded-full font-medium">
+                  Micro-Unlock
+                </span>
+</td>
+<td class="py-3.5 px-3 whitespace-nowrap text-on-surface-variant font-medium">
+                TaskFlow Wallet
+              </td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<span class="font-bold font-mono text-tertiary">-$0.80</span>
+</td>
+<td class="py-3.5 px-3 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm bg-tertiary-fixed text-on-tertiary-fixed px-2.5 py-0.5 rounded-full font-semibold">
+                  Claimed
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">link</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pt-space-xs text-body-xs font-body-xs text-on-surface-variant">
+<span>Showing <strong class="text-on-surface font-semibold">1 to 7</strong> of 49 transactions in ledger</span>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors font-label-sm text-label-sm font-semibold disabled:opacity-50">
+            Previous
+          </button>
+<div class="flex items-center gap-1">
+<span class="w-7 h-7 rounded-lg bg-primary text-on-primary flex items-center justify-center font-bold">1</span>
+<span class="w-7 h-7 rounded-lg hover:bg-surface-container flex items-center justify-center cursor-pointer">2</span>
+<span class="w-7 h-7 rounded-lg hover:bg-surface-container flex items-center justify-center cursor-pointer">3</span>
+<span class="px-1">...</span>
+<span class="w-7 h-7 rounded-lg hover:bg-surface-container flex items-center justify-center cursor-pointer">7</span>
+</div>
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors font-label-sm text-label-sm font-semibold">
+            Next
+          </button>
+</div>
+</div>
+</div>
+<!-- Escrow Guarantee Footer Banner -->
+<div class="bg-surface-container rounded-xl p-space-lg shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-start md:items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container-lowest flex items-center justify-center shrink-0 shadow-sm text-primary">
+<span class="material-symbols-outlined text-[28px]">verified_user</span>
+</div>
+<div class="space-y-0.5">
+<div class="flex items-center gap-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">100% Escrow Collateral Guarantee</h3>
+<span class="font-label-sm text-label-sm bg-surface-container-highest text-on-surface-variant px-2 py-0.5 rounded font-mono">Protocol v2.4</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            All client micro-task bounties are pre-funded into multi-signature escrow prior to worker acceptance. Workers are legally protected from non-payment, arbitrary rejects, and platform holdback.
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0 pl-14 md:pl-0">
+<div class="flex items-center gap-1.5 bg-surface-container-lowest px-3 py-1.5 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[18px]">account_balance</span>
+<span class="font-label-sm text-label-sm text-on-surface font-bold">FinCEN Regulated Rails</span>
+</div>
+<div class="flex items-center gap-1.5 bg-surface-container-lowest px-3 py-1.5 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-primary text-[18px]">lock</span>
+<span class="font-label-sm text-label-sm text-on-surface font-bold">256-Bit Cold Storage</span>
+</div>
+</div>
+</div>
+</div>
+<!-- MODAL: Withdrawal Instant Action Modal -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center bg-inverse-surface/60 backdrop-blur-sm p-4" id="withdrawModal">
+<div class="bg-surface-container-lowest rounded-2xl max-w-lg w-full p-space-lg shadow-2xl relative space-y-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold">Instant Payout Rail</h3>
+</div>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors" onclick="document.getElementById('withdrawModal').classList.add('hidden')">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="bg-surface-container p-space-md rounded-xl space-y-1">
+<div class="flex justify-between items-center text-body-xs font-body-xs text-on-surface-variant">
+<span>Worker Wallet Liquidity:</span>
+<span class="font-bold text-on-surface text-body-md font-mono">$145.50 USD</span>
+</div>
+<div class="flex justify-between items-center text-body-xs font-body-xs text-on-surface-variant">
+<span>Destination Account:</span>
+<span class="font-semibold text-secondary font-mono">M-Pesa (+254 712 345 678)</span>
+</div>
+<div class="flex justify-between items-center text-body-xs font-body-xs text-on-surface-variant">
+<span>Platform Processing Fee:</span>
+<span class="font-bold text-secondary font-mono">$0.00 (Tier 1 Pro Waived)</span>
+</div>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-bold">Specify Transfer Amount ($USD)</label>
+<div class="relative flex items-center">
+<span class="absolute left-3 text-on-surface font-bold text-headline-sm">$</span>
+<input class="w-full bg-surface-container-low rounded-xl py-3 pl-8 pr-20 text-headline-sm text-headline-sm font-bold text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-mono" max="145.50" type="number" value="145.50"/>
+<span class="absolute right-3 font-label-md text-label-md text-secondary font-bold">ALL FUNDS</span>
+</div>
+<span class="text-body-xs font-body-xs text-on-surface-variant">Will convert to ~19,133.25 KES at interbank exchange rate.</span>
+</div>
+<div class="p-3 bg-secondary-container/30 rounded-xl flex items-center gap-2 text-body-xs font-body-xs text-on-secondary-container">
+<span class="material-symbols-outlined text-secondary text-[18px]">verified</span>
+<span>Funds credit directly to telecom handset via Safaricom Daraja API within 30 seconds.</span>
+</div>
+<div class="flex items-center gap-space-sm pt-space-xs">
+<button class="w-1/2 py-2.5 rounded-lg bg-surface-container text-on-surface font-label-lg text-label-lg font-semibold hover:bg-surface-variant transition-colors" onclick="document.getElementById('withdrawModal').classList.add('hidden')">
+          Cancel
+        </button>
+<button class="w-1/2 py-2.5 rounded-lg bg-primary-container text-on-primary font-label-lg text-label-lg font-bold hover:bg-primary transition-all shadow-md" onclick="alert('Demo: Instant withdrawal dispatched to M-Pesa!'); document.getElementById('withdrawModal').classList.add('hidden');">
+          Confirm Transfer
+        </button>
+</div>
+</div>
+</div>
+<!-- MODAL: Official Receipt View Modal (QJH4928XLP) -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center bg-inverse-surface/60 backdrop-blur-sm p-4" id="receiptModal">
+<div class="bg-surface-container-lowest rounded-2xl max-w-md w-full p-space-lg shadow-2xl relative space-y-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Transaction Receipt</h3>
+</div>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors" onclick="document.getElementById('receiptModal').classList.add('hidden')">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Receipt Voucher Body -->
+<div class="bg-surface-container-low rounded-xl p-space-md space-y-space-sm">
+<div class="text-center pb-space-xs border-b border-outline-variant/30">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block">Disbursement Settlement</span>
+<span class="font-headline-xl text-headline-xl text-on-surface font-extrabold font-mono block">$100.00 USD</span>
+<span class="font-label-md text-label-md text-secondary font-bold font-mono">13,150.00 KES Received</span>
+</div>
+<div class="space-y-2 text-body-xs font-body-xs pt-1">
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Receipt Hash:</span>
+<span class="font-mono font-bold text-on-surface">QJH4928XLP</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Timestamp:</span>
+<span class="text-on-surface font-medium">May 22, 2025 · 16:22:18 UTC</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Beneficiary:</span>
+<span class="text-on-surface font-semibold">Elena Rostova</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Rail Network:</span>
+<span class="text-on-surface">Safaricom M-Pesa Kenya</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Target Phone:</span>
+<span class="font-mono text-on-surface font-semibold">+254 712 345 678</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Exchange Rate:</span>
+<span class="font-mono text-on-surface">1 USD = 131.50 KES</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Network Fee:</span>
+<span class="text-secondary font-bold">$0.00 (Subsidized)</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Execution Status:</span>
+<span class="inline-flex items-center gap-1 text-secondary font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Confirmed on Telecom Ledger
+            </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm pt-space-xs">
+<button class="w-1/2 py-2.5 rounded-lg bg-surface-container text-on-surface font-label-lg text-label-lg font-semibold hover:bg-surface-variant transition-colors flex items-center justify-center gap-1.5" onclick="window.print()">
+<span class="material-symbols-outlined text-[16px]">print</span>
+<span>Print Voucher</span>
+</button>
+<button class="w-1/2 py-2.5 rounded-lg bg-primary-container text-on-primary font-label-lg text-label-lg font-bold hover:bg-primary transition-all shadow-md" onclick="document.getElementById('receiptModal').classList.add('hidden')">
+          Done
+        </button>
+</div>
+</div>
+</div>
+</div></main><footer class="w-full bg-surface-container-low shadow-[0_-1px_4px_rgba(0,0,0,0.02)] mt-space-2xl"><div class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin lg:px-margin-desktop py-space-2xl"><div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-space-2xl"><div class="space-y-space-sm"><div class="flex items-center gap-space-sm"><img alt="TaskFlow Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XuWoqTzpHs-R1YNAc9X6ClYDrK78AssXzAQQSyu4X5W0AZ1rbXHWJF2UKEaknnYXs7mREisKoRVBShT-hVTshN6EPrGGOYD59soA2G0aw__c1Z91vUBon4HcdZa-7NS7gBaQ4Hst-EXBf0jebnMbW2k-SqSZYiKgxrXOjrCw8oDYUIvjV43XpRnmp4xrZXLtAHKi664S9rxoWiTV97dwxXgY4Fdr3c_dHiiRcBz0Y2XBb_4DuWr5GCjBx8"/><span class="font-headline-sm text-headline-sm text-on-surface font-bold">TaskFlow</span></div><p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">The high-trust micro-task network. Instant escrow mechanics, verified worker unlocks, and guaranteed milestone payouts.</p></div><div><h4 class="font-label-lg text-label-lg text-on-surface font-bold mb-space-md">Marketplace</h4><ul class="space-y-space-xs"><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">Available Bounties</li><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">$0.80 Unlock Model</li><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">Skill Verification</li><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">Leaderboards</li></ul></div><div><h4 class="font-label-lg text-label-lg text-on-surface font-bold mb-space-md">Enterprise Clients</h4><ul class="space-y-space-xs"><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">Post Micro-Task</li><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">Escrow Protection</li><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">Batch Processing</li><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">API Integrations</li></ul></div><div><h4 class="font-label-lg text-label-lg text-on-surface font-bold mb-space-md">Security &amp; Legal</h4><ul class="space-y-space-xs"><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">Escrow Compliance</li><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">Fee Transparency</li><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">Terms of Service</li><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">Privacy Policy</li></ul></div></div><div class="pt-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-sm text-on-surface-variant"><span class="font-body-xs text-body-xs">© 2025 TaskFlow Technologies Inc. All rights reserved.</span><div class="flex items-center gap-space-lg"><span class="font-body-xs text-body-xs hover:text-on-surface cursor-pointer">Status: Operational</span><span class="font-body-xs text-body-xs hover:text-on-surface cursor-pointer">Instant Payouts Active</span></div></div></div></footer></body></html>

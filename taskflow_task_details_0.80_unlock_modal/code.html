@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "secondary-fixed": "#6ffbbe", "primary": "#004ac6", "on-secondary": "#ffffff", "on-secondary-fixed": "#002113", "surface-container-highest": "#dae2fd", "tertiary": "#784b00", "surface-container-lowest": "#ffffff", "on-error": "#ffffff", "on-tertiary-fixed": "#2a1700", "secondary": "#006c49", "surface-container": "#eaedff", "on-tertiary-container": "#ffeedd", "on-tertiary": "#ffffff", "tertiary-fixed-dim": "#ffb95f", "surface-dim": "#d2d9f4", "surface-tint": "#0053db", "error": "#ba1a1a", "secondary-container": "#6cf8bb", "on-secondary-fixed-variant": "#005236", "primary-fixed-dim": "#b4c5ff", "tertiary-fixed": "#ffddb8", "on-tertiary-fixed-variant": "#653e00", "surface-container-low": "#f2f3ff", "on-surface-variant": "#434655", "on-error-container": "#93000a", "surface-variant": "#dae2fd", "outline": "#737686", "surface-container-high": "#e2e7ff", "on-primary-container": "#eeefff", "tertiary-container": "#996100", "error-container": "#ffdad6", "outline-variant": "#c3c6d7", "on-secondary-container": "#00714d", "surface-bright": "#faf8ff", "on-background": "#131b2e", "on-primary": "#ffffff", "primary-fixed": "#dbe1ff", "primary-container": "#2563eb", "secondary-fixed-dim": "#4edea3", "on-primary-fixed-variant": "#003ea8", "inverse-primary": "#b4c5ff", "on-primary-fixed": "#00174b", "inverse-on-surface": "#eef0ff", "inverse-surface": "#283044", "surface": "#faf8ff", "on-surface": "#131b2e", "background": "#faf8ff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter-sm": "1rem", "margin": "1.5rem", "space-xs": "0.25rem", "space-xl": "2rem", "space-2xl": "3rem", "space-lg": "1.5rem", "gutter": "1.5rem", "gutter-lg": "2rem", "space-sm": "0.5rem", "margin-mobile": "1rem", "margin-desktop": "2.5rem", "space-md": "1rem" }, "fontFamily": { "display": ["Inter"], "headline-lg-mobile": ["Inter"], "label-sm": ["Inter"], "headline-xl-mobile": ["Inter"], "label-md": ["Inter"], "body-md": ["Inter"], "body-xs": ["Inter"], "body-sm": ["Inter"], "headline-md": ["Inter"], "currency-stat": ["Inter"], "headline-sm": ["Inter"], "headline-xl": ["Inter"], "label-lg": ["Inter"], "headline-lg": ["Inter"], "body-lg": ["Inter"] }, "fontSize": { "display": ["3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.03em", "fontWeight": "700" }], "headline-lg-mobile": ["1.375rem", { "lineHeight": "1.875rem", "letterSpacing": "-0.015em", "fontWeight": "600" }], "label-sm": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.03em", "fontWeight": "600" }], "headline-xl-mobile": ["1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-md": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600" }], "body-md": ["1rem", { "lineHeight": "1.5rem", "fontWeight": "400" }], "body-xs": ["0.75rem", { "lineHeight": "1rem", "fontWeight": "400" }], "body-sm": ["0.875rem", { "lineHeight": "1.25rem", "fontWeight": "400" }], "headline-md": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "600" }], "currency-stat": ["1.875rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-sm": ["1.125rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.005em", "fontWeight": "600" }], "headline-xl": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.025em", "fontWeight": "700" }], "label-lg": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "600" }], "headline-lg": ["1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "fontWeight": "400" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-[1280px] mx-auto px-margin-mobile md:px-margin lg:px-margin-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-xl"><a class="flex items-center gap-space-sm" data-path="find-tasks" href="#"><img alt="TaskFlow Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XuWoqTzpHs-R1YNAc9X6ClYDrK78AssXzAQQSyu4X5W0AZ1rbXHWJF2UKEaknnYXs7mREisKoRVBShT-hVTshN6EPrGGOYD59soA2G0aw__c1Z91vUBon4HcdZa-7NS7gBaQ4Hst-EXBf0jebnMbW2k-SqSZYiKgxrXOjrCw8oDYUIvjV43XpRnmp4xrZXLtAHKi664S9rxoWiTV97dwxXgY4Fdr3c_dHiiRcBz0Y2XBb_4DuWr5GCjBx8"/><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">TaskFlow</span></a><nav class="hidden lg:flex items-center gap-space-lg" data-active-classes="text-primary font-label-lg text-label-lg font-bold"><a aria-current="page" class="transition-colors text-primary font-label-lg text-label-lg font-bold" data-path="find-tasks" href="#">Find Tasks</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="how-it-works" href="#">How It Works</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="for-clients" href="#">For Clients</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="for-workers" href="#">For Workers</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="pricing" href="#">Pricing</a></nav></div><div class="flex items-center gap-space-md"><div class="hidden sm:flex items-center gap-space-xs bg-surface-container-high px-space-md py-space-xs rounded-full"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Wallet</span><span class="font-label-lg text-label-lg text-secondary font-bold">$245.50</span></div><button aria-label="Notifications" class="p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors relative flex items-center justify-center" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-error"></span></button><div class="flex items-center gap-space-sm pl-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><main class="w-full pt-16 bg-surface"><div class="flex flex-col w-full relative">
+<!-- Subtle Ambient Glows -->
+<div class="absolute top-12 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="absolute top-80 right-1/4 w-80 h-80 bg-secondary/5 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<!-- Page Main Content (Underlying Task View) -->
+<div class="max-w-[1280px] w-full mx-auto px-margin-mobile md:px-margin lg:px-margin-desktop py-space-xl">
+<!-- Top Meta Breadcrumb -->
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md mb-space-md">
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[16px]">grid_view</span>
+<span>Tasks</span>
+</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface-variant">Computer Vision & AI Data</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface font-bold truncate">AI Data Annotation & Bounding Box Labeling</span>
+</div>
+<!-- Main Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left 8-col: Task Spec Sheet & Blurred Sandbox -->
+<div class="lg:col-span-8 flex flex-col gap-space-lg">
+<!-- Header Info Card -->
+<div class="bg-surface-container-lowest p-space-xl rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm uppercase tracking-wider font-semibold">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+              Live Micro-Task • 27 Slots Left
+            </span>
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container text-primary font-label-sm text-label-sm font-semibold">Vision ML</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-semibold">Autonomous Driving</span>
+</div>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface font-bold leading-tight">
+            AI Data Annotation & Bounding Box Labeling
+          </h1>
+<!-- Client Credibility Ribbon -->
+<div class="flex flex-wrap items-center gap-space-md pt-space-xs text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-primary font-bold font-label-md text-label-md">
+                TS
+              </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1 font-bold text-on-surface">
+<span>TechSolutions Global</span>
+<span class="material-symbols-outlined text-primary text-[16px]" title="Enterprise Verified">verified</span>
+</div>
+<span class="font-body-xs text-body-xs text-on-surface-variant">Member since Oct 2022</span>
+</div>
+</div>
+<div class="hidden sm:block h-6 w-px bg-surface-container-high"></div>
+<div class="flex items-center gap-1 text-tertiary font-semibold font-label-md text-label-md">
+<span class="material-symbols-outlined text-tertiary text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>4.9</span>
+<span class="text-on-surface-variant font-normal">(142 reviews)</span>
+</div>
+<div class="hidden sm:block h-6 w-px bg-surface-container-high"></div>
+<div class="flex items-center gap-1.5 text-secondary font-semibold font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">payments</span>
+<span>98% Payout Rate</span>
+</div>
+</div>
+</div>
+<!-- Metric KPI Ribbon Banner -->
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-space-sm p-space-md bg-surface-container-low rounded-xl">
+<div class="p-space-sm rounded-lg bg-surface-container-lowest flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Task Reward</span>
+<span class="font-currency-stat text-currency-stat text-on-surface font-bold mt-1">$5.00</span>
+</div>
+<div class="p-space-sm rounded-lg bg-tertiary-fixed/30 flex flex-col">
+<span class="font-label-sm text-label-sm text-on-tertiary-fixed-variant uppercase font-semibold">Access Fee</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-currency-stat text-currency-stat text-tertiary font-bold">$0.80</span>
+</div>
+</div>
+<div class="p-space-sm rounded-lg bg-secondary-container/40 flex flex-col">
+<span class="font-label-sm text-label-sm text-on-secondary-fixed-variant uppercase font-semibold">Net Yield</span>
+<span class="font-currency-stat text-currency-stat text-secondary font-bold mt-1">+$4.20</span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-lowest flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Slots Pool</span>
+<span class="font-headline-md text-headline-md text-on-surface font-bold mt-1">27<span class="text-on-surface-variant font-normal text-sm">/100</span></span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-lowest flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Time Est.</span>
+<span class="font-headline-md text-headline-md text-on-surface font-bold mt-1">25 Mins</span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-lowest flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Difficulty</span>
+<span class="font-headline-md text-headline-md text-secondary font-bold mt-1">Beginner</span>
+</div>
+</div>
+<!-- Public Preview & Dataset Teaser -->
+<div class="bg-surface-container-lowest p-space-xl rounded-xl shadow-sm flex flex-col gap-space-md">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">Public Task Description</h2>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+            Annotate and draw high-precision bounding boxes around pedestrians, cyclists, and traffic signals in 15 provided high-resolution autonomous vehicle sensor snapshots. Every image includes dual forward-facing LiDAR-calibrated RGB frames.
+          </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md pt-space-xs">
+<div class="relative rounded-lg overflow-hidden h-44 bg-surface-container">
+<img class="w-full h-full object-cover opacity-80" data-alt="High-resolution autonomous vehicle dashboard camera capture displaying a rainy suburban intersection with pedestrian crosswalks and multiple cyclists under evening street lighting, technical LiDAR overlay aesthetic with geometric guide points" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQtctYEYJCifffqgZIVizyP__KzX1ontPoQpsIgSPDIWEvXYO3cfHuEHT_V9_PLhMWwjfz-cGE2EvDMSGLg94uGSmMlLKOpdnuNrIThI4sq6nPxkG4Y2dh00ogjsY9ynXK_wi6MyKVVay-HQqtERUwAaUjZ_v2W_jEX5iKgXWXKgqgBJe6_FerDBlNkT4s7AcTVW7S3R9RXOFwDGhOSNgUCgJDdojrPXkatNTDNoDY3emMWvTL2t4Y8A"/>
+<div class="absolute bottom-2 left-2 px-2 py-1 bg-on-surface/80 backdrop-blur-sm rounded text-on-primary font-label-sm text-label-sm font-mono">
+                FRAME_SAMPLE_01.RAW
+              </div>
+</div>
+<div class="relative rounded-lg overflow-hidden h-44 bg-surface-container">
+<img class="w-full h-full object-cover opacity-80" data-alt="Autonomous car visual sensor dataset showing urban European boulevard at dusk with distinct bicycle lanes, traffic lights glowing red, and calibrated pixel coordinate markings in crisp high fidelity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUepo5-L52Rf22SOp7VmwqR2VZDqBLiuRS7ZUFH02eAD3PHjcj096e20kPCJTdeYX_Jf1h5klr83ITw8zfbiNioYo_zN3IWfqzHGi0_v1TasYkSXE5vPNZHAj62YIrAXLFS0DmVeQuJVQeRtOldS7AaEeqzZTTuThI1ynmd7kjuxAWpvHvsn9Ab1_qwErjla2PRtictuGukzWARUozIUuNDpzEKmVAkr8hCSxYJyK4Pmproj2YthDCSA"/>
+<div class="absolute bottom-2 left-2 px-2 py-1 bg-on-surface/80 backdrop-blur-sm rounded text-on-primary font-label-sm text-label-sm font-mono">
+                FRAME_SAMPLE_02.RAW
+              </div>
+</div>
+</div>
+</div>
+<!-- Locked Confidential Section with Heavy Visual Redaction -->
+<div class="relative rounded-xl overflow-hidden shadow-sm bg-surface-container-low p-space-xl min-h-[380px] flex flex-col justify-center items-center text-center">
+<!-- Background Blurred Mock Content -->
+<div class="absolute inset-0 p-space-xl opacity-20 filter blur-md select-none pointer-events-none flex flex-col gap-space-md">
+<div class="h-6 w-1/3 bg-on-surface rounded"></div>
+<div class="space-y-2">
+<div class="h-4 w-full bg-on-surface rounded"></div>
+<div class="h-4 w-5/6 bg-on-surface rounded"></div>
+<div class="h-4 w-2/3 bg-on-surface rounded"></div>
+</div>
+<div class="h-32 w-full bg-primary rounded-lg mt-4"></div>
+<div class="flex gap-4 mt-2">
+<div class="h-10 w-40 bg-on-surface rounded"></div>
+<div class="h-10 w-40 bg-on-surface rounded"></div>
+</div>
+</div>
+<!-- Glass Floating Lock Banner -->
+<div class="relative z-10 max-w-lg mx-auto bg-surface-container-lowest/95 backdrop-blur-xl p-space-xl rounded-xl shadow-md flex flex-col items-center gap-space-sm">
+<div class="w-14 h-14 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary shadow-inner mb-space-xs">
+<span class="material-symbols-outlined text-[30px]" style="font-variation-settings: 'FILL' 1;">lock</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold">
+              Confidential Client Guidelines & Raw Data Files
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">
+              Pay the one-time <strong class="text-tertiary">$0.80 task access fee</strong> to unlock proprietary dataset links, bounding box annotation rubrics, submission portal, and reserve your worker slot for 4 hours.
+            </p>
+<button class="mt-space-sm px-space-xl py-space-sm bg-primary hover:bg-primary-container text-on-primary rounded-lg font-label-lg text-label-lg font-bold flex items-center gap-2 shadow transition-all active:scale-[0.98]" onclick="document.getElementById('checkout-modal').classList.remove('hidden')" type="button">
+<span class="material-symbols-outlined text-[18px]">key</span>
+<span>Unlock Full Instructions ($0.80)</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Right 4-col: Quality & Escrow Safeguard Sidebar -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- Instant Unlock Promo Card -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">Escrow Guarantees</span>
+<span class="material-symbols-outlined text-secondary">verified_user</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start gap-space-sm p-space-sm bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">lock_clock</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">4-Hour Seat Lock</span>
+<span class="font-body-xs text-body-xs text-on-surface-variant">Your worker slot is exclusively held while you complete annotations.</span>
+</div>
+</div>
+<div class="flex items-start gap-space-sm p-space-sm bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-secondary text-[20px] mt-0.5">account_balance_wallet</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">100% Escrow Funded</span>
+<span class="font-body-xs text-body-xs text-on-surface-variant">$5.00 is locked in smart escrow, ready for instant release on approval.</span>
+</div>
+</div>
+<div class="flex items-start gap-space-sm p-space-sm bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-tertiary text-[20px] mt-0.5">security</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">Why $0.80 Access Fee?</span>
+<span class="font-body-xs text-body-xs text-on-surface-variant">Prevents automated bot runs and guarantees serious work submissions for top clients.</span>
+</div>
+</div>
+</div>
+<div class="pt-space-xs flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Avg Review Turnaround:</span>
+<span class="font-bold text-on-surface">1.2 hours</span>
+</div>
+</div>
+<!-- Task Velocity & Completion Stats Graphic -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<h4 class="font-label-lg text-label-lg font-bold text-on-surface">Pool Depletion Velocity</h4>
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">73 of 100 claimed</span>
+<span class="font-label-md text-label-md font-bold text-secondary">73% Full</span>
+</div>
+<div class="w-full bg-surface-container-high h-2.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full transition-all duration-500" style="width: 73%;"></div>
+</div>
+<div class="flex items-center gap-space-xs text-tertiary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">timer</span>
+<span>Est. pool closure in ~48 minutes</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ACTIVE HIGH-FIDELITY PAYMENT MODAL OVERLAY -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-space-sm sm:p-space-md bg-on-background/60 backdrop-blur-sm transition-opacity duration-200" id="checkout-modal">
+<!-- Modal Dialog Card (Elevated Level 3) -->
+<div class="bg-surface-container-lowest rounded-xl max-w-xl w-full shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+<!-- Modal Header -->
+<div class="px-space-xl py-space-md bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[20px]">lock_open</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">Unlock Task: AI Data Annotation</h2>
+<p class="font-body-xs text-body-xs text-on-surface-variant">Pay $0.80 task-access fee to unlock full instructions and claim your slot</p>
+</div>
+</div>
+<button class="p-1 rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" onclick="document.getElementById('checkout-modal').classList.add('hidden')" type="button">
+<span class="material-symbols-outlined text-[22px]">close</span>
+</button>
+</div>
+<!-- Modal Body (Scrollable if compact screen) -->
+<div class="p-space-xl overflow-y-auto space-y-space-lg">
+<!-- Order Summary Card -->
+<div class="bg-surface-container-low rounded-xl p-space-md space-y-space-xs">
+<div class="flex justify-between items-center text-body-sm font-body-sm text-on-surface-variant">
+<span>Task Access Fee</span>
+<span class="font-bold text-on-surface font-label-md text-label-md">$0.80</span>
+</div>
+<div class="flex justify-between items-center text-body-sm font-body-sm text-on-surface-variant">
+<span>Potential Task Bounty</span>
+<span class="font-bold text-secondary font-label-md text-label-md">+$5.00 Payout</span>
+</div>
+<div class="flex justify-between items-center text-body-sm font-body-sm text-on-surface-variant">
+<span>Worker Slot Status</span>
+<span class="font-bold text-primary font-label-md text-label-md flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+              Guaranteed 4-hr Reservation
+            </span>
+</div>
+<div class="pt-space-xs flex justify-between items-center font-bold text-on-surface">
+<span class="font-label-lg text-label-lg">Total Due Now</span>
+<span class="font-currency-stat text-currency-stat text-primary">$0.80</span>
+</div>
+</div>
+<!-- Payment Method Tabs Selector -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-bold uppercase tracking-wider mb-space-sm">
+            Select Payment Method
+          </label>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-xs mb-space-md">
+<!-- Option 1: Wallet Balance -->
+<button class="pay-tab p-space-sm rounded-lg text-left transition-all bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high flex flex-col justify-between" id="tab-wallet" onclick="switchMethod('wallet')" type="button">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+</div>
+<div class="mt-2">
+<span class="block font-label-sm text-label-sm font-bold text-on-surface">Wallet</span>
+<span class="block font-body-xs text-body-xs text-secondary font-semibold">$245.50</span>
+</div>
+</button>
+<!-- Option 2: M-Pesa (Selected by default) -->
+<button class="pay-tab p-space-sm rounded-lg text-left transition-all bg-surface-container-highest text-primary shadow-sm flex flex-col justify-between" id="tab-mpesa" onclick="switchMethod('mpesa')" type="button">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-[20px] text-primary">smartphone</span>
+<span class="material-symbols-outlined text-[16px] text-primary">check_circle</span>
+</div>
+<div class="mt-2">
+<span class="block font-label-sm text-label-sm font-bold text-primary">M-Pesa</span>
+<span class="block font-body-xs text-body-xs text-on-surface-variant font-medium">KES 104.00</span>
+</div>
+</button>
+<!-- Option 3: Cards -->
+<button class="pay-tab p-space-sm rounded-lg text-left transition-all bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high flex flex-col justify-between" id="tab-card" onclick="switchMethod('card')" type="button">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-[20px]">credit_card</span>
+</div>
+<div class="mt-2">
+<span class="block font-label-sm text-label-sm font-bold text-on-surface">Card</span>
+<span class="block font-body-xs text-body-xs text-on-surface-variant">Visa / MC</span>
+</div>
+</button>
+<!-- Option 4: PayPal -->
+<button class="pay-tab p-space-sm rounded-lg text-left transition-all bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high flex flex-col justify-between" id="tab-paypal" onclick="switchMethod('paypal')" type="button">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-[20px]">account_balance</span>
+</div>
+<div class="mt-2">
+<span class="block font-label-sm text-label-sm font-bold text-on-surface">PayPal</span>
+<span class="block font-body-xs text-body-xs text-on-surface-variant">Instant Link</span>
+</div>
+</button>
+</div>
+<!-- Active Panel: M-Pesa (Shown) -->
+<div class="method-panel bg-surface-container-lowest p-space-md rounded-xl space-y-space-md" id="panel-mpesa">
+<div class="flex items-center justify-between bg-surface-container-low px-space-md py-space-xs rounded-lg">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-secondary text-on-secondary font-label-sm text-label-sm font-bold">M-PESA EXPRESS</span>
+<span class="font-body-xs text-body-xs text-on-surface-variant">Instant STK Push</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface font-mono font-bold">FX: 1 USD = 130 KES</span>
+</div>
+<div class="space-y-space-xs">
+<label class="block font-label-md text-label-md text-on-surface font-semibold" for="mpesa-number">
+                Safaricom Phone Number
+              </label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-on-surface-variant font-label-md text-label-md font-mono">
+                  🇰🇪 +254
+                </div>
+<input class="w-full pl-20 pr-4 py-2.5 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm outline-none focus:bg-surface-container-lowest" id="mpesa-number" type="tel" value="712 345 678"/>
+</div>
+<p class="font-body-xs text-body-xs text-on-surface-variant">
+                You will receive a pop-up prompt on your phone requesting your M-Pesa PIN for KES 104.00.
+              </p>
+</div>
+</div>
+<!-- Active Panel: Wallet (Hidden) -->
+<div class="method-panel hidden bg-surface-container-lowest p-space-md rounded-xl space-y-space-sm" id="panel-wallet">
+<div class="flex items-center gap-space-sm p-space-md bg-secondary-container/30 rounded-lg">
+<span class="material-symbols-outlined text-secondary text-[24px]">verified</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-secondary-fixed">Sufficient Balance Available</span>
+<span class="font-body-xs text-body-xs text-on-secondary-fixed-variant">$245.50 available in your TaskFlow Vault.</span>
+</div>
+</div>
+<p class="font-body-xs text-body-xs text-on-surface-variant">
+              $0.80 will be deducted seamlessly from your wallet with zero network fees.
+            </p>
+</div>
+<!-- Active Panel: Card (Hidden) -->
+<div class="method-panel hidden bg-surface-container-lowest p-space-md rounded-xl space-y-space-sm" id="panel-card">
+<div class="space-y-1">
+<label class="block font-label-sm text-label-sm text-on-surface font-semibold">Card Details</label>
+<input class="w-full px-3 py-2 rounded-lg bg-surface-container-lowest text-on-surface text-body-sm shadow-sm" placeholder="4242 •••• •••• 4242" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<input class="px-3 py-2 rounded-lg bg-surface-container-lowest text-on-surface text-body-sm shadow-sm" placeholder="MM / YY" type="text"/>
+<input class="px-3 py-2 rounded-lg bg-surface-container-lowest text-on-surface text-body-sm shadow-sm" maxlength="3" placeholder="CVC" type="password"/>
+</div>
+</div>
+<!-- Active Panel: PayPal (Hidden) -->
+<div class="method-panel hidden bg-surface-container-lowest p-space-md rounded-xl text-center space-y-space-xs" id="panel-paypal">
+<p class="font-body-sm text-body-sm text-on-surface">Authenticate with PayPal for 1-click recurring task unlocks.</p>
+<span class="font-label-sm text-label-sm text-primary font-bold">Standard PayPal checkout redirected securely.</span>
+</div>
+</div>
+<!-- Trust & Security Assurance Footnote -->
+<div class="flex items-start gap-space-xs p-space-sm bg-surface-container-low rounded-lg text-on-surface-variant font-body-xs text-body-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary mt-0.5">lock</span>
+<span>
+            256-bit encrypted checkout. The $0.80 micro-fee guarantees serious applicants and protects dataset integrity. <span class="font-mono text-on-surface font-semibold">TXN-8092471</span>
+</span>
+</div>
+</div>
+<!-- Modal Footer Action Bar -->
+<div class="p-space-xl bg-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<button class="w-full sm:w-auto px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold transition-colors" onclick="document.getElementById('checkout-modal').classList.add('hidden')" type="button">
+          Cancel & Return
+        </button>
+<div class="flex items-center gap-space-xs w-full sm:w-auto">
+<button class="w-full sm:w-auto px-space-xl py-2.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg font-bold shadow-md flex items-center justify-center gap-2 transition-all active:scale-[0.98]" id="pay-submit-btn" onclick="simulatePaymentFlow()" type="button">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+<span id="pay-btn-label">Pay $0.80 & Unlock Task Now</span>
+</button>
+</div>
+</div>
+<!-- State Simulation Switcher (Demonstrating Prototype Transitions) -->
+<div class="px-space-xl py-2 bg-surface-container-high flex flex-wrap items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="font-mono text-[11px] uppercase tracking-wide">Interactive States:</span>
+<div class="flex items-center gap-2">
+<button class="hover:text-primary transition-colors underline font-medium" onclick="setModalState('ready')" type="button">Reset</button>
+<span>•</span>
+<button class="hover:text-primary transition-colors underline font-medium" onclick="setModalState('processing')" type="button">Processing...</button>
+<span>•</span>
+<button class="hover:text-secondary transition-colors underline font-bold" onclick="setModalState('success')" type="button">Success State</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Client-side tab & modal transition logic -->
+<script>
+    function switchMethod(methodKey) {
+      // Toggle tabs
+      document.querySelectorAll('.pay-tab').forEach(el => {
+        el.classList.remove('bg-surface-container-highest', 'text-primary', 'shadow-sm');
+        el.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+      });
+      const activeTab = document.getElementById('tab-' + methodKey);
+      if (activeTab) {
+        activeTab.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+        activeTab.classList.add('bg-surface-container-highest', 'text-primary', 'shadow-sm');
+      }
+
+      // Toggle Panels
+      document.querySelectorAll('.method-panel').forEach(panel => {
+        panel.classList.add('hidden');
+      });
+      const targetPanel = document.getElementById('panel-' + methodKey);
+      if (targetPanel) {
+        targetPanel.classList.remove('hidden');
+      }
+    }
+
+    function simulatePaymentFlow() {
+      setModalState('processing');
+      setTimeout(() => {
+        setModalState('success');
+      }, 1600);
+    }
+
+    function setModalState(state) {
+      const btn = document.getElementById('pay-submit-btn');
+      const label = document.getElementById('pay-btn-label');
+      
+      if (state === 'processing') {
+        btn.disabled = true;
+        btn.classList.add('opacity-80', 'cursor-wait');
+        label.innerHTML = '<span class="inline-block animate-spin mr-2">⟳</span> Contacting Safaricom STK Push...';
+      } else if (state === 'success') {
+        btn.disabled = false;
+        btn.classList.remove('bg-primary', 'opacity-80', 'cursor-wait');
+        btn.classList.add('bg-secondary');
+        label.innerHTML = '✓ Task Unlocked! Loading Workspace...';
+        setTimeout(() => {
+          document.getElementById('checkout-modal').classList.add('hidden');
+          alert('Task successfully unlocked! Your 4-hour reservation has started.');
+          setModalState('ready');
+        }, 1200);
+      } else {
+        btn.disabled = false;
+        btn.classList.remove('bg-secondary', 'opacity-80', 'cursor-wait');
+        btn.classList.add('bg-primary');
+        label.innerText = 'Pay $0.80 & Unlock Task Now';
+      }
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-container-low shadow-[0_-1px_4px_rgba(0,0,0,0.02)] mt-space-2xl"><div class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin lg:px-margin-desktop py-space-2xl"><div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-space-2xl"><div class="space-y-space-sm"><div class="flex items-center gap-space-sm"><img alt="TaskFlow Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XuWoqTzpHs-R1YNAc9X6ClYDrK78AssXzAQQSyu4X5W0AZ1rbXHWJF2UKEaknnYXs7mREisKoRVBShT-hVTshN6EPrGGOYD59soA2G0aw__c1Z91vUBon4HcdZa-7NS7gBaQ4Hst-EXBf0jebnMbW2k-SqSZYiKgxrXOjrCw8oDYUIvjV43XpRnmp4xrZXLtAHKi664S9rxoWiTV97dwxXgY4Fdr3c_dHiiRcBz0Y2XBb_4DuWr5GCjBx8"/><span class="font-headline-sm text-headline-sm text-on-surface font-bold">TaskFlow</span></div><p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">The high-trust micro-task network. Instant escrow mechanics, verified worker unlocks, and guaranteed milestone payouts.</p></div><div><h4 class="font-label-lg text-label-lg text-on-surface font-bold mb-space-md">Marketplace</h4><ul class="space-y-space-xs"><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">Available Bounties</li><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">$0.80 Unlock Model</li><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">Skill Verification</li><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">Leaderboards</li></ul></div><div><h4 class="font-label-lg text-label-lg text-on-surface font-bold mb-space-md">Enterprise Clients</h4><ul class="space-y-space-xs"><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">Post Micro-Task</li><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">Escrow Protection</li><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">Batch Processing</li><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">API Integrations</li></ul></div><div><h4 class="font-label-lg text-label-lg text-on-surface font-bold mb-space-md">Security & Legal</h4><ul class="space-y-space-xs"><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">Escrow Compliance</li><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">Fee Transparency</li><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">Terms of Service</li><li class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface cursor-pointer">Privacy Policy</li></ul></div></div><div class="pt-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-sm text-on-surface-variant"><span class="font-body-xs text-body-xs">© 2025 TaskFlow Technologies Inc. All rights reserved.</span><div class="flex items-center gap-space-lg"><span class="font-body-xs text-body-xs hover:text-on-surface cursor-pointer">Status: Operational</span><span class="font-body-xs text-body-xs hover:text-on-surface cursor-pointer">Instant Payouts Active</span></div></div></div></footer></body></html>
