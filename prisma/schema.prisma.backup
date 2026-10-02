@@ -1,0 +1,430 @@
+﻿datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  WORKER
+  CLIENT
+  ADMIN
+}
+
+enum TaskStatus {
+  DRAFT
+  SUBMITTED_FOR_APPROVAL
+  APPROVED
+  PUBLISHED
+  VIEWED
+  UNLOCKED
+  IN_PROGRESS
+  SUBMITTED
+  REVIEWING
+  APPROVED_BY_REVIEWER
+  REJECTED
+  COMPLETED
+  DISPUTED
+  CANCELLED
+}
+
+enum PaymentPurpose {
+  TASK_UNLOCK
+  WITHDRAWAL
+  REFUND
+  ADJUSTMENT
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  SUCCEEDED
+  FAILED
+  CANCELLED
+  REFUNDED
+}
+
+enum WalletTransactionType {
+  TASK_EARNING
+  WITHDRAWAL
+  REFUND
+  ADJUSTMENT
+}
+
+enum WithdrawalStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum DisputeStatus {
+  OPEN
+  IN_REVIEW
+  RESOLVED
+  CLOSED
+}
+
+enum NotificationType {
+  TASK_APPROVED
+  TASK_REJECTED
+  TASK_PUBLISHED
+  NEW_MESSAGE
+  WITHDRAWAL_SUCCESS
+  WITHDRAWAL_FAILURE
+  DISPUTE_OPENED
+  DISPUTE_RESOLVED
+  SYSTEM_UPDATE
+}
+
+enum AdminActionType {
+  USER_CREATED
+  USER_UPDATED
+  USER_DELETED
+  TASK_CREATED
+  TASK_UPDATED
+  TASK_DELETED
+  TASK_APPROVED
+  TASK_REJECTED
+  TASK_PUBLISHED
+  WITHDRAWAL_APPROVED
+  WITHDRAWAL_REJECTED
+  DISPUTE_OPENED
+  DISPUTE_RESOLVED
+  SYSTEM_UPDATE
+}
+
+enum SubmissionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model User {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  password      String
+  name          String
+  role          Role
+  status        String   @default("ACTIVE")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  workerProfile WorkerProfile?
+  clientProfile ClientProfile?
+  wallet        Wallet?
+  payments      Payment[]
+  submissions   Submission[]
+  reviews       SubmissionReview[]
+  withdrawals   Withdrawal[]
+  disputesAsClaimant Dispute[] @relation("DisputeClaimant")
+  disputesAsRespondent Dispute[] @relation("DisputeRespondent")
+  notifications Notification[]
+  adminActions  AdminAction[] @relation("AdminActionActor")
+  auditLogs     AuditLog[] @relation("AuditLogActor")
+  conversations Conversation[] @relation("ConversationParticipants")
+  messages      Message[] @relation("MessageSender")
+  messageReads  MessageRead[] @relation("MessageReadUser")
+
+  @@index([role])
+  @@index([status])
+}
+
+model WorkerProfile {
+  id      String   @id @default(uuid())
+  user    User     @relation(fields: [userId], references: [id])
+  userId  String   @unique
+  // Additional fields can be added as needed
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ClientProfile {
+  id      String   @id @default(uuid())
+  user    User     @relation(fields: [userId], references: [id])
+  userId  String   @unique
+  // Additional fields can be added as needed
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TaskCategory {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  description String?
+  tasks     Task[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Task {
+  id                  String   @id @default(uuid())
+  title               String
+  description         String
+  previewDescription  String
+  category            TaskCategory @relation(fields: [categoryId], references: [id])
+  categoryId          String
+  client              User       @relation(fields: [clientId], references: [id])
+  clientId            String
+  budget              Decimal    @db.Decimal(10, 2)
+  currency            String     @default("USD")
+  status              TaskStatus @default(DRAFT)
+  deadline            DateTime?
+  requirements        Json?
+  attachments         Json?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  approvedAt          DateTime?
+  publishedAt         DateTime?
+  completedAt         DateTime?
+  views               TaskView[]
+  unlocks             TaskUnlock[]
+  submissions         Submission[]
+  payments            Payment[] @relation("TaskPayments")
+  disputes            Dispute[]
+  @@index([categoryId])
+  @@index([clientId])
+  @@index([status])
+  @@index([createdAt])
+  @@index([deadline])
+}
+
+model TaskView {
+  id        String   @id @default(uuid())
+  task      Task     @relation(fields: [taskId], references: [id])
+  taskId    String
+  worker    User     @relation(fields: [workerId], references: [id])
+  workerId  String
+  viewedAt  DateTime @default(now())
+  // Optional: source/context if needed
+  @@unique([taskId, workerId])
+  @@index([taskId])
+  @@index([workerId])
+  @@index([viewedAt])
+}
+
+model TaskUnlock {
+  id        String   @id @default(uuid())
+  task      Task     @relation(fields: [taskId], references: [id])
+  taskId    String
+  worker    User     @relation(fields: [workerId], references: [id])
+  workerId  String
+  payment   Payment  @relation(fields: [paymentId], references: [id])
+  paymentId String
+  unlockedAt DateTime @default(now())
+  @@unique([taskId, workerId])
+  @@index([taskId])
+  @@index([workerId])
+  @@index([paymentId])
+}
+
+model Payment {
+  id                  String   @id @default(uuid())
+  user                User     @relation(fields: [userId], references: [id])
+  userId              String
+  task                Task?    @relation(fields: [taskId], references: [id], name: "TaskPayments")
+  taskId              String?
+  amount              Decimal    @db.Decimal(10, 2)
+  currency            String     @default("USD")
+  purpose             PaymentPurpose
+  provider            String     // e.g., "MPESA", "CARD"
+  providerTransactionId String   @unique
+  internalTransactionId String   @unique
+  status              PaymentStatus
+  idempotencyKey      String   @unique
+  metadata            Json?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  @@index([userId])
+  @@index([taskId])
+  @@index([status])
+  @@index([providerTransactionId])
+  @@index([internalTransactionId])
+  @@index([idempotencyKey])
+}
+
+model Submission {
+  id              String   @id @default(uuid())
+  task            Task     @relation(fields: [taskId], references: [id])
+  taskId          String
+  worker          User     @relation(fields: [workerId], references: [id])
+  workerId        String
+  content         String
+  attachments     Json?
+  status          SubmissionStatus @default(PENDING)
+  submittedAt     DateTime @default(now())
+  reviewedAt      DateTime?
+  reviewer        User?    @relation(fields: [reviewerId], references: [id])
+  reviewerId      String?
+  feedback        String?
+  // Earnings will be created via wallet transaction upon approval
+  @@index([taskId])
+  @@index([workerId])
+  @@index([status])
+}
+
+model SubmissionReview {
+  id            String   @id @default(uuid())
+  submission    Submission @relation(fields: [submissionId], references: [id])
+  submissionId  String
+  reviewer      User     @relation(fields: [reviewerId], references: [id])
+  reviewerId    String
+  feedback      String
+  rating        Int?     // Optional rating 1-5
+  createdAt     DateTime @default(now())
+  @@index([submissionId])
+  @@index([reviewerId])
+}
+
+model Wallet {
+  id        String   @id @default(uuid())
+  worker    User     @relation(fields: [workerId], references: [id])
+  workerId  String   @unique
+  // Balance is kept consistent with the ledger through application logic:
+  // - All wallet transactions (earnings, withdrawals, etc.) must go through the WalletTransaction model
+  // - Application code must update the balance field whenever a transaction is created
+  // - This denormalized balance field is for performance optimization of frequent balance reads
+  balance   Decimal    @db.Decimal(10, 2) @default(0)
+  transactions WalletTransaction[]
+  @@index([workerId])
+}
+
+model WalletTransaction {
+  id            String   @id @default(uuid())
+  wallet        Wallet   @relation(fields: [walletId], references: [id])
+  walletId      String
+  type          WalletTransactionType
+  amount        Decimal    @db.Decimal(10, 2)
+  // Reference to the entity that caused this transaction (e.g., TaskUnlock, Withdrawal)
+  referenceId   String?    // Could be taskUnlockId, withdrawalId, etc.
+  referenceType String?    // Optional: to indicate what the reference is for
+  metadata      Json?
+  createdAt     DateTime @default(now())
+  @@index([walletId])
+  @@index([type])
+  @@index([createdAt])
+}
+
+model Withdrawal {
+  id            String   @id @default(uuid())
+  wallet        Wallet   @relation(fields: [walletId], references: [id])
+  walletId      String
+  amount        Decimal    @db.Decimal(10, 2)
+  method        String     // e.g., "MPESA", "BANK_TRANSFER"
+  destination   String     // Phone number, bank account, etc.
+  status        WithdrawalStatus @default(PENDING)
+  providerReference String?    // Transaction ID from provider
+  failureReason String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  @@index([walletId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model Dispute {
+  id              String   @id @default(uuid())
+  task            Task     @relation(fields: [taskId], references: [id])
+  taskId          String
+  submission      Submission? @relation(fields: [submissionId], references: [id])
+  submissionId    String?
+  claimant        User     @relation("DisputeClaimant", fields: [claimantId], references: [id])
+  claimantId      String
+  respondent      User?    @relation("DisputeRespondent", fields: [respondentId], references: [id])
+  respondentId    String?
+  status          DisputeStatus @default(OPEN)
+  reason          String
+  resolution      String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  @@index([taskId])
+  @@index([submissionId])
+  @@index([claimantId])
+  @@index([respondentId])
+  @@index([status])
+}
+
+model Notification {
+  id              String   @id @default(uuid())
+  recipient       User     @relation(fields: [recipientId], references: [id])
+  recipientId     String
+  type            NotificationType
+  title           String
+  message         String
+  read            Boolean  @default(false)
+  // Optional: link to related entity
+  relatedEntityType String?  // e.g., "TASK", "WITHDRAWAL", "DISPUTE"
+  relatedEntityId   String?  // ID of the related entity
+  createdAt       DateTime @default(now())
+  @@index([recipientId])
+  @@index([read])
+  @@index([createdAt])
+}
+
+model AdminAction {
+  id            String   @id @default(uuid())
+  actor         User     @relation(fields: [actorId], references: [id])
+  actorId       String
+  action        AdminActionType
+  entityType    String   // e.g., "USER", "TASK", "WITHDRAWAL"
+  entityId      String   // ID of the entity
+  metadata      Json?    // Additional details
+  ipAddress     String?
+  userAgent     String?
+  createdAt     DateTime @default(now())
+  @@index([actorId])
+  @@index([entityType])
+  @@index([createdAt])
+}
+
+model AuditLog {
+  id            String   @id @default(uuid())
+  actor         User?    @relation(fields: [actorId], references: [id]) // Could be system
+  actorId       String?
+  action        String   // Description of action
+  entityType    String   // e.g., "PAYMENT", "WALLET_TRANSACTION"
+  entityId      String   // ID of the entity
+  metadata      Json?    // Additional details (avoid storing sensitive data)
+  ipAddress     String?
+  userAgent     String?
+  createdAt     DateTime @default(now())
+  @@index([actorId])
+  @@index([entityType])
+  @@index([createdAt])
+}
+
+model Conversation {
+  id            String   @id @default(uuid())
+  participants  User[]   @relation("ConversationParticipants")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  @@index([updatedAt])
+}
+
+model Message {
+  id            String   @id @default(uuid())
+  conversation  Conversation @relation(fields: [conversationId], references: [id])
+  conversationId String
+  sender        User     @relation(fields: [senderId], references: [id])
+  senderId      String
+  content       String
+  attachments   Json?
+  createdAt     DateTime @default(now())
+  @@index([conversationId])
+  @@index([senderId])
+  @@index([createdAt])
+}
+
+model MessageRead {
+  id            String   @id @default(uuid())
+  message       Message  @relation(fields: [messageId], references: [id])
+  messageId     String
+  user          User     @relation(fields: [userId], references: [id])
+  userId        String
+  readAt        DateTime @default(now())
+  @@unique([messageId, userId])
+  @@index([messageId])
+  @@index([userId])
+}

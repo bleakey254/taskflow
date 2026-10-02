@@ -1,0 +1,43 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Users\ADMIN\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.19.1
+2 info using node@v22.23.2
+3 silly config load:file:C:\Users\ADMIN\AppData\Roaming\npm\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\ADMIN\Downloads\stitch_taskflow_online_micro_task_marketplace\marketplace\.npmrc
+5 silly config load:file:C:\Users\ADMIN\.npmrc
+6 silly config load:file:C:\Users\ADMIN\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install left-pad
+8 verbose argv "install" "left-pad" "--save-dev" "--cache" "./npm-cache" "--loglevel" "verbose"
+9 verbose logfile logs-max:10 dir:C:\Users\ADMIN\Downloads\stitch_taskflow_online_micro_task_marketplace\marketplace\npm-cache\_logs\2026-09-28T03_17_36_334Z-
+10 verbose logfile C:\Users\ADMIN\Downloads\stitch_taskflow_online_micro_task_marketplace\marketplace\npm-cache\_logs\2026-09-28T03_17_36_334Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:2197815296 maxSize:549453824 maxEntrySize:274726912
+13 silly idealTree buildDeps
+14 silly fetch manifest left-pad@*
+15 silly packumentCache full:https://registry.npmjs.org/left-pad cache-miss
+16 http fetch GET https://registry.npmjs.org/left-pad attempt 1 failed with EACCES
+17 http fetch GET https://registry.npmjs.org/left-pad attempt 2 failed with EACCES
+18 http fetch GET https://registry.npmjs.org/left-pad attempt 3 failed with ENOENT
+19 silly placeDep ROOT left-pad@ OK for: marketplace@0.1.0 want: *
+20 verbose type system
+21 verbose stack FetchError: request to https://registry.npmjs.org/left-pad failed, reason: getaddrinfo ENOENT registry.npmjs.org
+21 verbose stack     at ClientRequest.<anonymous> (C:\Users\ADMIN\AppData\Roaming\npm\node_modules\npm\node_modules\minipass-fetch\lib\index.js:130:14)
+21 verbose stack     at ClientRequest.emit (node:events:519:28)
+21 verbose stack     at emitErrorEvent (node:_http_client:108:11)
+21 verbose stack     at _destroy (node:_http_client:967:9)
+21 verbose stack     at onSocketNT (node:_http_client:987:5)
+21 verbose stack     at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+22 error code ENOENT
+23 error syscall getaddrinfo
+24 error errno ENOENT
+25 error enoent request to https://registry.npmjs.org/left-pad failed, reason: getaddrinfo ENOENT registry.npmjs.org
+26 error enoent This is related to npm not being able to find a file.
+26 error enoent
+27 silly unfinished npm timer reify 1790565460332
+28 silly unfinished npm timer reify:loadTrees 1790565460334
+29 verbose cwd C:\Users\ADMIN\Downloads\stitch_taskflow_online_micro_task_marketplace\marketplace
+30 verbose os Windows_NT 10.0.26100
+31 verbose node v22.23.2
+32 verbose npm  v11.19.1
+33 verbose exit 1
+34 verbose code 1
+35 error A complete log of this run can be found in: C:\Users\ADMIN\Downloads\stitch_taskflow_online_micro_task_marketplace\marketplace\npm-cache\_logs\2026-09-28T03_17_36_334Z-debug-0.log
