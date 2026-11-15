@@ -12,7 +12,7 @@ export default function SimpleHomePage() {
         <div className="h-16 max-w-[1280px] mx-auto px-margin-mobile md:px-margin lg:px-margin-desktop flex items-center justify-between gap-space-md">
           <div className="flex items-center gap-space-xl">
             <Link href="/client/tasks" className="flex items-center gap-space-sm" data-path="find-tasks">
-              <img alt="TaskFlow Logo" className="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XuWoqTzpHs-R1YNAc9X6ClYDrK78AssXzAQQSyu4X5W0AZ1rbXHWJF2UKEaknnYXs7mREisKoRVBShT-hVTshN6EPrGGOYD59soA2G0aw__c1Z91vUBon4HcdZa-7NS7gBaQ4Hst-EXBf0jebnMbW2k-SqSZYiKgxrXOjrCw8oDYUIvjV43XpRnmp4xrZXLtAHKi664S9rxoWiTV97dwxXgY4Fdr3c_dHiiRcBz0Y2XBb_4DuWr5GCjBx8"/>
+              <img alt="TaskFlow Logo" className="h-8 w-auto object-contain" src="/taskflow-logo.svg"/>
               <span className="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">TaskFlow</span>
             </Link>
             <nav className="hidden lg:flex items-center gap-space-lg" data-active-classes="text-primary font-label-lg text-label-lg font-bold">
