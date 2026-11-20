@@ -47,7 +47,7 @@ export async function initiateTaskUnlockPayment(
 
     // Check if task is available for unlocking
     const unlockableStatuses = [TaskStatus.PUBLISHED, TaskStatus.VIEWED, TaskStatus.UNLOCKED];
-    if (!unlockableStatuses.includes(task.status)) {
+    if (!unlockableStatuses.includes(task.status as TaskStatus)) {
       return { success: false, error: 'This task is not available for unlocking' };
     }
 

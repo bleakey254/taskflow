@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { requireAuth, requireRole } from '@/lib/middleware/auth';
 import { prisma } from '@/lib/prisma';
-import { WithdrawalStatus } from '@/types/prisma';
+import { WithdrawalStatus, Role } from '@/types/prisma';
 
 // Get wallet details
 export async function getWallet(userId: string) {
@@ -64,7 +64,7 @@ export async function requestWithdrawal(
     }
 
     // Check if sufficient balance
-    if (wallet.balance < amount) {
+    if (Number(wallet.balance) < amount) {
       throw new Error('Insufficient wallet balance');
     }
 

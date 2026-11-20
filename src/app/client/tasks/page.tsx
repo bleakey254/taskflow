@@ -1,4 +1,9 @@
 import { getCurrentUser } from '@/lib/middleware/auth';
+import { PageShell, HeaderUser } from '@/components/layout';
+import { Card, CardHeader, CardContent, CardFooter } from '@/components/layout';
+import { Button, IconButton } from '@/components/layout';
+import { Badge, StatusBadge } from '@/components/layout';
+import Link from 'next/link';
 
 export const metadata = {
   title: 'My Tasks - TaskFlow',
@@ -6,9 +11,6 @@ export const metadata = {
 };
 
 export default async function ClientTasksPage() {
-  'use server';
-
-  // Get current user (layout already ensured auth and role)
   const user = await getCurrentUser();
 
   if (!user) {
@@ -16,77 +18,76 @@ export default async function ClientTasksPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-6xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
-          <div className="px-6 py-4 border-b">
-            <h2 className="text-xl font-semibold text-gray-900">
-              My Tasks
-            </h2>
-            <p className="mt-1 text-sm text-gray-500">
-              View and manage your posted tasks
-            </p>
-          </div>
+    <PageShell
+      header={
+        <>
+          <Link href="/" className="flex items-center gap-space-sm" data-path="find-tasks">
+            <img alt="TaskFlow Logo" className="h-8 w-auto object-contain" src="/taskflow-logo.svg"/>
+            <span className="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">TaskFlow</span>
+          </Link>
+          <HeaderUser name={user.name} balance="$245.50" />
+        </>
+      }
+      title="My Tasks"
+      description="View and manage your posted tasks"
+    >
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md mb-space-lg">
+        <div>
+          <h2 className="font-headline-xl text-headline-xl text-on-surface font-extrabold">My Tasks</h2>
+          <p className="font-body-md text-body-md text-on-surface-variant mt-0.5">View and manage your posted tasks</p>
+        </div>
+        <Link href="/client/tasks/create">
+          <Button leftIcon={<span className="material-symbols-outlined text-[18px]">add_circle</span>}>
+            Create New Task
+          </Button>
+        </Link>
+      </div>
 
-          <div className="px-6 py-6">
-            <div className="space-y-4">
-              <div className="flex justify-between items-center mb-4">
-                <button
-                  onClick={() => window.location.href = '/client/tasks/create'}
-                  className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
-                >
-                  + Create New Task
-                </button>
+      <Card variant="filled" padding="none">
+        <div className="space-y-0">
+          {/* Task Card */}
+          <div className="p-space-md border-b border-outline-variant/50 hover:bg-surface-container transition-colors">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-space-md">
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-wrap items-center gap-space-sm mb-space-xs">
+                  <Badge variant="primary" size="sm">Design</Badge>
+                  <StatusBadge status="completed" size="sm" />
+                </div>
+                <h3 className="font-headline-sm text-headline-sm text-on-surface font-bold truncate">Sample Task Title</h3>
+                <p className="font-body-sm text-body-sm text-on-surface-variant mt-0.5 line-clamp-2">
+                  Sample task description that was posted by a client.
+                </p>
               </div>
-
-              {/* Task list would go here */}
-              <div className="space-y-4">
-                {/* Placeholder task cards */}
-                <div className="bg-gray-50 p-4 rounded-lg border">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <h3 className="font-medium text-gray-900">Sample Task Title</h3>
-                      <p className="mt-1 text-sm text-gray-600">
-                        Sample task description that was posted by a client.
-                      </p>
-                    </div>
-                    <div className="text-center space-y-2">
-                      <div className="text-sm font-medium text-gray-900">
-                        $5.00
-                      </div>
-                      <div className="text-xs text-gray-500">
-                        Budget
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-3 pt-3 border-t">
-                    <div className="flex items-center space-x-3">
-                      <span className="text-xs text-gray-500">Status:</span>
-                      <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">
-                        COMPLETED
-                      </span>
-                    </div>
-
-                    <div className="mt-2 flex justify-end space-x-3">
-                      <button
-                        className="px-3 py-1 bg-gray-200 text-gray-800 text-sm rounded hover:bg-gray-300"
-                      >
-                        View Details
-                      </button>
-                      <button
-                        className="px-3 py-1 bg-indigo-600 text-white text-sm rounded hover:bg-indigo-700"
-                      >
-                        View Submissions
-                      </button>
-                    </div>
-                  </div>
+              <div className="flex items-center gap-space-lg sm:ml-space-md">
+                <div className="text-right">
+                  <p className="font-currency-stat text-currency-stat text-on-surface font-extrabold">$5.00</p>
+                  <p className="font-body-xs text-body-xs text-on-surface-variant">Budget</p>
+                </div>
+                <div className="flex items-center gap-space-sm">
+                  <IconButton variant="ghost" size="sm" ariaLabel="View details">
+                    <span className="material-symbols-outlined text-[20px]">visibility</span>
+                  </IconButton>
+                  <IconButton variant="ghost" size="sm" ariaLabel="View submissions">
+                    <span className="material-symbols-outlined text-[20px]">assignment</span>
+                  </IconButton>
                 </div>
               </div>
             </div>
           </div>
+
+          {/* Empty State */}
+          <div className="p-space-xl text-center">
+            <span className="material-symbols-outlined text-[48px] text-on-surface-variant/30">task_alt</span>
+            <p className="font-body-md text-body-md text-on-surface-variant mt-space-sm">No tasks yet</p>
+            <p className="font-body-sm text-body-sm text-on-surface-variant/60 mt-1">Create your first task to get started</p>
+            <Link href="/client/tasks/create" className="mt-space-md inline-block">
+              <Button size="sm" leftIcon={<span className="material-symbols-outlined text-[16px]">add_circle</span>}>
+                Create Task
+              </Button>
+            </Link>
+          </div>
         </div>
-      </div>
-    </div>
+      </Card>
+    </PageShell>
   );
 }

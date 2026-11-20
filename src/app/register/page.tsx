@@ -1,95 +1,128 @@
+"use client";
+
+import { useState } from 'react';
+import Link from 'next/link';
 import { registerUser } from '@/actions/auth';
+import { PageShell } from '@/components/layout';
+import { Card } from '@/components/layout';
+import { Button } from '@/components/layout';
+import { Input, Select } from '@/components/layout';
 
 export default function RegisterPage() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [role, setRole] = useState<'WORKER' | 'CLIENT'>('WORKER');
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('role', role);
+
+    try {
+      await registerUser(undefined, formData);
+      window.location.href = '/dashboard';
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An unexpected error occurred. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="w-full max-w-md space-y-8 p-6">
-        <div className="space-y-4">
-          <h2 className="text-center text-2xl font-bold text-gray-900">
-            Create your TaskFlow account
-          </h2>
-          <p className="text-center text-sm text-gray-600">
+    <PageShell
+      fullWidth
+      className="flex items-center justify-center min-h-screen py-space-2xl"
+    >
+      <Card variant="elevated" padding="lg" className="w-full max-w-md">
+        <div className="text-center mb-space-lg">
+          <Link href="/" className="inline-flex items-center gap-space-sm mb-space-md" data-path="find-tasks">
+            <img alt="TaskFlow Logo" className="h-8 w-auto object-contain" src="/taskflow-logo.svg"/>
+            <span className="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">TaskFlow</span>
+          </Link>
+          <h1 className="font-headline-xl text-headline-xl text-on-surface font-extrabold">Create your TaskFlow account</h1>
+          <p className="font-body-md text-body-md text-on-surface-variant mt-space-xs">
             Get started with task management and collaboration
           </p>
         </div>
-        <form className="space-y-6" action={async (formData: FormData) => {
-          'use server';
-          return await registerUser(undefined, formData);
-        }}>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                First name
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                autoComplete="name"
-                required
-                className="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus-indigo-600 sm:text-sm sm:leading-6"
-              />
+
+        <form onSubmit={handleSubmit} className="space-y-space-md">
+          {error && (
+            <div className="p-space-sm bg-error/10 text-error rounded-lg font-body-sm text-body-sm flex items-center gap-2" role="alert">
+              <span className="material-symbols-outlined text-[18px]">error</span>
+              {error}
             </div>
-          </div>
+          )}
 
-          <div className="space-y-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Email address
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              required
-              className="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus-indigo-600 sm:text-sm sm:leading-6"
-            />
-          </div>
+          <Input
+            label="First name"
+            type="text"
+            autoComplete="name"
+            required
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="John"
+            leftIcon={<span className="material-symbols-outlined text-[20px]">person</span>}
+          />
 
-          <div className="space-y-4">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-              Password
-            </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              autoComplete="new-password"
-              required
-              className="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus-indigo-600 sm:text-sm sm:leading-6"
-            />
-          </div>
+          <Input
+            label="Email address"
+            type="email"
+            autoComplete="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@example.com"
+            leftIcon={<span className="material-symbols-outlined text-[20px]">email</span>}
+          />
 
-          <div className="space-y-4">
-            <label htmlFor="role" className="block text-sm font-medium text-gray-700">
-              Account type
-            </label>
-            <select
-              id="role"
-              name="role"
-              required
-              className="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus-indigo-600 sm:text-sm sm:leading-6"
-            >
-              <option value="">Select account type</option>
-              <option value="WORKER">Worker - Complete tasks and earn</option>
-              <option value="CLIENT">Client - Post tasks and manage workers</option>
-            </select>
-          </div>
+          <Input
+            label="Password"
+            type="password"
+            autoComplete="new-password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Create a strong password"
+            leftIcon={<span className="material-symbols-outlined text-[20px]">lock</span>}
+            helperText="At least 8 characters"
+          />
 
-          <div>
-            <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-              Create account
-            </button>
-          </div>
+          <Select
+            label="Account type"
+            required
+            value={role}
+            onChange={(e) => setRole(e.target.value as 'WORKER' | 'CLIENT')}
+            placeholder="Select account type"
+            options={[
+              { value: 'WORKER', label: 'Worker - Complete tasks and earn' },
+              { value: 'CLIENT', label: 'Client - Post tasks and manage workers' },
+            ]}
+          />
+
+          <Button type="submit" fullWidth size="lg" loading={loading}>
+            Create account
+            <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </Button>
         </form>
 
-        <div className="text-center text-sm text-gray-500">
-          Already have an account?
-          <a href="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
-            Sign in
-          </a>
+        <div className="mt-space-lg text-center">
+          <p className="font-body-sm text-body-sm text-on-surface-variant">
+            Already have an account?
+            <Link href="/login" className="font-medium text-primary hover:text-primary/80 ml-1">
+              Sign in
+            </Link>
+          </p>
         </div>
-      </div>
-    </div>
+      </Card>
+    </PageShell>
   );
 }

@@ -1,6 +1,13 @@
-import { getWallet, requestWithdrawal } from '@/actions/wallet';
+import { getWallet } from '@/actions/wallet';
 import { getCurrentUser } from '@/lib/middleware/auth';
 import { WalletTransaction, WalletTransactionType } from '@/types/prisma';
+import { PageShell, HeaderUser } from '@/components/layout';
+import { Card, CardHeader, CardContent, CardFooter } from '@/components/layout';
+import { Button, IconButton } from '@/components/layout';
+import { Badge } from '@/components/layout';
+import { DataCard, StatGrid } from '@/components/layout';
+import { Input, Select } from '@/components/layout';
+import Link from 'next/link';
 
 export const metadata = {
   title: 'Wallet - TaskFlow',
@@ -8,209 +15,166 @@ export const metadata = {
 };
 
 export default async function WorkerWalletPage() {
-  'use server';
-
-  // Get current user (layout already ensured auth and role)
   const user = await getCurrentUser();
 
   if (!user) {
     return <div>Loading...</div>;
   }
 
-  // Get wallet data
   const wallet = await getWallet(user.id);
 
   if (!wallet) {
     return <div>Loading wallet data...</div>;
   }
 
+  const balance = Number(wallet.balance.toString()).toFixed(2);
+
   return (
-    <div className="min-h-screen bg-surface">
-      <div className="max-w-2xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
-        <div className="bg-surface-container-lowest rounded-xl shadow-md overflow-hidden">
-          <div className="px-6 py-4 border-b border-surface-container-high">
-            <h2 className="text-xl font-semibold text-on-surface">
-              Wallet
-            </h2>
-            <p className="mt-1 text-sm text-on-surface-variant">
-              View your earnings and request withdrawals
-            </p>
-          </div>
+    <PageShell
+      header={
+        <>
+          <Link href="/" className="flex items-center gap-space-sm" data-path="find-tasks">
+            <img alt="TaskFlow Logo" className="h-8 w-auto object-contain" src="/taskflow-logo.svg"/>
+            <span className="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">TaskFlow</span>
+          </Link>
+          <HeaderUser name={user.name} balance={`$${balance}`} />
+        </>
+      }
+      title="Wallet"
+      description="View your earnings and request withdrawals"
+    >
+      <StatGrid columns={1} gap="md" className="max-w-2xl">
+        <DataCard
+          title="Wallet Balance"
+          value={`$${balance}`}
+          icon={<span className="material-symbols-outlined text-[24px]">account_balance_wallet</span>}
+          iconColor="primary"
+          subtitle="Available for withdrawal"
+          variant="highlight"
+        />
+      </StatGrid>
 
-          <div className="px-6 py-6">
-            {/* Wallet balance */}
-            <div className="mb-6">
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <h3 className="text-lg font-medium text-on-surface">
-                    Wallet Balance
-                  </h3>
-                  <p className="mt-1 text-sm text-on-surface-variant">
-                    Available for withdrawal
-                  </p>
-                </div>
-                <div className="text-3xl font-bold text-primary">
-                  ${Number(wallet.balance.toString()).toFixed(2)}
-                </div>
-              </div>
+      <div className="mt-space-xl grid gap-gutter max-w-2xl">
+        <Card variant="elevated" padding="lg">
+          <CardHeader
+            title="Recent Transactions"
+            action={
+              <Button variant="ghost" size="sm">View All</Button>
+            }
+          />
+          <CardContent>
+            {wallet.transactions.length > 0 ? (
+              <div className="space-y-0">
+                {wallet.transactions.map((tx: any, index: number) => {
+                  const txType = tx.type as WalletTransactionType;
+                  const isEarning = txType === WalletTransactionType.TASK_EARNING || txType === WalletTransactionType.REFUND;
+                  const isWithdrawal = txType === WalletTransactionType.WITHDRAWAL;
+                  const typeLabel = txType === WalletTransactionType.TASK_EARNING ? 'Task Earnings' :
+                    txType === WalletTransactionType.WITHDRAWAL ? 'Withdrawal' :
+                    txType === WalletTransactionType.REFUND ? 'Refund' : 'Adjustment';
+                  const typeIcon = txType === WalletTransactionType.TASK_EARNING ? 'task_alt' :
+                    txType === WalletTransactionType.WITHDRAWAL ? 'account_balance_wallet' :
+                    txType === WalletTransactionType.REFUND ? 'undo' : 'tune';
+                  const typeColor = isEarning ? 'secondary' : isWithdrawal ? 'error' : 'primary';
 
-              {/* Recent transactions */}
-              <div className="space-y-4">
-                <h3 className="text-lg font-medium text-on-surface mb-4">
-                  Recent Transactions
-                </h3>
-
-                {wallet.transactions.length > 0 ? (
-                  wallet.transactions.map((tx: WalletTransaction, index: number) => (
-                    <div key={index} className="border-b border-surface-container-high py-3 last:border-b-0">
-                      <div className="flex justify-between items-start mb-1">
-                        <div className="flex-1">
-                          <div className="flex items-center space-x-2">
-                            <div className={[
-                              'h-6 w-6 flex items-center justify-center rounded',
-                              tx.type === WalletTransactionType.TASK_EARNING ? 'bg-secondary/10' :
-                              tx.type === WalletTransactionType.WITHDRAWAL ? 'bg-error/10' :
-                              tx.type === WalletTransactionType.REFUND ? 'bg-primary/10' :
-                              'bg-surface-variant'
-                            ].join(' ')}>
-                              <span className={[
-                                'text-sm font-medium',
-                                tx.type === WalletTransactionType.TASK_EARNING ? 'text-secondary' :
-                                tx.type === WalletTransactionType.WITHDRAWAL ? 'text-error' :
-                                tx.type === WalletTransactionType.REFUND ? 'text-primary' :
-                                'text-on-surface-variant'
-                              ].join(' ')}>
-                                {tx.type === WalletTransactionType.TASK_EARNING ? '+' :
-                                 tx.type === WalletTransactionType.WITHDRAWAL ? '-' :
-                                 tx.type === WalletTransactionType.REFUND ? '+' : '±'}
-                              </span>
-                            </div>
-                            <div>
-                              <h4 className="font-medium text-on-surface">
-                                {tx.type === WalletTransactionType.TASK_EARNING ? 'Task Earnings' :
-                                 tx.type === WalletTransactionType.WITHDRAWAL ? 'Withdrawal' :
-                                 tx.type === WalletTransactionType.REFUND ? 'Refund' : 'Adjustment'}
-                              </h4>
-                              <p className="text-sm text-on-surface-variant truncate">
-                                {/* In a real app, we'd show more details from metadata */}
-                                Transaction from task completion
-                              </p>
-                            </div>
-                          </div>
+                  return (
+                    <div key={index} className="flex items-center justify-between p-space-sm border-b border-outline-variant/50 last:border-0 hover:bg-surface-container transition-colors">
+                      <div className="flex items-center gap-space-md">
+                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center bg-${typeColor}/10 text-${typeColor}`}>
+                          <span className="material-symbols-outlined text-[20px]">{typeIcon}</span>
                         </div>
-                        <div className="text-right">
-                          <span className={[
-                            'font-medium',
-                            tx.type === WalletTransactionType.TASK_EARNING || tx.type === WalletTransactionType.REFUND ? 'text-secondary' :
-                            tx.type === WalletTransactionType.WITHDRAWAL ? 'text-error' :
-                            'text-on-surface-variant'
-                          ].join(' ')}>
-                            {(tx.type === WalletTransactionType.TASK_EARNING || tx.type === WalletTransactionType.REFUND) ?
-                              `+${Number(tx.amount.toString()).toFixed(2)}` :
-                              `-${Number(tx.amount.toString()).toFixed(2)}`}
-                          </span>
+                        <div>
+                          <p className="font-label-md text-label-md text-on-surface font-medium">{typeLabel}</p>
+                          <p className="font-body-xs text-body-xs text-on-surface-variant">
+                            {new Date(tx.createdAt).toLocaleDateString()}
+                          </p>
                         </div>
                       </div>
-                      <div className="text-xs text-on-surface-variant">
-                        {new Date(tx.createdAt).toLocaleDateString()}
+                      <div className="text-right">
+                        <p className={`font-label-lg text-label-lg font-bold ${isEarning ? 'text-secondary' : 'text-error'}`}>
+                          {isEarning ? '+' : '-'}$${Number(tx.amount.toString()).toFixed(2)}
+                        </p>
+                        {tx.metadata && (
+                          <Badge variant="outline" size="sm" className="mt-1">{JSON.stringify(tx.metadata).slice(0, 30)}...</Badge>
+                        )}
                       </div>
                     </div>
-                  ))
-                ) : (
-                  <div className="text-center py-8">
-                    <p className="text-sm text-on-surface-variant">
-                      No transactions yet. Complete tasks to start earning!
-                    </p>
-                  </div>
-                )}
+                  );
+                })}
               </div>
-            </div>
-
-            {/* Withdrawal section */}
-            <div className="mt-8 pt-6 border-t border-surface-container-high">
-              <h3 className="text-lg font-medium text-on-surface mb-4">
-                Request Withdrawal
-              </h3>
-              <div className="space-y-4">
-                <form className="space-y-4" action={async (formData: FormData) => {
-                  'use server';
-                  await requestWithdrawal(undefined, formData);
-                }}>
-                  <div className="space-y-3">
-                    <div>
-                      <label htmlFor="amount" className="block text-sm font-medium text-on-surface mb-2">
-                        Withdrawal Amount ($)
-                      </label>
-                      <div className="flex items-center">
-                        <span className="mr-2 text-on-surface">$</span>
-                        <input
-                          id="amount"
-                          name="amount"
-                          type="number"
-                          step="0.01"
-                          min="1.00"
-                          required
-                          className="w-32 rounded-md border border-surface-container-high py-1.5 pl-3 pr-10 text-on-surface shadow-sm focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm sm:leading-6 bg-surface-container-lowest"
-                        />
-                      </div>
-                      <p className="mt-1 text-xs text-on-surface-variant">
-                        Minimum withdrawal: $1.00
-                      </p>
-                    </div>
-
-                    <div className="space-y-3">
-                      <label htmlFor="method" className="block text-sm font-medium text-on-surface mb-2">
-                        Withdrawal Method
-                      </label>
-                      <select
-                        id="method"
-                        name="method"
-                        required
-                        className="block w-full rounded-md border border-surface-container-high py-1.5 pl-3 pr-10 text-on-surface shadow-sm focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm sm:leading-6 bg-surface-container-lowest"
-                      >
-                        <option value="">Select withdrawal method</option>
-                        <option value="mpesa">M-Pesa</option>
-                        <option value="bank_transfer">Bank Transfer</option>
-                      </select>
-                    </div>
-
-                    <div className="space-y-3">
-                      <label htmlFor="destination" className="block text-sm font-medium text-on-surface mb-2">
-                        Destination (Phone Number or Bank Account)
-                      </label>
-                      <input
-                        id="destination"
-                        name="destination"
-                        type="text"
-                        placeholder="Enter your M-Pesa number or bank account details"
-                        required
-                        className="block w-full rounded-md border border-surface-container-high py-1.5 pl-3 pr-10 text-on-surface shadow-sm focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm sm:leading-6 bg-surface-container-lowest"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <button
-                      type="button"
-                      className="px-4 py-2 bg-surface-container-high text-on-surface rounded hover:bg-surface-container transition-colors"
-                      onClick={() => window.history.back()}
-                    >
-                      Go Back
-                    </button>
-                    <button
-                      type="submit"
-                      className="px-6 py-2 bg-primary text-on-primary w-auto hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                      disabled={Number(wallet.balance.toString()) < 1.00}
-                    >
-                      Request Withdrawal
-                    </button>
-                  </div>
-                </form>
+            ) : (
+              <div className="text-center py-space-xl">
+                <span className="material-symbols-outlined text-[48px] text-on-surface-variant/30">receipt_long</span>
+                <p className="font-body-md text-body-md text-on-surface-variant mt-space-sm">No transactions yet</p>
+                <p className="font-body-sm text-body-sm text-on-surface-variant/60 mt-1">Complete tasks to start earning!</p>
               </div>
-            </div>
-          </div>
-        </div>
+            )}
+          </CardContent>
+        </Card>
+
+        <Card variant="elevated" padding="lg">
+          <CardHeader title="Request Withdrawal" />
+          <CardContent>
+            <form className="space-y-space-lg" action={async (formData: FormData) => {
+              'use server';
+            }}>
+              <div className="space-y-space-sm">
+                <label htmlFor="amount" className="block font-label-sm text-label-sm text-on-surface font-medium mb-1.5">
+                  Withdrawal Amount ($)
+                </label>
+                <div className="flex items-center gap-space-sm">
+                  <span className="text-on-surface font-body-lg text-body-lg font-bold">$</span>
+                  <Input
+                    id="amount"
+                    name="amount"
+                    type="number"
+                    step="0.01"
+                    min="1.00"
+                    required
+                    className="w-32"
+                    placeholder="1.00"
+                    helperText="Minimum withdrawal: $1.00"
+                  />
+                </div>
+              </div>
+
+              <Select
+                label="Withdrawal Method"
+                name="method"
+                required
+                placeholder="Select withdrawal method"
+                options={[
+                  { value: 'mpesa', label: 'M-Pesa' },
+                  { value: 'bank_transfer', label: 'Bank Transfer' },
+                ]}
+              />
+
+              <Input
+                label="Destination (Phone Number or Bank Account)"
+                name="destination"
+                type="text"
+                placeholder="Enter your M-Pesa number or bank account details"
+                required
+                leftIcon={<span className="material-symbols-outlined text-[20px]">account_circle</span>}
+              />
+
+              <CardFooter>
+                <Button variant="ghost" onClick={() => window.history.back()}>
+                  <span className="material-symbols-outlined text-[18px]">arrow_back</span>
+                  Go Back
+                </Button>
+                <Button
+                  type="submit"
+                  leftIcon={<span className="material-symbols-outlined text-[18px]">send</span>}
+                  disabled={Number(balance) < 1.00}
+                >
+                  Request Withdrawal
+                </Button>
+              </CardFooter>
+            </form>
+          </CardContent>
+        </Card>
       </div>
-    </div>
+    </PageShell>
   );
 }

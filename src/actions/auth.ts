@@ -16,7 +16,7 @@ export async function registerUser(
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
   const name = formData.get('name') as string;
-  const role = formData.get('role') as string;
+  const role = formData.get('role') as Role;
 
   // Basic validation
   if (!email || !password || !name || !role) {
@@ -47,7 +47,7 @@ export async function registerUser(
         email,
         password: hashedPassword,
         name,
-        role: role,
+        role: role as Role,
         status: UserStatus.ACTIVE,
       },
     });
@@ -187,4 +187,17 @@ export async function getCurrentUser(): Promise<{ user: null | { id: string; ema
   }
 
   return { user: validationResult.user };
+}
+
+// Simple sign out action (no form data required)
+export async function signOut(): Promise<void> {
+  'use server';
+
+  const cookieStore = await cookies();
+  const token = cookieStore.get('session-token')?.value;
+
+  if (token) {
+    await deleteSession(token);
+    cookieStore.delete('session-token');
+  }
 }

@@ -44,7 +44,7 @@ export async function requireRole(allowedRoles: Role[]) {
 
   const { user } = validationResult;
 
-  if (!allowedRoles.includes(user.role)) {
+  if (!allowedRoles.includes(user.role as Role)) {
     // User doesn't have required role
     redirect('/unauthorized');
   }

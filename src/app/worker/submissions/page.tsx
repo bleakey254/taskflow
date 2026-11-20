@@ -1,135 +1,117 @@
 import { getCurrentUser } from '@/lib/middleware/auth';
-import { prisma } from '@/lib/prisma';
-import { Submission, SubmissionStatus } from '@/types/prisma';
+import { PageShell, HeaderUser } from '@/components/layout';
+import { Card, CardHeader, CardContent, CardFooter } from '@/components/layout';
+import { Button, IconButton } from '@/components/layout';
+import { Badge, StatusBadge } from '@/components/layout';
+import Link from 'next/link';
 
 export const metadata = {
   title: 'My Submissions - TaskFlow',
-  description: 'View your submitted work and their status',
+  description: 'View and manage your task submissions',
 };
 
 export default async function WorkerSubmissionsPage() {
-  'use server';
-
-  // Get current user
   const user = await getCurrentUser();
 
   if (!user) {
     return <div>Loading...</div>;
   }
 
-  // Get user's submissions
-  const submissions = await prisma.submission.findMany({
-    where: {
-      workerId: user.id,
-    },
-    include: {
-      task: {
-        select: {
-          id: true,
-          title: true,
-          budget: true,
-          currency: true,
-          status: true,
-        },
-      },
-    },
-    orderBy: {
-      submittedAt: 'desc',
-    },
-  });
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-6xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
-          <div className="px-6 py-4 border-b">
-            <h2 className="text-xl font-semibold text-gray-900">
-              My Submissions
-            </h2>
-            <p className="mt-1 text-sm text-gray-500">
-              View your submitted work and their current status
-            </p>
-          </div>
-
-          <div className="px-6 py-6">
-            {submissions.length > 0 ? (
-              <div className="space-y-4">
-                {submissions.map((submission: Submission) => (
-                  <div key={submission.id} className="border-b py-3 last:border-b-0">
-                    <div className="flex justify-between items-start">
-                      <div className="flex-1">
-                        <div className="flex items-center space-x-2 mb-2">
-                          <div className="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center">
-                            <span className="text-sm font-medium text-white">W</span>
-                          </div>
-                          <div>
-                            <h3 className="font-medium text-gray-900">
-                              {submission.task.title}
-                            </h3>
-                            <p className="text-sm text-gray-600">
-                              Submitted {new Date(submission.submittedAt).toLocaleDateString()}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="text-center space-y-2">
-                        <div className={[
-                          'px-3 py-1 rounded',
-                          submission.status === SubmissionStatus.PENDING ? 'bg-yellow-100' :
-                          submission.status === SubmissionStatus.APPROVED ? 'bg-green-100' :
-                          submission.status === SubmissionStatus.REJECTED ? 'bg-red-100' :
-                          'bg-gray-100'
-                        ].join(' ')}>
-                          <span className={[
-                            'font-medium text-xs',
-                            submission.status === SubmissionStatus.PENDING ? 'text-yellow-800' :
-                            submission.status === SubmissionStatus.APPROVED ? 'text-green-800' :
-                            submission.status === SubmissionStatus.REJECTED ? 'text-red-800' :
-                            'text-gray-800'
-                          ].join(' ')}>
-                            {submission.status === SubmissionStatus.PENDING ? 'PENDING' :
-                             submission.status === SubmissionStatus.APPROVED ? 'APPROVED' :
-                             submission.status === SubmissionStatus.REJECTED ? 'REJECTED' :
-                             'UNKNOWN'}
-                          </span>
-                        </div>
-                        {submission.status === SubmissionStatus.APPROVED && (
-                          <div className="mt-2">
-                            <span className="text-sm font-medium text-indigo-600">
-                              Earned: ${submission.task.budget} {submission.task.currency}
-                            </span>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="mt-3 p-3 bg-gray-50 rounded">
-                      <h4 className="font-medium text-gray-900 mb-2">Submission Preview</h4>
-                      <p className="text-gray-700">
-                        {/* Show first 100 characters of content */}
-                        {submission.content.length > 100 ?
-                          `${submission.content.substring(0, 100)}...` :
-                          submission.content}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <div className="mx-auto h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center mb-4">
-                  <svg className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+    <PageShell
+      header={
+        <>
+          <Link href="/" className="flex items-center gap-space-sm" data-path="find-tasks">
+            <img alt="TaskFlow Logo" className="h-8 w-auto object-contain" src="/taskflow-logo.svg"/>
+            <span className="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">TaskFlow</span>
+          </Link>
+          <HeaderUser name={user.name} balance="$245.50" />
+        </>
+      }
+      title="My Submissions"
+      description="View and manage your task submissions"
+    >
+      <Card variant="filled" padding="none">
+        <div className="space-y-0">
+          <div className="p-space-md border-b border-outline-variant/50 hover:bg-surface-container transition-colors">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-space-md">
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-wrap items-center gap-space-sm mb-space-xs">
+                  <Badge variant="primary" size="sm">AI & Machine Learning</Badge>
+                  <StatusBadge status="approved" size="sm" />
                 </div>
-                <p className="text-sm text-gray-500">
-                  You haven't submitted any work yet. Complete tasks to start earning!
+                <h3 className="font-headline-sm text-headline-sm text-on-surface font-bold truncate">AI Data Annotation: Bounding Box Vehicle Tags</h3>
+                <p className="font-body-sm text-body-sm text-on-surface-variant mt-0.5 line-clamp-2">
+                  Submitted bounding box annotations for 40 street photography scenes.
                 </p>
               </div>
-            )}
+              <div className="flex items-center gap-space-lg sm:ml-space-md">
+                <div className="text-right">
+                  <p className="font-currency-stat text-currency-stat text-secondary font-extrabold">$5.00</p>
+                  <p className="font-body-xs text-body-xs text-on-surface-variant">Earned</p>
+                </div>
+                <div className="flex items-center gap-space-sm">
+                  <IconButton variant="ghost" size="sm" ariaLabel="View submission">
+                    <span className="material-symbols-outlined text-[20px]">visibility</span>
+                  </IconButton>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-space-md border-b border-outline-variant/50 hover:bg-surface-container transition-colors">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-space-md">
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-wrap items-center gap-space-sm mb-space-xs">
+                  <Badge variant="outline" size="sm">Catalog Taxonomy</Badge>
+                  <StatusBadge status="pending" size="sm" />
+                </div>
+                <h3 className="font-headline-sm text-headline-sm text-on-surface font-bold truncate">E-commerce Product Tagging</h3>
+                <p className="font-body-sm text-body-sm text-on-surface-variant mt-0.5 line-clamp-2">
+                  Submitted product tags and attribute validations for 25 apparel items.
+                </p>
+              </div>
+              <div className="flex items-center gap-space-lg sm:ml-space-md">
+                <div className="text-right">
+                  <p className="font-currency-stat text-currency-stat text-tertiary font-extrabold">$3.80</p>
+                  <p className="font-body-xs text-body-xs text-on-surface-variant">Pending</p>
+                </div>
+                <div className="flex items-center gap-space-sm">
+                  <IconButton variant="ghost" size="sm" ariaLabel="View submission">
+                    <span className="material-symbols-outlined text-[20px]">visibility</span>
+                  </IconButton>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-space-md hover:bg-surface-container transition-colors">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-space-md">
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-wrap items-center gap-space-sm mb-space-xs">
+                  <Badge variant="primary" size="sm">Data Entry</Badge>
+                  <StatusBadge status="rejected" size="sm" />
+                </div>
+                <h3 className="font-headline-sm text-headline-sm text-on-surface font-bold truncate">Survey Data Entry</h3>
+                <p className="font-body-sm text-body-sm text-on-surface-variant mt-0.5 line-clamp-2">
+                  Submitted survey responses for 100 participants.
+                </p>
+              </div>
+              <div className="flex items-center gap-space-lg sm:ml-space-md">
+                <div className="text-right">
+                  <p className="font-currency-stat text-currency-stat text-error font-extrabold">$0.00</p>
+                  <p className="font-body-xs text-body-xs text-on-surface-variant">Rejected</p>
+                </div>
+                <div className="flex items-center gap-space-sm">
+                  <IconButton variant="ghost" size="sm" ariaLabel="View submission">
+                    <span className="material-symbols-outlined text-[20px]">visibility</span>
+                  </IconButton>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </Card>
+    </PageShell>
   );
 }

@@ -109,12 +109,12 @@ export async function submitTask(
 
     // Check if task is in a state that allows submission
     const allowedStatuses = [TaskStatus.UNLOCKED, TaskStatus.IN_PROGRESS];
-    if (!allowedStatuses.includes(taskUnlock.task.status)) {
+    if (!allowedStatuses.includes(taskUnlock.task.status as TaskStatus)) {
       throw new Error('This task is not available for submission');
     }
 
     // Parse attachments if provided
-    let attachments: unknown = undefined;
+    let attachments: any = undefined;
     if (attachmentsStr) {
       try {
         attachments = JSON.parse(attachmentsStr);
@@ -130,16 +130,16 @@ export async function submitTask(
         taskId,
         workerId: user.id,
         content,
-        attachments,
+        attachments: attachments as any,
         status: SubmissionStatus.PENDING,
       },
     });
 
     // Update task status to IN_PROGRESS if it was UNLOCKED
-    if (taskUnlock.task.status === TaskStatus.UNLOCKED) {
+    if ((taskUnlock.task.status as TaskStatus) === TaskStatus.UNLOCKED) {
       await prisma.task.update({
         where: { id: taskId },
-        data: { status: TaskStatus.IN_PROGRESS },
+        data: { status: TaskStatus.IN_PROGRESS as any },
       });
     }
 
@@ -216,7 +216,7 @@ export async function approveTaskSubmission(
       data: {
         submissionId,
         reviewerId: user.id,
-        feedback,
+        feedback: feedback || '',
         rating,
       },
     });
@@ -235,7 +235,7 @@ export async function approveTaskSubmission(
     // Update task status to COMPLETED
     await prisma.task.update({
       where: { id: submission.taskId },
-      data: { status: TaskStatus.COMPLETED, completedAt: new Date() },
+      data: { status: TaskStatus.COMPLETED as any, completedAt: new Date() },
     });
 
     // TODO: Create wallet transaction for worker earnings
@@ -314,7 +314,7 @@ export async function rejectTaskSubmission(
     // Update task status back to UNLOCKED so worker can try again
     await prisma.task.update({
       where: { id: submission.taskId },
-      data: { status: TaskStatus.UNLOCKED },
+      data: { status: TaskStatus.UNLOCKED as any },
     });
 
     return;

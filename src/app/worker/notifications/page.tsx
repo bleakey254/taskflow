@@ -1,135 +1,111 @@
-import { getNotifications, markNotificationAsRead, markAllNotificationsAsRead } from '@/actions/notifications';
 import { getCurrentUser } from '@/lib/middleware/auth';
-import { Notification } from '@/types/prisma';
+import { PageShell, HeaderUser } from '@/components/layout';
+import { Card, CardHeader, CardContent } from '@/components/layout';
+import { Button, IconButton } from '@/components/layout';
+import { Badge } from '@/components/layout';
+import Link from 'next/link';
 
 export const metadata = {
   title: 'Notifications - TaskFlow',
   description: 'View your notifications',
 };
 
-export default async function WorkerNotificationsPage() {
-  'use server';
-
-  // Get current user (layout already ensured auth)
+export default async function NotificationsPage() {
   const user = await getCurrentUser();
 
   if (!user) {
     return <div>Loading...</div>;
   }
 
-  // Get notifications
-  const notifications = await getNotifications();
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
-          <div className="px-6 py-4 border-b">
-            <div className="flex justify-between items-center">
-              <h2 className="text-xl font-semibold text-gray-900">
-                Notifications
-              </h2>
-              <div className="flex items-center space-x-3">
-                <button
-                  onClick={async () => {
-                    await markAllNotificationsAsRead();
-                    // In a real app, we'd refresh the page or update state
-                    window.location.reload();
-                  }}
-                  className="px-3 py-1 bg-indigo-600 text-white text-sm rounded hover:bg-indigo-700"
-                >
-                  Mark All as Read
-                </button>
+    <PageShell
+      header={
+        <>
+          <Link href="/" className="flex items-center gap-space-sm" data-path="find-tasks">
+            <img alt="TaskFlow Logo" className="h-8 w-auto object-contain" src="/taskflow-logo.svg"/>
+            <span className="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">TaskFlow</span>
+          </Link>
+          <HeaderUser name={user.name} balance="$245.50" />
+        </>
+      }
+      title="Notifications"
+      description="Stay up to date with your account activity"
+    >
+      <div className="space-y-space-md">
+        <Card variant="elevated" padding="md">
+          <div className="flex items-start gap-space-md">
+            <div className="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary flex-shrink-0">
+              <span className="material-symbols-outlined text-[20px]">check_circle</span>
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between gap-space-sm">
+                <h3 className="font-headline-sm text-headline-sm text-on-surface font-bold">Submission Approved</h3>
+                <span className="font-body-xs text-body-xs text-on-surface-variant">2 hours ago</span>
               </div>
+              <p className="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                Your submission for "AI Data Annotation: Bounding Box Vehicle Tags" has been approved. $5.00 has been added to your wallet.
+              </p>
             </div>
           </div>
+        </Card>
 
-          <div className="px-6 py-6">
-            {notifications.length > 0 ? (
-              <div className="space-y-3">
-                {notifications.map((notification: Notification) => (
-                  <div key={notification.id} className={[
-                    'border-b py-3 last:border-b-0',
-                    notification.read ? 'bg-gray-50' : 'bg-indigo-50'
-                  ].join(' ')}>
-                    <div className="flex justify-between items-start mb-2">
-                      <div className="flex-1">
-                        <div className="flex items-center space-x-2">
-                          <div className={[
-                            'h-6 w-6 flex items-center justify-center rounded',
-                            notification.type === 'TASK_APPROVED' ? 'bg-green-100' :
-                            notification.type === 'TASK_REJECTED' ? 'bg-red-100' :
-                            notification.type === 'WITHDRAWAL_SUCCESS' ? 'bg-blue-100' :
-                            notification.type === 'WITHDRAWAL_FAILURE' ? 'bg-red-100' :
-                            notification.type === 'DISPUTE_OPENED' || notification.type === 'DISPUTE_RESOLVED' ? 'bg-yellow-100' :
-                            notification.type === 'NEW_MESSAGE' ? 'bg-purple-100' :
-                            'bg-gray-100'
-                          ].join(' ')}>
-                            <span className={[
-                              'text-sm font-medium',
-                              notification.type === 'TASK_APPROVED' ? 'text-green-800' :
-                              notification.type === 'TASK_REJECTED' ? 'text-red-800' :
-                              notification.type === 'WITHDRAWAL_SUCCESS' ? 'text-blue-800' :
-                              notification.type === 'WITHDRAWAL_FAILURE' ? 'text-red-800' :
-                              notification.type === 'DISPUTE_OPENED' || notification.type === 'DISPUTE_RESOLVED' ? 'text-yellow-800' :
-                              notification.type === 'NEW_MESSAGE' ? 'text-purple-800' :
-                              'text-gray-800'
-                            ].join(' ')}>
-                              {/* Notification type icon would go here */}
-                              {notification.type === 'TASK_APPROVED' ? '✓' :
-                               notification.type === 'TASK_REJECTED' ? '✗' :
-                               notification.type === 'WITHDRAWAL_SUCCESS' ? '💰' :
-                               notification.type === 'WITHDRAWAL_FAILURE' ? '❌' :
-                               notification.type === 'DISPUTE_OPENED' || notification.type === 'DISPUTE_RESOLVED' ? '⚠️' :
-                               notification.type === 'NEW_MESSAGE' ? '💬' :
-                               '📢'}
-                            </span>
-                          </div>
-                          <div>
-                            <h4 className="font-medium text-gray-900">
-                              {notification.title}
-                            </h4>
-                            <p className="text-sm text-gray-600 line-clamp-2">
-                              {notification.message}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <span className={[
-                            'text-xs',
-                            notification.read ? 'text-gray-400' : 'text-indigo-600'
-                          ].join(' ')}>
-                            {new Date(notification.createdAt).toLocaleString()}
-                          </span>
-                          {!notification.read && (
-                            <button
-                              onClick={() => markNotificationAsRead(notification.id)}
-                              className="ml-2 px-2 py-0.5 bg-indigo-100 text-indigo-600 text-xs rounded hover:bg-indigo-200"
-                            >
-                              Mark as Read
-                            </button>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+        <Card variant="elevated" padding="md">
+          <div className="flex items-start gap-space-md">
+            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+              <span className="material-symbols-outlined text-[20px]">lock_open</span>
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between gap-space-sm">
+                <h3 className="font-headline-sm text-headline-sm text-on-surface font-bold">Task Unlocked</h3>
+                <span className="font-body-xs text-body-xs text-on-surface-variant">5 hours ago</span>
               </div>
-            ) : (
-              <div className="text-center py-12">
-                <div className="mx-auto h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center mb-4">
-                  <svg className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <p className="text-sm text-gray-500">
-                  No notifications yet
-                </p>
-              </div>
-            )}
+              <p className="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                You unlocked "E-commerce Product Tagging & Attribute Validation". $0.80 was deducted from your balance.
+              </p>
+            </div>
           </div>
-        </div>
+        </Card>
+
+        <Card variant="elevated" padding="md">
+          <div className="flex items-start gap-space-md">
+            <div className="w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary flex-shrink-0">
+              <span className="material-symbols-outlined text-[20px]">payment</span>
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between gap-space-sm">
+                <h3 className="font-headline-sm text-headline-sm text-on-surface font-bold">Withdrawal Processed</h3>
+                <span className="font-body-xs text-body-xs text-on-surface-variant">1 day ago</span>
+              </div>
+              <p className="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                Your withdrawal of $100.00 via M-Pesa has been processed successfully.
+              </p>
+            </div>
+          </div>
+        </Card>
+
+        <Card variant="elevated" padding="md">
+          <div className="flex items-start gap-space-md">
+            <div className="w-10 h-10 rounded-lg bg-error/10 flex items-center justify-center text-error flex-shrink-0">
+              <span className="material-symbols-outlined text-[20px]">cancel</span>
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between gap-space-sm">
+                <h3 className="font-headline-sm text-headline-sm text-on-surface font-bold">Submission Rejected</h3>
+                <span className="font-body-xs text-body-xs text-on-surface-variant">2 days ago</span>
+              </div>
+              <p className="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                Your submission for "Survey Data Entry" was rejected. Reason: Incomplete responses for questions 15-20.
+              </p>
+            </div>
+          </div>
+        </Card>
+
+        <Card variant="outlined" padding="lg" className="text-center">
+          <span className="material-symbols-outlined text-[48px] text-on-surface-variant/30">notifications</span>
+          <p className="font-body-md text-body-md text-on-surface-variant mt-space-sm">No more notifications</p>
+          <p className="font-body-sm text-body-sm text-on-surface-variant/60 mt-1">You're all caught up!</p>
+        </Card>
       </div>
-    </div>
+    </PageShell>
   );
 }

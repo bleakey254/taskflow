@@ -1,6 +1,5 @@
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 generator client {
@@ -104,29 +103,33 @@ enum SubmissionStatus {
 }
 
 model User {
-  id            String   @id @default(uuid())
-  email         String   @unique
-  password      String
-  name          String
-  role          Role
-  status        String   @default("ACTIVE")
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  workerProfile WorkerProfile?
-  clientProfile ClientProfile?
-  wallet        Wallet?
-  payments      Payment[]
-  submissions   Submission[] @relation("SubmissionWorker")
-  reviews       SubmissionReview[]
-  disputesAsClaimant Dispute[] @relation("DisputeClaimant")
-  disputesAsRespondent Dispute[] @relation("DisputeRespondent")
-  notifications Notification[]
-  adminActions  AdminAction[] @relation("AdminActionActor")
-  auditLogs     AuditLog[] @relation("AuditLogActor")
-  conversations Conversation[] @relation("ConversationParticipants")
-  messages      Message[] @relation("MessageSender")
-  messageReads  MessageRead[] @relation("MessageReadUser")
-  sessions      Session[]
+  id                    String   @id @default(uuid())
+  email                 String   @unique
+  password              String
+  name                  String
+  role                  Role
+  status                String   @default("ACTIVE")
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  workerProfile         WorkerProfile?
+  clientProfile         ClientProfile?
+  wallet                Wallet?
+  payments              Payment[]
+  submissions           Submission[] @relation("SubmissionWorker")
+  reviews               SubmissionReview[]
+  reviewedSubmissions   Submission[] @relation("SubmissionReviewer")
+  createdTasks          Task[] @relation("ClientTasks")
+  taskViews             TaskView[]
+  taskUnlocks           TaskUnlock[]
+  disputesAsClaimant    Dispute[] @relation("DisputeClaimant")
+  disputesAsRespondent  Dispute[] @relation("DisputeRespondent")
+  notifications         Notification[]
+  adminActions          AdminAction[] @relation("AdminActionActor")
+  auditLogs             AuditLog[] @relation("AuditLogActor")
+  conversations         Conversation[] @relation("ConversationParticipants")
+  messages              Message[] @relation("MessageSender")
+  messageReads          MessageRead[] @relation("MessageReadUser")
+  sessions              Session[]
 
   @@index([role])
   @@index([status])
@@ -152,7 +155,6 @@ model WorkerProfile {
   id      String   @id @default(uuid())
   user    User     @relation(fields: [userId], references: [id])
   userId  String   @unique
-  // Additional fields can be added as needed
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -161,7 +163,6 @@ model ClientProfile {
   id      String   @id @default(uuid())
   user    User     @relation(fields: [userId], references: [id])
   userId  String   @unique
-  // Additional fields can be added as needed
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -182,7 +183,7 @@ model Task {
   previewDescription  String
   category            TaskCategory @relation(fields: [categoryId], references: [id])
   categoryId          String
-  client              User       @relation(fields: [clientId], references: [id])
+  client              User       @relation("ClientTasks", fields: [clientId], references: [id])
   clientId            String
   budget              Decimal    @db.Decimal(10, 2)
   currency            String     @default("USD")
@@ -214,7 +215,6 @@ model TaskView {
   worker    User     @relation(fields: [workerId], references: [id])
   workerId  String
   viewedAt  DateTime @default(now())
-  // Optional: source/context if needed
   @@unique([taskId, workerId])
   @@index([taskId])
   @@index([workerId])
@@ -242,6 +242,7 @@ model Payment {
   userId              String
   task                Task?    @relation(fields: [taskId], references: [id], name: "TaskPayments")
   taskId              String?
+  taskUnlocks         TaskUnlock[]
   amount              Decimal    @db.Decimal(10, 2)
   currency            String     @default("USD")
   purpose             PaymentPurpose
@@ -275,7 +276,8 @@ model Submission {
   reviewer        User?    @relation("SubmissionReviewer", fields: [reviewerId], references: [id])
   reviewerId      String?
   feedback        String?
-  // Earnings will be created via wallet transaction upon approval
+  review          SubmissionReview?
+  disputes        Dispute[]
   @@index([taskId])
   @@index([workerId])
   @@index([status])
@@ -284,7 +286,7 @@ model Submission {
 model SubmissionReview {
   id            String   @id @default(uuid())
   submission    Submission @relation(fields: [submissionId], references: [id])
-  submissionId  String
+  submissionId  String   @unique
   reviewer      User     @relation(fields: [reviewerId], references: [id])
   reviewerId    String
   feedback      String
@@ -298,12 +300,9 @@ model Wallet {
   id        String   @id @default(uuid())
   worker    User     @relation(fields: [workerId], references: [id])
   workerId  String   @unique
-  // Balance is kept consistent with the ledger through application logic:
-  // - All wallet transactions (earnings, withdrawals, etc.) must go through the WalletTransaction model
-  // - Application code must update the balance field whenever a transaction is created
-  // - This denormalized balance field is for performance optimization of frequent balance reads
   balance   Decimal    @db.Decimal(10, 2) @default(0)
   transactions WalletTransaction[]
+  withdrawals Withdrawal[]
   @@index([workerId])
 }
 
@@ -313,9 +312,8 @@ model WalletTransaction {
   walletId      String
   type          WalletTransactionType
   amount        Decimal    @db.Decimal(10, 2)
-  // Reference to the entity that caused this transaction (e.g., TaskUnlock, Withdrawal)
-  referenceId   String?    // Could be taskUnlockId, withdrawalId, etc.
-  referenceType String?    // Optional: to indicate what the reference is for
+  referenceId   String?
+  referenceType String?
   metadata      Json?
   createdAt     DateTime @default(now())
   @@index([walletId])
@@ -331,7 +329,7 @@ model Withdrawal {
   method        String     // e.g., "MPESA", "BANK_TRANSFER"
   destination   String     // Phone number, bank account, etc.
   status        WithdrawalStatus @default(PENDING)
-  providerReference String?    // Transaction ID from provider
+  providerReference String?
   failureReason String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
@@ -370,9 +368,8 @@ model Notification {
   title           String
   message         String
   read            Boolean  @default(false)
-  // Optional: link to related entity
-  relatedEntityType String?  // e.g., "TASK", "WITHDRAWAL", "DISPUTE"
-  relatedEntityId   String?  // ID of the related entity
+  relatedEntityType String?
+  relatedEntityId   String?
   createdAt       DateTime @default(now())
   @@index([recipientId])
   @@index([read])
@@ -384,9 +381,9 @@ model AdminAction {
   actor         User     @relation("AdminActionActor", fields: [actorId], references: [id])
   actorId       String
   action        AdminActionType
-  entityType    String   // e.g., "USER", "TASK", "WITHDRAWAL"
-  entityId      String   // ID of the entity
-  metadata      Json?    // Additional details
+  entityType    String
+  entityId      String
+  metadata      Json?
   ipAddress     String?
   userAgent     String?
   createdAt     DateTime @default(now())
@@ -397,12 +394,12 @@ model AdminAction {
 
 model AuditLog {
   id            String   @id @default(uuid())
-  actor         User?    @relation("AuditLogActor", fields: [actorId], references: [id]) // Could be system
+  actor         User?    @relation("AuditLogActor", fields: [actorId], references: [id])
   actorId       String?
-  action        String   // Description of action
-  entityType    String   // e.g., "PAYMENT", "WALLET_TRANSACTION"
-  entityId      String   // ID of the entity
-  metadata      Json?    // Additional details (avoid storing sensitive data)
+  action        String
+  entityType    String
+  entityId      String
+  metadata      Json?
   ipAddress     String?
   userAgent     String?
   createdAt     DateTime @default(now())
@@ -414,6 +411,7 @@ model AuditLog {
 model Conversation {
   id            String   @id @default(uuid())
   participants  User[]   @relation("ConversationParticipants")
+  messages      Message[]
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   @@index([updatedAt])
@@ -427,6 +425,7 @@ model Message {
   senderId      String
   content       String
   attachments   Json?
+  reads         MessageRead[]
   createdAt     DateTime @default(now())
   @@index([conversationId])
   @@index([senderId])
