@@ -16,9 +16,8 @@ export async function requireAuth() {
   const validationResult = await validateSession(token);
 
   if (!validationResult) {
-    // Clear invalid cookie and redirect to login
-    const cookieStore = await cookies();
-    cookieStore.delete('session-token');
+    // Cannot delete the cookie here: this runs during render, where Next only
+    // allows cookie writes inside Server Actions and Route Handlers.
     redirect('/login');
   }
 
@@ -37,8 +36,6 @@ export async function requireRole(allowedRoles: Role[]) {
   const validationResult = await validateSession(token);
 
   if (!validationResult) {
-    const cookieStore = await cookies();
-    cookieStore.delete('session-token');
     redirect('/login');
   }
 

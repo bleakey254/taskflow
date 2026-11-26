@@ -1,10 +1,12 @@
-import { createTask } from '@/actions/task';
-import { getCurrentUser } from '@/lib/middleware/auth';
+import { redirect } from 'next/navigation';
 import { requireRole } from '@/lib/middleware/auth';
+import { prisma } from '@/lib/prisma';
+import { createTask } from '@/actions/task';
+import { MIN_TASK_BUDGET } from '@/lib/constants';
 import { Role } from '@/types/prisma';
 import { PageShell, HeaderUser } from '@/components/layout';
-import { Card, CardHeader, CardContent, CardFooter } from '@/components/layout';
-import { Button, IconButton } from '@/components/layout';
+import { Card, CardFooter } from '@/components/layout';
+import { Button } from '@/components/layout';
 import { Input, Textarea, Select } from '@/components/layout';
 import Link from 'next/link';
 
@@ -13,33 +15,56 @@ export const metadata = {
   description: 'Create a new micro-task',
 };
 
-export default async function CreateTaskPage() {
-  const user = await getCurrentUser();
-  await requireRole([Role.CLIENT]);
+export default async function CreateTaskPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
+  const user = await requireRole([Role.CLIENT]);
+  const { error } = await searchParams;
 
-  if (!user) {
-    return <div>Loading...</div>;
-  }
+  const categories = await prisma.taskCategory.findMany({
+    orderBy: { name: 'asc' },
+    select: { id: true, name: true },
+  });
+
+  // The id sent with the form must be the category's database id, not its name.
+  const createAction = async (formData: FormData) => {
+    'use server';
+
+    try {
+      await createTask(undefined, formData);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Could not create the task';
+      redirect(`/client/tasks/create?error=${encodeURIComponent(message)}`);
+    }
+
+    redirect('/client/tasks?created=1');
+  };
 
   return (
     <PageShell
       header={
         <>
           <Link href="/" className="flex items-center gap-space-sm" data-path="find-tasks">
-            <img alt="TaskFlow Logo" className="h-8 w-auto object-contain" src="/taskflow-logo.svg"/>
+            <img alt="TaskFlow Logo" className="h-8 w-auto object-contain" src="/taskflow-logo.svg" />
             <span className="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">TaskFlow</span>
           </Link>
-          <HeaderUser name={user.name} balance="$245.50" />
+          <HeaderUser name={user.name} />
         </>
       }
       title="Create New Task"
-      description="Create a task that workers can complete for $0.80+"
+      description={`Create a task that workers can complete for $${MIN_TASK_BUDGET.toFixed(2)}+`}
     >
       <Card variant="elevated" padding="lg" className="max-w-2xl">
-        <form className="space-y-space-lg" action={async (formData: FormData) => {
-          'use server';
-          await createTask(undefined, formData);
-        }}>
+        {error && (
+          <p className="mb-space-md font-body-sm text-body-sm text-error flex items-center gap-1" role="alert">
+            <span className="material-symbols-outlined text-[16px]">error</span>
+            {error}
+          </p>
+        )}
+
+        <form className="space-y-space-lg" action={createAction}>
           <Input
             label="Task Title"
             name="title"
@@ -74,16 +99,7 @@ export default async function CreateTaskPage() {
             name="categoryId"
             required
             placeholder="Select a category"
-            options={[
-              { value: 'design', label: 'Design' },
-              { value: 'development', label: 'Development' },
-              { value: 'writing', label: 'Writing & Translation' },
-              { value: 'marketing', label: 'Marketing & Social Media' },
-              { value: 'data', label: 'Data Entry & Analysis' },
-              { value: 'video', label: 'Video & Animation' },
-              { value: 'music', label: 'Music & Audio' },
-              { value: 'business', label: 'Business & Consulting' },
-            ]}
+            options={categories.map((category) => ({ value: category.id, label: category.name }))}
           />
 
           <div className="space-y-space-sm">
@@ -97,11 +113,11 @@ export default async function CreateTaskPage() {
                 name="budget"
                 type="number"
                 step="0.01"
-                min="0.80"
+                min={MIN_TASK_BUDGET}
                 required
                 className="w-32"
-                placeholder="0.80"
-                helperText="Minimum budget is $0.80 (the unlock fee)"
+                placeholder={MIN_TASK_BUDGET.toFixed(2)}
+                helperText={`Minimum budget is $${MIN_TASK_BUDGET.toFixed(2)} (the unlock fee)`}
               />
             </div>
           </div>
@@ -119,12 +135,15 @@ export default async function CreateTaskPage() {
           </div>
 
           <CardFooter>
-            <Button variant="ghost" onClick={() => window.history.back()}>
+            <Link
+              href="/client/tasks"
+              className="inline-flex items-center justify-center gap-1.5 font-label-lg text-label-lg font-bold rounded-lg px-space-xl py-space-md text-on-surface hover:bg-surface-container-high transition-all duration-fast"
+            >
               <span className="material-symbols-outlined text-[18px]">arrow_back</span>
               Go Back
-            </Button>
+            </Link>
             <Button type="submit" leftIcon={<span className="material-symbols-outlined text-[18px]">add_circle</span>}>
-              Create Task
+              Save draft
             </Button>
           </CardFooter>
         </form>

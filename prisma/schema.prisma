@@ -229,6 +229,9 @@ model TaskUnlock {
   workerId  String
   payment   Payment  @relation(fields: [paymentId], references: [id])
   paymentId String
+  // Progress for this worker on this task. Task.status stays a rollup so one
+  // worker's progress never changes what another worker sees.
+  status    TaskStatus @default(UNLOCKED)
   unlockedAt DateTime @default(now())
   @@unique([taskId, workerId])
   @@index([taskId])

@@ -1,22 +1,34 @@
 'use server';
 
-import { redirect } from 'next/navigation';
-import { cookies } from 'next/headers';
 import { requireAuth, requireRole } from '@/lib/middleware/auth';
 import { prisma } from '@/lib/prisma';
-import { WithdrawalStatus, Role } from '@/types/prisma';
+import { formatMoney, MIN_WITHDRAWAL } from '@/lib/constants';
+import { WithdrawalStatus, Role, NotificationType } from '@/types/prisma';
 
-// Get wallet details
-export async function getWallet(userId: string) {
+const WITHDRAWAL_METHODS = ['mpesa', 'bank_transfer'];
+
+// Get wallet details for the current session user
+export async function getWallet() {
   'use server';
 
+  // Derive the worker from the session. Never trust a caller-supplied id.
+  const user = await requireAuth();
+
   try {
-    const wallet = await prisma.wallet.findUnique({
-      where: { workerId: userId },
+    // Every worker needs a wallet. Creating it on first visit keeps older
+    // accounts (created before signup did this) from hitting a dead end.
+    const wallet = await prisma.wallet.upsert({
+      where: { workerId: user.id },
+      update: {},
+      create: { workerId: user.id },
       include: {
         transactions: {
           orderBy: { createdAt: 'desc' },
           take: 20, // Get recent transactions
+        },
+        withdrawals: {
+          orderBy: { createdAt: 'desc' },
+          take: 5,
         },
       },
     });
@@ -28,6 +40,22 @@ export async function getWallet(userId: string) {
   }
 }
 
+// Balance string for the header. Clients and admins have no spending wallet.
+export async function getWalletBalanceLabel(): Promise<string | undefined> {
+  'use server';
+
+  const user = await requireAuth();
+
+  if (user.role !== Role.WORKER) {
+    return undefined;
+  }
+
+  const wallet = await prisma.wallet.findUnique({ where: { workerId: user.id } });
+  if (!wallet) return undefined;
+
+  return formatMoney(wallet.balance);
+}
+
 // Request withdrawal action
 export async function requestWithdrawal(
   prevState: unknown | undefined,
@@ -35,67 +63,101 @@ export async function requestWithdrawal(
 ): Promise<void> {
   'use server';
 
+  const user = await requireRole([Role.WORKER]);
+
+  const amountStr = formData.get('amount') as string | null;
+  const method = formData.get('method') as string | null;
+  const destination = (formData.get('destination') as string | null)?.trim();
+
+  if (!amountStr || !method || !destination) {
+    throw new Error('All fields are required');
+  }
+
+  if (!WITHDRAWAL_METHODS.includes(method)) {
+    throw new Error('Choose a valid withdrawal method');
+  }
+
+  const amount = Number(amountStr);
+  if (!Number.isFinite(amount) || amount <= 0) {
+    throw new Error('Amount must be a positive number');
+  }
+
+  if (amount < MIN_WITHDRAWAL) {
+    throw new Error(`Minimum withdrawal amount is $${MIN_WITHDRAWAL.toFixed(2)}`);
+  }
+
+  // Two decimal places only; the database column is Decimal(10,2) and a value
+  // like 0.005 would otherwise be silently rounded after the check.
+  if (Math.round(amount * 100) !== amount * 100) {
+    throw new Error('Amount can have at most two decimal places');
+  }
+
   try {
-    // Require authentication and WORKER role
-    const user = await requireAuth();
-    await requireRole([Role.WORKER]);
+    await prisma.$transaction(async (tx) => {
+      const wallet = await tx.wallet.findUnique({ where: { workerId: user.id } });
 
-    const amountStr = formData.get('amount') as string;
-    const method = formData.get('method') as string;
-    const destination = formData.get('destination') as string;
+      if (!wallet) {
+        throw new Error('Wallet not found');
+      }
 
-    // Basic validation
-    if (!amountStr || !method || !destination) {
-      throw new Error('All fields are required');
-    }
+      if (Number(wallet.balance) < amount) {
+        throw new Error('Insufficient wallet balance');
+      }
 
-    const amount = parseFloat(amountStr);
-    if (isNaN(amount) || amount <= 0) {
-      throw new Error('Amount must be a positive number');
-    }
+      // Debit first, guarded by the balance so two concurrent requests cannot
+      // both spend the same earnings.
+      const debited = await tx.wallet.updateMany({
+        where: { id: wallet.id, balance: { gte: amount } },
+        data: { balance: { decrement: amount } },
+      });
 
-    // Get wallet to check balance
-    const wallet = await prisma.wallet.findUnique({
-      where: { workerId: user.id },
+      if (debited.count === 0) {
+        throw new Error('Insufficient wallet balance');
+      }
+
+      const withdrawal = await tx.withdrawal.create({
+        data: {
+          walletId: wallet.id,
+          amount,
+          method,
+          destination,
+          status: WithdrawalStatus.PENDING,
+        },
+      });
+
+      await tx.walletTransaction.create({
+        data: {
+          walletId: wallet.id,
+          type: 'WITHDRAWAL',
+          amount,
+          referenceId: withdrawal.id,
+          referenceType: 'Withdrawal',
+          metadata: { method, destination, status: WithdrawalStatus.PENDING },
+        },
+      });
+
+      await tx.notification.create({
+        data: {
+          recipientId: user.id,
+          type: NotificationType.WITHDRAWAL_SUCCESS,
+          title: 'Withdrawal requested',
+          message: `Your withdrawal of $${amount.toFixed(2)} via ${method === 'mpesa' ? 'M-Pesa' : 'bank transfer'} is pending review.`,
+          relatedEntityType: 'Withdrawal',
+          relatedEntityId: withdrawal.id,
+        },
+      });
     });
-
-    if (!wallet) {
-      throw new Error('Wallet not found');
-    }
-
-    // Check if sufficient balance
-    if (Number(wallet.balance) < amount) {
-      throw new Error('Insufficient wallet balance');
-    }
-
-    // Check minimum withdrawal amount (e.g., $1.00)
-    if (amount < 1.00) {
-      throw new Error('Minimum withdrawal amount is $1.00');
-    }
-
-    // Create withdrawal request
-    const withdrawal = await prisma.withdrawal.create({
-      data: {
-        walletId: wallet.id,
-        amount,
-        method,
-        destination,
-        status: WithdrawalStatus.PENDING,
-      },
-    });
-
-    // TODO: In a real implementation, we would:
-    // 1. Create a wallet transaction of type WITHDRAWAL (pending)
-    // 2. Initiate the actual payment process (M-Pesa, bank transfer, etc.)
-    // 3. Update withdrawal status based on payment result
-    // 4. Create corresponding wallet transaction when completed
-
-    // For now, we'll just return void as the action completed successfully
-    return;
   } catch (error) {
     console.error('Withdrawal request error:', error);
-    // In a real app, we'd handle form errors properly
-    // For now, we'll just throw the error
-    throw error;
+    if (error instanceof Error) {
+      // Surface the validation messages this action itself produces.
+      if (
+        error.message === 'Wallet not found' ||
+        error.message === 'Insufficient wallet balance'
+      ) {
+        throw error;
+      }
+    }
+    throw new Error('Could not request this withdrawal');
   }
 }

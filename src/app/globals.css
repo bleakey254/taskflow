@@ -171,3 +171,134 @@
     color: var(--foreground);
   }
 }
+
+/* ===========================================
+   ENTRANCE ANIMATIONS (CSS-only, zero deps)
+   =========================================== */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes ringPulse {
+  0%, 100% { box-shadow: 0 0 0 0 var(--color-primary); }
+  50% { box-shadow: 0 0 0 8px transparent; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+.animate-entrance {
+  animation: fadeSlideUp 0.6s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+  opacity: 0;
+}
+
+.animate-entrance-scale {
+  animation: scaleIn 0.5s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+  opacity: 0;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-ring-pulse {
+  animation: ringPulse 1.5s ease-out infinite;
+}
+
+.animate-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: shimmer 1.5s infinite;
+  border-radius: inherit;
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Stagger delays */
+.delay-0 { animation-delay: 0ms; }
+.delay-1 { animation-delay: 80ms; }
+.delay-2 { animation-delay: 160ms; }
+.delay-3 { animation-delay: 240ms; }
+.delay-4 { animation-delay: 320ms; }
+.delay-5 { animation-delay: 400ms; }
+.delay-6 { animation-delay: 480ms; }
+.delay-7 { animation-delay: 560ms; }
+.delay-8 { animation-delay: 640ms; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-entrance,
+  .animate-entrance-scale,
+  .animate-fade-in,
+  .animate-ring-pulse,
+  .animate-shimmer::after,
+  .animate-shake {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ===========================================
+   MICRO-INTERACTIONS
+   =========================================== */
+.btn-interactive {
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+.btn-interactive:hover { transform: translateY(-1px); }
+.btn-interactive:active { transform: translateY(0) scale(0.99); }
+.btn-interactive:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-primary);
+}
+
+.input-interactive:focus-within {
+  animation: ringPulse 1.5s ease-out infinite;
+}
+
+.card-hover-lift {
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+.card-hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-elevation-3, 0 12px 24px -8px rgba(0,0,0,0.12));
+}
+
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: width 0.2s ease-out;
+}
+.link-underline:hover::after { width: 100%; }

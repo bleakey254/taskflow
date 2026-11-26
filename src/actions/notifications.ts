@@ -1,6 +1,6 @@
 'use server';
 
-import { getCurrentUser } from '@/lib/middleware/auth';
+import { revalidatePath } from 'next/cache';
 import { requireAuth } from '@/lib/middleware/auth';
 import { prisma } from '@/lib/prisma';
 
@@ -8,70 +8,41 @@ import { prisma } from '@/lib/prisma';
 export async function getNotifications() {
   'use server';
 
-  try {
-    const user = await requireAuth();
+  const user = await requireAuth();
 
-    const notifications = await prisma.notification.findMany({
-      where: {
-        recipientId: user.id,
-      },
-      orderBy: {
-        createdAt: 'desc',
-      },
-      take: 50, // Get recent notifications
-    });
-
-    return notifications;
-  } catch (error) {
-    console.error('Get notifications error:', error);
-    return [];
-  }
+  return prisma.notification.findMany({
+    where: { recipientId: user.id },
+    orderBy: { createdAt: 'desc' },
+    take: 50,
+  });
 }
 
 // Mark notification as read
 export async function markNotificationAsRead(notificationId: string) {
   'use server';
 
-  try {
-    const user = await requireAuth();
+  const user = await requireAuth();
 
-    await prisma.notification.update({
-      where: {
-        id: notificationId,
-        recipientId: user.id, // Ensure user can only mark their own notifications
-      },
-      data: {
-        read: true,
-      },
-    });
+  const updated = await prisma.notification.updateMany({
+    where: { id: notificationId, recipientId: user.id },
+    data: { read: true },
+  });
 
-    return { success: true };
-  } catch (error) {
-    console.error('Mark notification as read error:', error);
-    return { success: false, error: 'Failed to mark notification as read' };
-  }
+  revalidatePath('/worker/notifications');
+
+  return { success: updated.count > 0 };
 }
 
 // Mark all notifications as read
 export async function markAllNotificationsAsRead() {
   'use server';
 
-  try {
-    const user = await requireAuth();
+  const user = await requireAuth();
 
-    await prisma.notification.updateMany({
-      where: {
-        recipientId: user.id,
-        read: false,
-      },
-      data: {
-        read: true,
-      },
-    });
+  await prisma.notification.updateMany({
+    where: { recipientId: user.id, read: false },
+    data: { read: true },
+  });
 
-    return { success: true };
-  } catch (error) {
-    console.error('Mark all notifications as read error:', error);
-    return { success: false, error: 'Failed to mark notifications as read' };
-  }
+  revalidatePath('/worker/notifications');
 }

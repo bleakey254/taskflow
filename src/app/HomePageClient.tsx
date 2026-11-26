@@ -30,16 +30,16 @@ export default function HomePageClient() {
               <Link href="/client/tasks" className="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="find-tasks">
                 Find Tasks
               </Link>
-              <Link href="/how-it-works" className="transition-colors text-primary font-label-lg text-label-lg font-bold" data-path="how-it-works" aria-current="page">
+              <Link href="#how-it-works" className="transition-colors text-primary font-label-lg text-label-lg font-bold" data-path="how-it-works">
                 How It Works
               </Link>
-              <Link href="/for-clients" className="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="for-clients">
+              <Link href="/client/tasks/create" className="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="for-clients">
                 For Clients
               </Link>
-              <Link href="/for-workers" className="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="for-workers">
+              <Link href="/worker/tasks" className="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="for-workers">
                 For Workers
               </Link>
-              <Link href="/pricing" className="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="pricing">
+              <Link href="#how-it-works" className="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="pricing">
                 Pricing
               </Link>
             </nav>
@@ -88,7 +88,7 @@ export default function HomePageClient() {
                   <span>Find Tasks</span>
                   <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
                 </Link>
-                <Link href="/create-task" className="w-full sm:w-auto bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-lg text-label-lg px-space-xl py-space-md rounded-lg shadow-sm transition-all flex items-center justify-center gap-space-xs active:scale-[0.98]">
+                <Link href="/client/tasks/create" className="w-full sm:w-auto bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-lg text-label-lg px-space-xl py-space-md rounded-lg shadow-sm transition-all flex items-center justify-center gap-space-xs active:scale-[0.98]">
                   <span className="material-symbols-outlined text-[18px] text-primary">add_circle</span>
                   <span>Post a Task</span>
                 </Link>
@@ -277,7 +277,7 @@ export default function HomePageClient() {
         </section>
 
         {/* HOW IT WORKS (4 STEPS) */}
-        <section className="max-w-[1280px] mx-auto px-margin-mobile md:px-margin lg:px-margin-desktop py-space-2xl w-full">
+        <section id="how-it-works" className="max-w-[1280px] mx-auto px-margin-mobile md:px-margin lg:px-margin-desktop py-space-2xl w-full scroll-mt-16">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-space-2xl gap-space-md">
             <div>
               <div className="flex items-center gap-space-xs text-primary mb-space-xs">

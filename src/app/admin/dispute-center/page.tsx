@@ -1,189 +1,68 @@
-import { getCurrentUser } from '@/lib/middleware/auth';
 import { requireRole } from '@/lib/middleware/auth';
+import { prisma } from '@/lib/prisma';
 import { Role } from '@/types/prisma';
-import { PageShell, HeaderUser } from '@/components/layout';
-import { Card, CardHeader, CardContent, CardFooter } from '@/components/layout';
-import { Button, IconButton } from '@/components/layout';
-import { Badge, StatusBadge } from '@/components/layout';
-import { Divider } from '@/components/layout';
-import Link from 'next/link';
+import { AdminShell, EmptyState } from '@/components/admin/AdminShell';
+import { Card } from '@/components/layout';
+import { Badge } from '@/components/layout';
 
 export const metadata = {
-  title: 'Dispute Center - TaskFlow Admin',
-  description: 'Manage and resolve disputes',
+  title: 'Disputes - TaskFlow Admin',
+  description: 'Disputes raised on tasks and submissions',
 };
 
 export default async function DisputeCenterPage() {
-  const user = await getCurrentUser();
-  await requireRole([Role.ADMIN]);
+  const admin = await requireRole([Role.ADMIN]);
 
-  if (!user) {
-    return <div>Loading...</div>;
-  }
+  const disputes = await prisma.dispute.findMany({
+    include: {
+      task: { select: { title: true } },
+      claimant: { select: { name: true, email: true } },
+      respondent: { select: { name: true, email: true } },
+    },
+    orderBy: { createdAt: 'desc' },
+    take: 100,
+  });
 
   return (
-    <PageShell
-      header={
-        <>
-          <Link href="/admin/dashboard" className="flex items-center gap-space-sm" data-path="admin">
-            <img alt="TaskFlow Logo" className="h-8 w-auto object-contain" src="/taskflow-logo.svg"/>
-            <span className="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">TaskFlow Admin</span>
-          </Link>
-          <HeaderUser name={user.name} />
-        </>
-      }
-      title="Dispute Center"
-      description="Manage and resolve disputes between clients and workers"
+    <AdminShell
+      userName={admin.name}
+      title="Disputes"
+      description="Disputes filed against tasks. Resolution is not automated yet, so this view is read-only."
     >
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md mb-space-lg">
-        <div>
-          <h2 className="font-headline-xl text-headline-xl text-on-surface font-extrabold">Dispute Center</h2>
-          <p className="font-body-md text-body-md text-on-surface-variant mt-0.5">Manage and resolve disputes between clients and workers</p>
-        </div>
-        <div className="flex items-center gap-space-sm">
-          <Button variant="outlined" leftIcon={<span className="material-symbols-outlined text-[18px]">filter_list</span>}>
-            Filters
-          </Button>
-        </div>
-      </div>
-
-      <div className="grid gap-gutter lg:grid-cols-3">
-        <Card variant="elevated" padding="lg" className="lg:col-span-2">
-          <CardHeader
-            title="Open Disputes"
-            action={<Badge variant="error" size="sm">3 Open</Badge>}
+      {disputes.length === 0 ? (
+        <Card variant="outlined" padding="lg">
+          <EmptyState
+            icon="gavel"
+            title="No disputes"
+            hint="Disputes appear here when a worker or client files one against a task."
           />
-          <CardContent>
-            <div className="space-y-space-md">
-              <Card variant="outlined" padding="md">
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-space-md">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex flex-wrap items-center gap-space-sm mb-space-xs">
-                      <Badge variant="error" size="sm">Payment Dispute</Badge>
-                      <StatusBadge status="open" size="sm" />
-                    </div>
-                    <h3 className="font-headline-sm text-headline-sm text-on-surface font-bold">AI Data Annotation - Quality Dispute</h3>
-                    <p className="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
-                      Worker claims client rejected valid work. Client states deliverables don't meet specification.
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-space-sm">
-                    <Button variant="secondary" size="sm" leftIcon={<span className="material-symbols-outlined text-[16px]">gavel</span>}>
-                      Review
-                    </Button>
-                  </div>
-                </div>
-                <div className="mt-space-sm pt-space-sm border-t border-outline-variant/50 flex flex-wrap items-center justify-between gap-space-sm text-on-surface-variant">
-                  <div className="flex items-center gap-space-md">
-                    <span className="font-body-sm text-body-sm">Worker:</span>
-                    <span className="font-body-sm text-body-sm font-medium">John Doe</span>
-                    <span className="font-body-sm text-body-sm">Client:</span>
-                    <span className="font-body-sm text-body-sm font-medium">Acme Corp</span>
-                    <span className="font-body-sm text-body-sm">Amount:</span>
-                    <span className="font-label-lg text-label-lg text-error font-bold">$5.00</span>
-                  </div>
-                  <span className="font-body-xs text-body-xs">Opened: 2024-01-15</span>
-                </div>
-              </Card>
-
-              <Card variant="outlined" padding="md">
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-space-md">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex flex-wrap items-center gap-space-sm mb-space-xs">
-                      <Badge variant="tertiary" size="sm">Scope Dispute</Badge>
-                      <StatusBadge status="open" size="sm" />
-                    </div>
-                    <h3 className="font-headline-sm text-headline-sm text-on-surface font-bold">E-commerce Tagging - Requirements Dispute</h3>
-                    <p className="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
-                      Client added additional requirements after task was unlocked. Worker requests additional compensation.
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-space-sm">
-                    <Button variant="secondary" size="sm" leftIcon={<span className="material-symbols-outlined text-[16px]">gavel</span>}>
-                      Review
-                    </Button>
-                  </div>
-                </div>
-                <div className="mt-space-sm pt-space-sm border-t border-outline-variant/50 flex flex-wrap items-center justify-between gap-space-sm text-on-surface-variant">
-                  <div className="flex items-center gap-space-md">
-                    <span className="font-body-sm text-body-sm">Worker:</span>
-                    <span className="font-body-sm text-body-sm font-medium">Jane Smith</span>
-                    <span className="font-body-sm text-body-sm">Client:</span>
-                    <span className="font-body-sm text-body-sm font-medium">RetailCo</span>
-                    <span className="font-body-sm text-body-sm">Amount:</span>
-                    <span className="font-label-lg text-label-lg text-tertiary font-bold">$3.80</span>
-                  </div>
-                  <span className="font-body-xs text-body-xs">Opened: 2024-01-14</span>
-                </div>
-              </Card>
-
-              <Card variant="outlined" padding="md">
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-space-md">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex flex-wrap items-center gap-space-sm mb-space-xs">
-                      <Badge variant="primary" size="sm">Deadline Dispute</Badge>
-                      <StatusBadge status="open" size="sm" />
-                    </div>
-                    <h3 className="font-headline-sm text-headline-sm text-on-surface font-bold">Survey Data Entry - Late Submission</h3>
-                    <p className="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
-                      Worker submitted 2 hours past deadline due to technical issues. Client refuses payment.
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-space-sm">
-                    <Button variant="secondary" size="sm" leftIcon={<span className="material-symbols-outlined text-[16px]">gavel</span>}>
-                      Review
-                    </Button>
-                  </div>
-                </div>
-                <div className="mt-space-sm pt-space-sm border-t border-outline-variant/50 flex flex-wrap items-center justify-between gap-space-sm text-on-surface-variant">
-                  <div className="flex items-center gap-space-md">
-                    <span className="font-body-sm text-body-sm">Worker:</span>
-                    <span className="font-body-sm text-body-sm font-medium">Bob Wilson</span>
-                    <span className="font-body-sm text-body-sm">Client:</span>
-                    <span className="font-body-sm text-body-sm font-medium">SurveyCo</span>
-                    <span className="font-body-sm text-body-sm">Amount:</span>
-                    <span className="font-label-lg text-label-lg text-primary font-bold">$2.50</span>
-                  </div>
-                  <span className="font-body-xs text-body-xs">Opened: 2024-01-13</span>
-                </div>
-              </Card>
-            </div>
-          </CardContent>
         </Card>
-
-        <Card variant="elevated" padding="lg">
-          <CardHeader title="Quick Stats" />
-          <CardContent>
-            <div className="space-y-space-md">
-              <div className="flex items-center justify-between">
-                <span className="font-body-md text-body-md text-on-surface-variant">Total Disputes</span>
-                <span className="font-currency-stat text-currency-stat text-on-surface font-bold">12</span>
+      ) : (
+        <Card variant="filled" padding="none">
+          <div className="space-y-0">
+            {disputes.map((dispute) => (
+              <div
+                key={dispute.id}
+                className="p-space-md border-b border-outline-variant/50 last:border-0 hover:bg-surface-container transition-colors"
+              >
+                <div className="flex flex-wrap items-center gap-space-sm mb-space-xs">
+                  <Badge variant={dispute.status === 'OPEN' ? 'error' : 'neutral'} size="sm">{dispute.status}</Badge>
+                  <Badge variant="outline" size="sm">{dispute.createdAt.toLocaleDateString()}</Badge>
+                </div>
+                <p className="font-label-md text-label-md text-on-surface font-bold">{dispute.task.title}</p>
+                <p className="font-body-sm text-body-sm text-on-surface-variant">
+                  Claimant: {dispute.claimant.name} ({dispute.claimant.email})
+                  {dispute.respondent ? ` · Respondent: ${dispute.respondent.name}` : ''}
+                </p>
+                <p className="font-body-sm text-body-sm text-on-surface-variant mt-1 whitespace-pre-wrap">{dispute.reason}</p>
+                {dispute.resolution && (
+                  <p className="font-body-xs text-body-xs text-secondary mt-1">Resolution: {dispute.resolution}</p>
+                )}
               </div>
-              <div className="flex items-center justify-between">
-                <span className="font-body-md text-body-md text-on-surface-variant">Open</span>
-                <span className="font-currency-stat text-currency-stat text-error font-bold">3</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="font-body-md text-body-md text-on-surface-variant">Resolved</span>
-                <span className="font-currency-stat text-currency-stat text-secondary font-bold">9</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="font-body-md text-body-md text-on-surface-variant">Avg Resolution Time</span>
-                <span className="font-label-lg text-label-lg text-on-surface font-bold">2.5 days</span>
-              </div>
-              <Divider />
-              <div className="flex items-center justify-between">
-                <span className="font-body-md text-body-md text-on-surface-variant">In Favor of Worker</span>
-                <span className="font-label-lg text-label-lg text-secondary font-bold">67%</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="font-body-md text-body-md text-on-surface-variant">In Favor of Client</span>
-                <span className="font-label-lg text-label-lg text-primary font-bold">33%</span>
-              </div>
-            </div>
-          </CardContent>
+            ))}
+          </div>
         </Card>
-      </div>
-    </PageShell>
+      )}
+    </AdminShell>
   );
 }

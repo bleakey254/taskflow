@@ -34,3 +34,32 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## TaskFlow local setup
+
+Prerequisites: Node.js, npm, and a PostgreSQL server.
+
+1. `cp .env.example .env` and set `DATABASE_URL` to your PostgreSQL database.
+2. Create the schema and demo data:
+
+   ```bash
+   npm install
+   npm run db:push   # or: npm run db:migrate  (applies prisma/migrations)
+   npm run seed
+   ```
+
+3. `npm run dev`, then open http://127.0.0.1:3000.
+
+Seeded accounts (password `Password123!`):
+
+| Account | Email | Role |
+| --- | --- | --- |
+| Worker | `worker@taskflow.dev` | WORKER |
+| Client | `client@taskflow.dev` | CLIENT |
+| Admin | `admin@taskflow.dev` | ADMIN |
+
+Notes:
+
+- Task unlock charges are simulated outside production. Set `MPESA_SIMULATE="false"` to make unlocking refuse until a real provider is integrated.
+- `POST /api/webhooks/mpesa` requires `MPESA_WEBHOOK_SECRET` and accepts it as an `x-mpesa-signature` header, a Bearer token, or a `?secret=` query parameter.
+- If you develop against a throwaway cluster (for example one started with `initdb` in a local folder), remember it is not a system service and must be started each session.

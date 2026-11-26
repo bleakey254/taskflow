@@ -1,7 +1,12 @@
 import bcrypt from 'bcrypt';
+import { createHash } from 'crypto';
 import { prisma } from './prisma';
 
 // Crypto is globally available in Node.js, no import needed
+
+// Emails are stored and looked up in one canonical form, so "User@X.com" and
+// "user@x.com" cannot become two separate accounts.
+export const normalizeEmail = (email: string): string => email.trim().toLowerCase();
 
 // Password hashing and verification
 export const hashPassword = async (password: string): Promise<string> => {
@@ -25,9 +30,10 @@ export const generateSessionToken = (): string => {
 };
 
 export const hashSessionToken = async (token: string): Promise<string> => {
-  // Hash the session token before storing in database
-  // Using bcrypt for consistency, though we could use a faster hash for tokens
-  return await bcrypt.hash(token, 10);
+  // Deterministic hash: the same token must always produce the same value so
+  // sessions can be looked up. bcrypt salts every hash, which made lookups
+  // impossible and every session invalid.
+  return createHash('sha256').update(token).digest('hex');
 };
 
 // Session creation
@@ -79,11 +85,16 @@ export const validateSession = async (token: string) => {
     return null;
   }
 
-  // Optionally update session activity
-  await prisma.session.update({
-    where: { id: session.id },
-    data: { updatedAt: new Date() },
-  });
+  // Track activity, but do not write on every request: validateSession runs
+  // several times per page render, and an unconditional update turned each
+  // render into extra database writes. Once per 15 minutes is enough.
+  const lastSeen = session.updatedAt.getTime();
+  if (Date.now() - lastSeen > 15 * 60 * 1000) {
+    await prisma.session.update({
+      where: { id: session.id },
+      data: { updatedAt: new Date() },
+    });
+  }
 
   // Return user without password
   const { password, ...userWithoutPassword } = session.user;

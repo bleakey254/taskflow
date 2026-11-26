@@ -29,6 +29,12 @@ export default function LoginPage() {
       await loginUser(undefined, formData);
       window.location.href = '/dashboard';
     } catch (err) {
+      // Let Next's redirect signal (NEXT_REDIRECT) through untouched; catching
+      // it here would cancel the navigation and show it as an error.
+      const digest = (err as { digest?: unknown }).digest;
+      if (typeof digest === 'string' && digest.startsWith('NEXT_REDIRECT')) {
+        throw err;
+      }
       setError(err instanceof Error ? err.message : 'An unexpected error occurred. Please try again.');
     } finally {
       setLoading(false);
@@ -41,20 +47,20 @@ export default function LoginPage() {
       className="flex items-center justify-center min-h-screen py-space-2xl"
     >
       <Card variant="elevated" padding="lg" className="w-full max-w-md">
-        <div className="text-center mb-space-lg">
-          <Link href="/" className="inline-flex items-center gap-space-sm mb-space-md" data-path="find-tasks">
+        <div className="text-center mb-space-lg animate-entrance">
+          <Link href="/" className="inline-flex items-center gap-space-sm mb-space-md animate-entrance delay-1" data-path="find-tasks">
             <img alt="TaskFlow Logo" className="h-8 w-auto object-contain" src="/taskflow-logo.svg"/>
             <span className="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">TaskFlow</span>
           </Link>
-          <h1 className="font-headline-xl text-headline-xl text-on-surface font-extrabold">Sign in to TaskFlow</h1>
-          <p className="font-body-md text-body-md text-on-surface-variant mt-space-xs">
+          <h1 className="font-headline-xl text-headline-xl text-on-surface font-extrabold animate-entrance delay-2">Sign in to TaskFlow</h1>
+          <p className="font-body-md text-body-md text-on-surface-variant mt-space-xs animate-entrance delay-3">
             Access your dashboard and manage your tasks
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-space-md">
+        <form onSubmit={handleSubmit} className="space-y-space-md animate-entrance delay-4">
           {error && (
-            <div className="p-space-sm bg-error/10 text-error rounded-lg font-body-sm text-body-sm flex items-center gap-2" role="alert">
+            <div className="p-space-sm bg-error/10 text-error rounded-lg font-body-sm text-body-sm flex items-center gap-2 animate-shake" role="alert">
               <span className="material-symbols-outlined text-[18px]">error</span>
               {error}
             </div>
@@ -69,6 +75,7 @@ export default function LoginPage() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
             leftIcon={<span className="material-symbols-outlined text-[20px]">email</span>}
+            className="animate-entrance delay-1 input-interactive"
           />
 
           <Input
@@ -80,9 +87,10 @@ export default function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
             leftIcon={<span className="material-symbols-outlined text-[20px]">lock</span>}
+            className="animate-entrance delay-2 input-interactive"
           />
 
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between animate-entrance delay-3">
             <label className="flex items-start gap-2 cursor-pointer">
               <input
                 type="checkbox"
@@ -92,12 +100,12 @@ export default function LoginPage() {
               />
               <span className="font-body-sm text-body-sm text-on-surface-variant">Remember me</span>
             </label>
-            <Link href="/forgot-password" className="font-body-sm text-body-sm text-primary hover:text-primary/80 font-medium">
+            <Link href="/forgot-password" className="font-body-sm text-body-sm text-primary hover:text-primary/80 font-medium link-underline">
               Forgot password?
             </Link>
           </div>
 
-          <Button type="submit" fullWidth size="lg" loading={loading}>
+          <Button type="submit" fullWidth size="lg" loading={loading} className="btn-interactive animate-entrance delay-4">
             Sign in
             <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
           </Button>
