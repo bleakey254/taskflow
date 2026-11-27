@@ -44,3 +44,10 @@ next-env.d.ts
 
 # local dev database cluster
 .pgdata/
+
+# generated Prisma artifacts (prisma skills sync / RC codegen)
+/generated/
+
+# local dev logs
+/dev-server.log
+/e2e.log

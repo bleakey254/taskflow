@@ -8,7 +8,7 @@ export interface WalletTransaction {
   amount: number | { toString: () => string }; // Decimal representation
   referenceId?: string | null;
   referenceType?: string | null;
-  metadata?: any; // Json type
+  metadata?: unknown; // Json type
   createdAt: Date;
 }
 
@@ -48,7 +48,7 @@ export interface Submission {
   taskId: string;
   workerId: string;
   content: string;
-  attachments?: any; // Json type
+  attachments?: unknown; // Json type
   status: SubmissionStatus;
   submittedAt: Date;
   reviewedAt?: Date | null;

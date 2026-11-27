@@ -22,12 +22,12 @@ export default function HomePageClient() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
         <div className="h-16 max-w-[1280px] mx-auto px-margin-mobile md:px-margin lg:px-margin-desktop flex items-center justify-between gap-space-md">
           <div className="flex items-center gap-space-xl">
-            <Link href="/client/tasks" className="flex items-center gap-space-sm" data-path="find-tasks">
+            <Link href="/worker/tasks" className="flex items-center gap-space-sm" data-path="find-tasks">
               <img alt="TaskFlow Logo" className="h-8 w-auto object-contain" src="/taskflow-logo.svg"/>
               <span className="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">TaskFlow</span>
             </Link>
             <nav className="hidden lg:flex items-center gap-space-lg" data-active-classes="text-primary font-label-lg text-label-lg font-bold">
-              <Link href="/client/tasks" className="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="find-tasks">
+              <Link href="/worker/tasks" className="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="find-tasks">
                 Find Tasks
               </Link>
               <Link href="#how-it-works" className="transition-colors text-primary font-label-lg text-label-lg font-bold" data-path="how-it-works">
@@ -84,7 +84,7 @@ export default function HomePageClient() {
                 Discover online tasks from clients around the world, unlock the work you qualify for, complete it, and receive payment securely through our escrow guarantee.
               </p>
               <div className="flex flex-wrap items-center gap-space-md pt-space-xs w-full sm:w-auto">
-                <Link href="/client/tasks" className="w-full sm:w-auto bg-primary-container hover:bg-primary text-on-primary font-label-lg text-label-lg px-space-xl py-space-md rounded-lg shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-space-xs active:scale-[0.98]">
+                <Link href="/worker/tasks" className="w-full sm:w-auto bg-primary-container hover:bg-primary text-on-primary font-label-lg text-label-lg px-space-xl py-space-md rounded-lg shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-space-xs active:scale-[0.98]">
                   <span>Find Tasks</span>
                   <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
                 </Link>
@@ -379,7 +379,7 @@ export default function HomePageClient() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-space-md">
               {/* Cat 1 */}
               <Link
-                href="/client/tasks"
+                href="/worker/tasks"
                 className="group bg-surface-container-lowest hover:bg-primary hover:text-on-primary p-space-md rounded-xl shadow-sm transition-all duration-200 flex flex-col justify-between"
               >
                 <div className="w-10 h-10 rounded-lg bg-surface-container-high group-hover:bg-on-primary/10 flex items-center justify-center text-primary group-hover:text-on-primary transition-colors mb-space-md">
@@ -392,7 +392,7 @@ export default function HomePageClient() {
               </Link>
               {/* Cat 2 (Featured highlight) */}
               <Link
-                href="/client/tasks"
+                href="/worker/tasks"
                 className="group bg-surface-container-lowest hover:bg-primary hover:text-on-primary p-space-md rounded-xl shadow-sm transition-all duration-200 flex flex-col justify-between"
               >
                 <div className="w-10 h-10 rounded-lg bg-surface-container-high group-hover:bg-on-primary/10 flex items-center justify-center text-primary group-hover:text-on-primary transition-colors mb-space-md">
@@ -406,7 +406,7 @@ export default function HomePageClient() {
               </Link>
               {/* Cat 3 */}
               <Link
-                href="/client/tasks"
+                href="/worker/tasks"
                 className="group bg-surface-container-lowest hover:bg-primary hover:text-on-primary p-space-md rounded-xl shadow-sm transition-all duration-200 flex flex-col justify-between"
               >
                 <div className="w-10 h-10 rounded-lg bg-surface-container-high group-hover:bg-on-primary/10 flex items-center justify-center text-primary group-hover:text-on-primary transition-colors mb-space-md">
@@ -419,7 +419,7 @@ export default function HomePageClient() {
               </Link>
               {/* Cat 4 */}
               <Link
-                href="/client/tasks"
+                href="/worker/tasks"
                 className="group bg-surface-container-lowest hover:bg-primary hover:text-on-primary p-space-md rounded-xl shadow-sm transition-all duration-200 flex flex-col justify-between"
               >
                 <div className="w-10 h-10 rounded-lg bg-surface-container-high group-hover:bg-on-primary/10 flex items-center justify-center text-primary group-hover:text-on-primary transition-colors mb-space-md">
@@ -432,7 +432,7 @@ export default function HomePageClient() {
               </Link>
               {/* Cat 5 */}
               <Link
-                href="/client/tasks"
+                href="/worker/tasks"
                 className="group bg-surface-container-lowest hover:bg-primary hover:text-on-primary p-space-md rounded-xl shadow-sm transition-all duration-200 flex flex-col justify-between"
               >
                 <div className="w-10 h-10 rounded-lg bg-surface-container-high group-hover:bg-on-primary/10 flex items-center justify-center text-primary group-hover:text-on-primary transition-colors mb-space-md">
@@ -445,7 +445,7 @@ export default function HomePageClient() {
               </Link>
               {/* Cat 6 */}
               <Link
-                href="/client/tasks"
+                href="/worker/tasks"
                 className="group bg-surface-container-lowest hover:bg-primary hover:text-on-primary p-space-md rounded-xl shadow-sm transition-all duration-200 flex flex-col justify-between"
               >
                 <div className="w-10 h-10 rounded-lg bg-surface-container-high group-hover:bg-on-primary/10 flex items-center justify-center text-primary group-hover:text-on-primary transition-colors mb-space-md">
@@ -458,7 +458,7 @@ export default function HomePageClient() {
               </Link>
               {/* Cat 7 */}
               <Link
-                href="/client/tasks"
+                href="/worker/tasks"
                 className="group bg-surface-container-lowest hover:bg-primary hover:text-on-primary p-space-md rounded-xl shadow-sm transition-all duration-200 flex flex-col justify-between"
               >
                 <div className="w-10 h-10 rounded-lg bg-surface-container-high group-hover:bg-on-primary/10 flex items-center justify-center text-primary group-hover:text-on-primary transition-colors mb-space-md">
@@ -471,7 +471,7 @@ export default function HomePageClient() {
               </Link>
               {/* Cat 8 */}
               <Link
-                href="/client/tasks"
+                href="/worker/tasks"
                 className="group bg-surface-container-lowest hover:bg-primary hover:text-on-primary p-space-md rounded-xl shadow-sm transition-all duration-200 flex flex-col justify-between"
               >
                 <div className="w-10 h-10 rounded-lg bg-surface-container-high group-hover:bg-on-primary/10 flex items-center justify-center text-primary group-hover:text-on-primary transition-colors mb-space-md">
@@ -484,7 +484,7 @@ export default function HomePageClient() {
               </Link>
               {/* Cat 9 */}
               <Link
-                href="/client/tasks"
+                href="/worker/tasks"
                 className="group bg-surface-container-lowest hover:bg-primary hover:text-on-primary p-space-md rounded-xl shadow-sm transition-all duration-200 flex flex-col justify-between"
               >
                 <div className="w-10 h-10 rounded-lg bg-surface-container-high group-hover:bg-on-primary/10 flex items-center justify-center text-primary group-hover:text-on-primary transition-colors mb-space-md">
@@ -497,7 +497,7 @@ export default function HomePageClient() {
               </Link>
               {/* Cat 10 */}
               <Link
-                href="/client/tasks"
+                href="/worker/tasks"
                 className="group bg-surface-container-lowest hover:bg-primary hover:text-on-primary p-space-md rounded-xl shadow-sm transition-all duration-200 flex flex-col justify-between"
               >
                 <div className="w-10 h-10 rounded-lg bg-surface-container-high group-hover:bg-on-primary/10 flex items-center justify-center text-primary group-hover:text-on-primary transition-colors mb-space-md">
@@ -614,13 +614,13 @@ export default function HomePageClient() {
             </div>
             <div className="z-10 flex flex-col sm:flex-row items-center gap-space-sm w-full md:w-auto">
               <Link
-                href="/client/tasks"
+                href="/worker/tasks"
                 className="w-full sm:w-auto bg-surface-container-lowest text-primary hover:bg-surface-container font-label-lg text-label-lg px-space-2xl py-space-md rounded-lg shadow-lg font-bold transition-all active:scale-95 text-center"
               >
                 Get Started Free
               </Link>
               <Link
-                href="/client/tasks"
+                href="/worker/tasks"
                 className="w-full sm:w-auto bg-on-primary/10 hover:bg-on-primary/20 text-on-primary font-label-lg text-label-lg px-space-xl py-space-md rounded-lg transition-all text-center"
               >
                 Browse Marketplace

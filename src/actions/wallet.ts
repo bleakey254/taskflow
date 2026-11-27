@@ -1,7 +1,8 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { requireAuth, requireRole } from '@/lib/middleware/auth';
-import { prisma } from '@/lib/prisma';
+import { prisma, INTERACTIVE_TRANSACTION_OPTIONS } from '@/lib/prisma';
 import { formatMoney, MIN_WITHDRAWAL } from '@/lib/constants';
 import { WithdrawalStatus, Role, NotificationType } from '@/types/prisma';
 
@@ -38,22 +39,6 @@ export async function getWallet() {
     console.error('Get wallet error:', error);
     return null;
   }
-}
-
-// Balance string for the header. Clients and admins have no spending wallet.
-export async function getWalletBalanceLabel(): Promise<string | undefined> {
-  'use server';
-
-  const user = await requireAuth();
-
-  if (user.role !== Role.WORKER) {
-    return undefined;
-  }
-
-  const wallet = await prisma.wallet.findUnique({ where: { workerId: user.id } });
-  if (!wallet) return undefined;
-
-  return formatMoney(wallet.balance);
 }
 
 // Request withdrawal action
@@ -146,7 +131,7 @@ export async function requestWithdrawal(
           relatedEntityId: withdrawal.id,
         },
       });
-    });
+    }, INTERACTIVE_TRANSACTION_OPTIONS);
   } catch (error) {
     console.error('Withdrawal request error:', error);
     if (error instanceof Error) {
@@ -160,4 +145,7 @@ export async function requestWithdrawal(
     }
     throw new Error('Could not request this withdrawal');
   }
+
+  revalidatePath('/worker/wallet');
+  revalidatePath('/dashboard');
 }

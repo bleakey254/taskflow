@@ -1,7 +1,8 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { requireAuth, requireRole } from '@/lib/middleware/auth';
-import { prisma } from '@/lib/prisma';
+import { prisma, INTERACTIVE_TRANSACTION_OPTIONS } from '@/lib/prisma';
 import { MIN_TASK_BUDGET, CURRENCY } from '@/lib/constants';
 import { Role, TaskStatus, SubmissionStatus, NotificationType } from '@/types/prisma';
 
@@ -67,6 +68,8 @@ export async function createTask(
     console.error('Task creation error:', error);
     throw new Error('Could not create the task');
   }
+
+  revalidatePath('/client/tasks');
 }
 
 // Publish a draft so workers can see and unlock it
@@ -93,6 +96,69 @@ export async function publishTask(formData: FormData): Promise<void> {
     where: { id: task.id },
     data: { status: TaskStatus.PUBLISHED, publishedAt: new Date() },
   });
+
+  revalidatePath('/client/tasks');
+  revalidatePath('/worker/tasks');
+  revalidatePath('/dashboard');
+}
+
+// Submit a draft for admin review instead of publishing it directly
+export async function submitTaskForApproval(formData: FormData): Promise<void> {
+  'use server';
+
+  const user = await requireRole([Role.CLIENT]);
+  const taskId = formData.get('taskId') as string | null;
+
+  if (!taskId) {
+    throw new Error('Task id is required');
+  }
+
+  const task = await prisma.task.findFirst({ where: { id: taskId, clientId: user.id } });
+  if (!task) {
+    throw new Error('Task not found');
+  }
+
+  // A task already awaiting review is a no-op success, so a double click or a
+  // stale tab does not report a failure for work that was already accepted.
+  if (task.status !== TaskStatus.DRAFT && task.status !== TaskStatus.SUBMITTED_FOR_APPROVAL) {
+    throw new Error('Only draft tasks can be submitted for approval');
+  }
+
+  if (task.status === TaskStatus.DRAFT) {
+    try {
+      await prisma.$transaction(async (tx) => {
+        // The status change is the claim: only the request that moves the task
+        // out of DRAFT records the audit row, so concurrent submissions cannot
+        // create duplicates.
+        const claimed = await tx.task.updateMany({
+          where: { id: task.id, status: TaskStatus.DRAFT },
+          data: { status: TaskStatus.SUBMITTED_FOR_APPROVAL },
+        });
+
+        if (claimed.count === 0) {
+          return;
+        }
+
+        await tx.adminAction.create({
+          data: {
+            actorId: user.id,
+            action: 'TASK_SUBMITTED_FOR_APPROVAL',
+            entityType: 'Task',
+            entityId: task.id,
+            metadata: { from: task.status },
+          },
+        });
+      }, INTERACTIVE_TRANSACTION_OPTIONS);
+    } catch (error) {
+      console.error('Task submit-for-approval error:', error);
+      throw new Error('Could not submit this task for approval');
+    }
+  }
+
+  revalidatePath('/client/tasks');
+  revalidatePath('/admin/task-approval-center');
+  revalidatePath('/admin/all-tasks');
+  revalidatePath('/admin/dashboard');
 }
 
 // Task submission action
@@ -176,6 +242,11 @@ export async function submitTask(
     console.error('Task submission error:', error);
     throw new Error('Could not submit your work');
   }
+
+  revalidatePath(`/worker/tasks/${taskId}`);
+  revalidatePath('/worker/submissions');
+  revalidatePath('/client/tasks');
+  revalidatePath('/dashboard');
 }
 
 // Task approval action (for clients/reviewers)
@@ -338,7 +409,7 @@ export async function approveTaskSubmission(
           relatedEntityId: submission.taskId,
         },
       });
-    });
+    }, INTERACTIVE_TRANSACTION_OPTIONS);
   } catch (error) {
     console.error('Task approval error:', error);
     if (error instanceof Error && error.message.startsWith('Only pending')) {
@@ -346,6 +417,12 @@ export async function approveTaskSubmission(
     }
     throw new Error('Could not approve this submission');
   }
+
+  revalidatePath(`/client/tasks/${submission.taskId}/submissions`);
+  revalidatePath('/client/tasks');
+  revalidatePath('/worker/wallet');
+  revalidatePath('/worker/submissions');
+  revalidatePath('/dashboard');
 }
 
 // Task rejection action (for clients/reviewers)
@@ -423,7 +500,7 @@ export async function rejectTaskSubmission(
           relatedEntityId: submission.id,
         },
       });
-    });
+    }, INTERACTIVE_TRANSACTION_OPTIONS);
   } catch (error) {
     console.error('Task rejection error:', error);
     if (error instanceof Error && error.message.startsWith('Only pending')) {
@@ -431,6 +508,11 @@ export async function rejectTaskSubmission(
     }
     throw new Error('Could not reject this submission');
   }
+
+  revalidatePath(`/client/tasks/${submission.taskId}/submissions`);
+  revalidatePath('/client/tasks');
+  revalidatePath('/worker/submissions');
+  revalidatePath('/worker/tasks');
 }
 
 // Unlockable statuses are the ones a worker may pay to open

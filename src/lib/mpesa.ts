@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma';
+import { prisma, INTERACTIVE_TRANSACTION_OPTIONS } from '@/lib/prisma';
 import type { MpesaCallbackResult } from '@/lib/payments';
 import { TaskStatus, PaymentStatus, NotificationType } from '@/types/prisma';
 
@@ -39,9 +39,13 @@ export async function handleMpesaCallback(requestData: unknown): Promise<MpesaCa
 
   const succeeded = Number(resultCode) === 0;
 
-  await prisma.$transaction(async (tx) => {
-    await tx.payment.update({
-      where: { id: payment.id },
+  // Claim the row atomically: only the callback that flips it from PENDING to a
+  // terminal status may apply the result and create side effects. A concurrent
+  // callback (provider retry, replay) sees count === 0 and is treated as an
+  // already-processed callback instead of double-settling.
+  const settled = await prisma.$transaction(async (tx) => {
+    const claimed = await tx.payment.updateMany({
+      where: { id: payment.id, status: PaymentStatus.PENDING },
       data: {
         status: succeeded ? PaymentStatus.SUCCEEDED : PaymentStatus.FAILED,
         metadata: {
@@ -52,6 +56,10 @@ export async function handleMpesaCallback(requestData: unknown): Promise<MpesaCa
         },
       },
     });
+
+    if (claimed.count !== 1) {
+      return false;
+    }
 
     if (!succeeded) {
       await tx.notification.create({
@@ -64,10 +72,10 @@ export async function handleMpesaCallback(requestData: unknown): Promise<MpesaCa
           relatedEntityId: payment.id,
         },
       });
-      return;
+      return true;
     }
 
-    if (!payment.taskId) return;
+    if (!payment.taskId) return true;
 
     const existing = await tx.taskUnlock.findFirst({
       where: { taskId: payment.taskId, workerId: payment.userId },
@@ -94,7 +102,12 @@ export async function handleMpesaCallback(requestData: unknown): Promise<MpesaCa
         relatedEntityId: payment.taskId,
       },
     });
-  });
+    return true;
+  }, INTERACTIVE_TRANSACTION_OPTIONS);
+
+  if (!settled) {
+    return { success: true, status: 200, message: 'Callback already processed' };
+  }
 
   return {
     success: true,

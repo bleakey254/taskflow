@@ -1,8 +1,9 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { randomUUID } from 'crypto';
 import { requireRole } from '@/lib/middleware/auth';
-import { prisma } from '@/lib/prisma';
+import { prisma, INTERACTIVE_TRANSACTION_OPTIONS } from '@/lib/prisma';
 import { UNLOCK_FEE, CURRENCY } from '@/lib/constants';
 import { isPaymentSimulationEnabled } from '@/lib/payments';
 import {
@@ -73,8 +74,15 @@ export async function initiateTaskUnlockPayment(
     };
   }
 
-  // Deterministic key: retries and double submits collapse onto one payment.
-  const idempotencyKey = `${user.id}:${taskId}:unlock`;
+  // The key is scoped to the attempt, not just the task: a worker whose charge
+  // failed must be able to try again, and a key reused across attempts would
+  // collide with the FAILED row and refuse the retry as a double submit. A
+  // genuine double submit still produces the same key here, so the second one
+  // fails on idempotency; the unique unlock below backstops that too.
+  const previousAttempts = await prisma.payment.count({
+    where: { userId: user.id, taskId: task.id, purpose: PaymentPurpose.TASK_UNLOCK },
+  });
+  const idempotencyKey = `${user.id}:${taskId}:unlock:${previousAttempts + 1}`;
 
   try {
     await prisma.$transaction(async (tx) => {
@@ -117,7 +125,7 @@ export async function initiateTaskUnlockPayment(
           relatedEntityId: task.id,
         },
       });
-    });
+    }, INTERACTIVE_TRANSACTION_OPTIONS);
   } catch (error) {
     console.error('Payment initiation error:', error);
     if (typeof error === 'object' && error !== null && 'code' in error && error.code === 'P2002') {
@@ -125,6 +133,10 @@ export async function initiateTaskUnlockPayment(
     }
     return { success: false, error: 'An error occurred while processing payment' };
   }
+
+  revalidatePath('/worker/tasks');
+  revalidatePath(`/worker/tasks/${taskId}`);
+  revalidatePath('/dashboard');
 
   return { success: true, redirectUrl: `/worker/tasks/${taskId}` };
 }

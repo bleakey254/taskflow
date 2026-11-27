@@ -64,13 +64,13 @@ export function CardHeader({ title, subtitle, action, className = '', ...props }
   );
 }
 
-interface CardContentProps extends HTMLAttributes<HTMLDivElement> {}
+type CardContentProps = HTMLAttributes<HTMLDivElement>;
 
 export function CardContent({ children, className = '', ...props }: CardContentProps) {
   return <div className={className} {...props}>{children}</div>;
 }
 
-interface CardFooterProps extends HTMLAttributes<HTMLDivElement> {}
+type CardFooterProps = HTMLAttributes<HTMLDivElement>;
 
 export function CardFooter({ children, className = '', ...props }: CardFooterProps) {
   return (

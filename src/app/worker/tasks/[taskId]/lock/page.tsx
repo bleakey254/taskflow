@@ -5,7 +5,7 @@ import { requireRole } from '@/lib/middleware/auth';
 import { prisma } from '@/lib/prisma';
 import { formatMoney, UNLOCK_FEE } from '@/lib/constants';
 import { isPaymentSimulationEnabled } from '@/lib/payments';
-import { Role } from '@/types/prisma';
+import { Role, PaymentStatus, PaymentPurpose } from '@/types/prisma';
 import { PageShell, HeaderUser } from '@/components/layout';
 import { Card, CardHeader, CardContent, CardFooter } from '@/components/layout';
 import { Button } from '@/components/layout';
@@ -45,6 +45,22 @@ export default async function TaskLockPage({
   const wallet = await prisma.wallet.findUnique({ where: { workerId: user.id } });
   const balance = wallet ? formatMoney(wallet.balance) : undefined;
   const simulated = isPaymentSimulationEnabled();
+
+  // Show the most recent failed attempt, if any, so a returning worker knows
+  // why it failed and that retrying is safe (no charge was taken).
+  const lastFailedPayment = await prisma.payment.findFirst({
+    where: {
+      userId: user.id,
+      taskId,
+      purpose: PaymentPurpose.TASK_UNLOCK,
+      status: PaymentStatus.FAILED,
+    },
+    orderBy: { updatedAt: 'desc' },
+    select: { metadata: true, updatedAt: true },
+  });
+  const lastFailedReason =
+    (lastFailedPayment?.metadata as { callbackResultDesc?: string } | null)?.callbackResultDesc ||
+    (lastFailedPayment ? 'the provider declined the charge' : null);
 
   return (
     <PageShell
@@ -107,6 +123,15 @@ export default async function TaskLockPage({
               <p className="mb-space-md font-body-sm text-body-sm text-error flex items-center gap-1" role="alert">
                 <span className="material-symbols-outlined text-[16px]">error</span>
                 {error}
+              </p>
+            )}
+            {lastFailedPayment && lastFailedReason && (
+              <p className="mb-space-md font-body-sm text-body-sm text-on-surface-variant flex items-start gap-1" role="status">
+                <span className="material-symbols-outlined text-[16px] mt-0.5">info</span>
+                <span>
+                  Your last attempt on {lastFailedPayment.updatedAt.toLocaleString()} didn&apos;t go through
+                  ({lastFailedReason}). No charge was taken — you can safely try again.
+                </span>
               </p>
             )}
             <form

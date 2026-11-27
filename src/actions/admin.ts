@@ -1,7 +1,8 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { requireRole } from '@/lib/middleware/auth';
-import { prisma } from '@/lib/prisma';
+import { prisma, INTERACTIVE_TRANSACTION_OPTIONS } from '@/lib/prisma';
 import {
   Role,
   UserStatus,
@@ -184,7 +185,7 @@ export async function settleWithdrawal(formData: FormData): Promise<void> {
           metadata: { amount, reason },
         },
       });
-    });
+    }, INTERACTIVE_TRANSACTION_OPTIONS);
   } catch (error) {
     console.error('Withdrawal settlement error:', error);
     if (error instanceof Error && error.message.startsWith('Only pending')) {
@@ -192,6 +193,13 @@ export async function settleWithdrawal(formData: FormData): Promise<void> {
     }
     throw new Error('Could not settle this withdrawal');
   }
+
+  revalidatePath('/admin/withdrawals');
+  revalidatePath('/admin/dashboard');
+  revalidatePath('/admin/transactions');
+  revalidatePath('/admin/audit-logs');
+  revalidatePath('/admin/escrow-and-payouts');
+  revalidatePath('/worker/wallet');
 }
 
 // Activate, suspend or deactivate a user account.
@@ -237,6 +245,11 @@ export async function setUserStatus(formData: FormData): Promise<void> {
     console.error('User status update error:', error);
     throw new Error('Could not update this account');
   }
+
+  revalidatePath('/admin/workers');
+  revalidatePath('/admin/clients');
+  revalidatePath('/admin/verification-queue');
+  revalidatePath('/admin/audit-logs');
 }
 
 // Publish a task that a client submitted for approval.
@@ -279,4 +292,9 @@ export async function publishSubmittedTask(formData: FormData): Promise<void> {
     console.error('Task publish error:', error);
     throw new Error('Could not publish this task');
   }
+
+  revalidatePath('/admin/task-approval-center');
+  revalidatePath('/admin/all-tasks');
+  revalidatePath('/worker/tasks');
+  revalidatePath('/admin/audit-logs');
 }

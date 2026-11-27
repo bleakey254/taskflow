@@ -8,7 +8,7 @@ export default function UnauthorizedPage() {
             Unauthorized Access
           </h2>
           <p className="text-center text-sm text-on-surface-variant">
-            You don't have permission to access this page
+            You don&apos;t have permission to access this page
           </p>
         </div>
 

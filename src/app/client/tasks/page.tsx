@@ -1,7 +1,8 @@
+import { redirect } from 'next/navigation';
 import { requireRole } from '@/lib/middleware/auth';
 import { prisma } from '@/lib/prisma';
 import { formatMoney } from '@/lib/constants';
-import { publishTask } from '@/actions/task';
+import { publishTask, submitTaskForApproval } from '@/actions/task';
 import { Role } from '@/types/prisma';
 import { PageShell, HeaderUser } from '@/components/layout';
 import { Card } from '@/components/layout';
@@ -17,6 +18,7 @@ export const metadata = {
 
 const taskStatus: Record<string, { label: string; classes: string }> = {
   DRAFT: { label: 'Draft', classes: 'bg-surface-container-high text-on-surface-variant' },
+  SUBMITTED_FOR_APPROVAL: { label: 'Pending review', classes: 'bg-tertiary/10 text-tertiary' },
   PUBLISHED: { label: 'Live', classes: 'bg-secondary/10 text-secondary' },
   VIEWED: { label: 'Live', classes: 'bg-secondary/10 text-secondary' },
   UNLOCKED: { label: 'Live', classes: 'bg-secondary/10 text-secondary' },
@@ -34,6 +36,30 @@ export default async function ClientTasksPage({
 }) {
   const user = await requireRole([Role.CLIENT]);
   const { created, error } = await searchParams;
+
+  // Failures come back as a query message so the page can show them instead of
+  // the action's error reaching the client as an unhandled rejection.
+  const submitForApprovalAction = async (formData: FormData) => {
+    'use server';
+
+    try {
+      await submitTaskForApproval(formData);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Could not submit this task for approval';
+      redirect(`/client/tasks?error=${encodeURIComponent(message)}`);
+    }
+  };
+
+  const publishAction = async (formData: FormData) => {
+    'use server';
+
+    try {
+      await publishTask(formData);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Could not publish this task';
+      redirect(`/client/tasks?error=${encodeURIComponent(message)}`);
+    }
+  };
 
   const tasks = await prisma.task.findMany({
     where: { clientId: user.id },
@@ -126,10 +152,16 @@ export default async function ClientTasksPage({
                       </div>
                       <div className="flex flex-wrap items-center gap-space-sm">
                         {isDraft && (
-                          <form action={publishTask}>
-                            <input type="hidden" name="taskId" value={task.id} />
-                            <Button type="submit" size="sm" variant="secondary">Publish</Button>
-                          </form>
+                          <>
+                            <form action={publishAction}>
+                              <input type="hidden" name="taskId" value={task.id} />
+                              <Button type="submit" size="sm" variant="secondary">Publish</Button>
+                            </form>
+                            <form action={submitForApprovalAction}>
+                              <input type="hidden" name="taskId" value={task.id} />
+                              <Button type="submit" size="sm" variant="outlined">Submit for review</Button>
+                            </form>
+                          </>
                         )}
                         <LinkButton href={`/client/tasks/${task.id}/submissions`} size="sm" variant="outlined">
                           {task._count.submissions > 0 ? `Review (${task._count.submissions})` : 'Submissions'}

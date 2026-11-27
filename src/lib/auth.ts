@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import { createHash } from 'crypto';
 import { prisma } from './prisma';
+import { UserStatus } from '@/types/prisma';
 
 // Crypto is globally available in Node.js, no import needed
 
@@ -77,6 +78,13 @@ export const validateSession = async (token: string) => {
   });
 
   if (!session) return null;
+
+  // Suspension must take effect immediately: end the account's sessions so a
+  // cookie issued before the change cannot keep working (login re-checks too).
+  if (session.user.status !== UserStatus.ACTIVE) {
+    await prisma.session.deleteMany({ where: { userId: session.userId } });
+    return null;
+  }
 
   // Check if session has expired
   if (session.expiresAt < new Date()) {
